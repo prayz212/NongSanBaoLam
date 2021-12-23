@@ -27,6 +27,9 @@ Route::prefix('/')->group(function () {
     Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detail'])->name('productDetail');
 
     Route::post('/them-vao-gio-hang', [CartController::class, 'addToCart'])->name('addToCart');
+    Route::post('/cap-nhat-so-luong', [CartController::class, 'updateToCart'])->name('updateToCart');
+    Route::post('/xoa-khoi-gio-hang', [CartController::class, 'deleteFormCart'])->name('deleteFormCart');
+    Route::get('/gio-hang', [CartController::class, 'index'])->name('shoppingCart');
     
     Route::post('/them-binh-luan', [CommentController::class, 'addComment'])->name('addComment');
     Route::post('/tra-loi-binh-luan', [CommentController::class, 'replyComment'])->name('replyComment');

@@ -20,7 +20,7 @@ class ProductController extends Controller
             ->limit(4)
             ->get();
 
-        return view('client.product_detail')
+        return view('client.product-detail')
             ->with('detail', $product)
             ->with('relative', $relative);
     }

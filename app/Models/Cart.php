@@ -15,43 +15,32 @@ class Cart {
 	
 	public function add($item, $quantity)
 	{
-		$cart = ['qty' => $quantity, 'price' => $item->price, 'item' => $item];
+		$cart = ['qty' => (int)$quantity, 'item' => $item];
 		if($this->items)
 		{
 			if(array_key_exists($item->id, $this->items))
 			{
-				$oldCart = $this->items[$id];
+				$oldCart = $this->items[$item->id];
 				$cart['qty'] += $oldCart['qty'];
 			}
 		}
 		
-		$this->items[$id] = $cart;
+		$this->items[$item->id] = $cart;
 	}
-	
-	// public function removeItem($id)
-	// {
-	// 	$this->totalQty -= $this->items[$id]['qty'];
-	// 	$this->totalPrice -= $this->items[$id]['price'];
-	// 	unset($this->items[$id]);
-	// }
-	
-	// public function decreaseItemByOne($id){
-  //       $this->items[$id]['qty']--;
-  //       $this->items[$id]['price'] -= $this->items[$id]['item']['unit_price'];
-  //       $this->totalQty--;
-  //       $this->totalPrice -= $this->items[$id]['item']['unit_price'];
-  //       if($this->items[$id]['qty'] <= 0){
-  //           unset($this->items[$id]);
-  //       }
-  //   }
 
-  //   public function increaseItemByOne($id){
-  //       $this->items[$id]['qty']++;
-  //       $this->items[$id]['price'] += $this->items[$id]['item']['unit_price'];
-  //       $this->totalQty++;
-  //       $this->totalPrice += $this->items[$id]['item']['unit_price'];
-  //   }
+	public function updateQuantity($id, $quantity) {
+		$this->items[$id]['qty'] = $quantity;
+	}
+
+	public function deleteItem($id) {
+		if($this->items)
+		{
+			if(array_key_exists($id, $this->items))
+			{
+				unset($this->items[$id]);
+			}
+		}
+	}
 }
-
 
 ?>
