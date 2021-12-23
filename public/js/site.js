@@ -91,6 +91,7 @@ $(document).ready(function () {
             $(".toast-sta").text("Thất bại");
             $(".toast-msg").text(toastMess);
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     $("#close").on("click", () => {
@@ -158,6 +159,59 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             $(this).closest(".row").find("div button").click();
         }
+    });
+
+    $(".remove-item-from-cart").click(function () {
+        const trElement = $(this).closest(".items_tr");
+        var id = trElement.attr("data-id");
+        var url = $(this).attr("data-href");
+        var data = { id };
+        const _this = $(this);
+
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url,
+            data,
+            success: function (data) {
+                if (data.status == 200) {
+                    trElement.remove();
+                    const isEmpty = $("tbody tr").length == 1;
+                    console.log(isEmpty);
+                    var newTotalPrice = 0;
+                    if (isEmpty) {
+                        $("tbody").append(
+                            '<tr><td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td></tr>'
+                        );
+                    } else {
+                        const quantity = parseInt($(_this).find("input").val());
+                        const unitPrice = parseInt(
+                            $(_this).find("input").attr("data-unit-price")
+                        );
+                        const preTotal = quantity * unitPrice;
+
+                        const preTotalPrice = parseInt(
+                            $("#total-price").attr("data-total")
+                        );
+                        newTotalPrice = preTotalPrice - preTotal;
+                    }
+                    $("#total-price").attr("data-total", newTotalPrice);
+                    $("#total-price").text(
+                        newTotalPrice.toLocaleString("it-IT", {
+                            currency: "VND",
+                        }) + "đ"
+                    );
+                    showToast("success", "Sản phẩm đã được xoá khỏi giỏ hàng");
+                } else {
+                    showToast(
+                        "fail",
+                        "Rất tiếc đã xảy ra lỗi. Xin vui lòng thử lại sau."
+                    );
+                }
+            },
+        });
     });
 });
 
