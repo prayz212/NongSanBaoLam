@@ -242,7 +242,7 @@
                         <i class="bx bx-star"></i>
                     } --}}
                 </div>
-                <h4 class="__price">{{ number_format($r->price, 0) }}đ</h4>
+                <h4 class="__price">{{ number_format($r->price, 0, ",", ".") }}đ</h4>
             </div>
         </div>
       @endforeach

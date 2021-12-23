@@ -60,22 +60,22 @@
                                   <a class="__nav-link ">Tài khoản</a>
                               </li>
                               <li class="__nav-item">
-                                  <a class="__nav-link icon"><i class="bx bx-shopping-bag"></i></a>
+                                  <a class="__nav-link icon" href="{{ url('/gio-hang') }}"><i class="bx bx-shopping-bag"></i></a>
                               </li>
 
-                              <li class="__nav-item">
+                              {{-- <li class="__nav-item">
                                   <a class="__nav-link icon"><i class="bx bx-log-out"></i></a>
-                              </li>
+                              </li> --}}
                           </ul>
                       </div>
 
-                      <a class="__cart-icon">
+                      <a class="__cart-icon" href="{{ url('/gio-hang') }}">
                           <i class="bx bx-shopping-bag"></i>
                       </a>
 
-                      <a class="__cart-icon">
+                      {{-- <a class="__cart-icon">
                           <i class='bx bx-log-out'></i>
-                      </a>
+                      </a> --}}
 
                       <div class="__hamburger">
                           <i class="bx bx-menu"></i>
@@ -129,20 +129,20 @@
                                 <a class="__nav-link">Tài khoản</a>
                             </li>
                             <li class="__nav-item">
-                                <a class="__nav-link icon"><i class="bx bx-shopping-bag"></i></a>
+                                <a class="__nav-link icon" href="{{ url('/gio-hang') }}"><i class="bx bx-shopping-bag"></i></a>
                             </li>
-                            <li class="__nav-item">
+                            {{-- <li class="__nav-item">
                                 <a class="__nav-link icon"><i class="bx bx-log-out"></i></a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
 
                     <a class="__cart-icon">
                         <i class="bx bx-shopping-bag"></i>
                     </a>
-                    <a class="__cart-icon">
+                    {{-- <a class="__cart-icon">
                         <i class='bx bx-log-out'></i>
-                    </a>
+                    </a> --}}
                     <div class="__hamburger">
                         <i class="bx bx-menu"></i>
                     </div>
@@ -165,6 +165,6 @@
     </div>
     <!-- End Footer -->
 
-    <script src="{{ asset('js/site.js') }}" asp-append-version="true"></script>
+    <script src="{{ asset('js/site.js') }}"></script>
 </body>
 </html>
