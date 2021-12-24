@@ -203,10 +203,4 @@ String.prototype.getDecimals ||
             a.trigger("change");
     });
 </script>
-
-
-
-
-
-
 @endsection

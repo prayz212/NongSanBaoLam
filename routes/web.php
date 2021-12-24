@@ -24,7 +24,9 @@ use App\Http\Controllers\CommentController;
 Route::prefix('/')->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('homepage');
 
+    Route::get('/danh-sach-san-pham', [ProductController::class, 'index'])->name('productpage');
     Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detail'])->name('productDetail');
+    Route::get('/tim-kiem-san-pham', [ProductController::class, 'search'])->name('searchProduct');
 
     Route::post('/them-vao-gio-hang', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cap-nhat-so-luong', [CartController::class, 'updateToCart'])->name('updateToCart');

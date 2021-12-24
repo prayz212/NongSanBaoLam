@@ -24,4 +24,30 @@ class ProductController extends Controller
             ->with('detail', $product)
             ->with('relative', $relative);
     }
+
+    public function index() {
+        $products = Product::with(['main_pic', 'avgRating'])
+            ->where('isDelete', '=', false)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(3);
+
+            // dd($products);
+        return view('client.product-page')
+            ->with('products', $products)
+            ->with('queryString', '?page=');
+    }
+
+    public function search(Request $request) {
+        $searchKey = $request->query('key');
+
+        $products = Product::with(['main_pic', 'avgRating'])
+            ->where('isDelete', '=', false)
+            ->where('name', 'like', '%' . $searchKey . '%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(3);
+
+        return view('client.product-page')
+            ->with('products', $products)
+            ->with('queryString', '?key=' . $searchKey . '&page=');
+    }
 }
