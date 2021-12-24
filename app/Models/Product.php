@@ -27,4 +27,14 @@ class Product extends Model
     public function comment() {
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function rating() {
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    public function avgRating() {
+        return $this->rating()
+            ->selectRaw('avg(star) as rating, product_id')
+            ->groupBy('product_id');
+    }
 }
