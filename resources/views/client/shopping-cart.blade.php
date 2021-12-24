@@ -5,9 +5,9 @@
   <form asp-controller="Cart" asp-action="" id="paymentForm">
       <table>
           <tr>
-              <th class="col-md-1 d-none d-sm-table-cell text-center">STT</th>
+              <th class="col-md-1 d-none d-md-table-cell text-center">STT</th>
               <th class="col-md-4 col-7 py-4 text-center">Sản phẩm</th>
-              <th class="col-md-2 text-center"><div class="d-none d-md-block"> Phân loại </div></th>
+              <th class="col-md-2 d-none d-md-table-cell text-center"><div class="d-none d-md-block"> Phân loại </div></th>
               <th class="col-md-1 col-2 text-center">Số lượng</th>
               <th class="col-md-2 col-2 text-center">Số tiền</th>
               <th class="col-md-2 col-1 text-center">Thao tác</th>
@@ -19,7 +19,7 @@
             @endphp
             @foreach($carts->items as $c)
                <tr class="border items_tr" data-id="{{ $c['item']->id }}">
-                  <td class="col-md-1 text-center d-none d-sm-table-cell">
+                  <td class="col-md-1 text-center d-none d-md-table-cell">
                     <div> {{ $i }} </div>
                   </td>
                   <td class="col-md-4 col-7" onclick="location.href ='{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}'" style="cursor: pointer">
@@ -34,7 +34,7 @@
                           </div>
                       </div>
                   </td>
-                  <td class="col-md-2 text-center"><div class="d-none d-md-block"> {{ $c['item']->category->name }} </div></td>
+                  <td class="col-md-2 text-center d-none d-md-table-cell"><div> {{ $c['item']->category->name }} </div></td>
                   <td class="col-md-1 col-2">
                       <div class="d-flex justify-content-center">
                           <input type="number" name="items_quantity[]" data-unit-price="{{ $c['item']->price }}" value="{{ $c['qty'] }}" min="1" class="_form-input text-center px-0" onchange="changeItemPrice(this)">
@@ -139,6 +139,9 @@
                 console.log("failed")
             }
         },
+        error: function() {
+          console.log("failed")
+        }
     });
   }
 </script>
