@@ -140,7 +140,7 @@ li {
 }
 
 .__nav-item:not(:last-child) {
-    margin-right: 2.5rem;
+    margin-right: 1.5rem;
 }
 
 .__nav-link:link,
@@ -163,6 +163,16 @@ li {
 
 .__cart-icon {
     display: none;
+}
+
+@media only screen and (max-width: 930px) {
+    .__search-box {
+        max-width: 170px;
+    }
+
+    .__brand-name {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 768px) {

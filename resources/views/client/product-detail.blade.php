@@ -18,7 +18,7 @@
       <div class="__right">
           <nav aria-label="breadcrumb">
               <ol class="breadcrumb bg-body">
-                  <li class="breadcrumb-item"><a asp-action="">Products</a></li>
+                  <li class="breadcrumb-item"><a href="{{ url('danh-sach-san-pham') }}">Sản phẩm</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{ $detail->name }}</li>
               </ol>
           </nav>

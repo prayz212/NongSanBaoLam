@@ -12,13 +12,11 @@ $(document).ready(function () {
     navOpen.addEventListener("click", () => {
         menu.classList.add("__show");
         document.body.classList.add("__show");
-        navBar.classList.add("__show");
     });
 
     navClose.addEventListener("click", () => {
         menu.classList.remove("__show");
         document.body.classList.remove("__show");
-        navBar.classList.remove("__show");
     });
 
     // Scroll To
@@ -124,12 +122,12 @@ $(document).ready(function () {
                     );
                 }
             },
-            error: function() {
+            error: function () {
                 showToast(
                     "fail",
                     "Rất tiếc đã xảy ra lỗi. Xin vui lòng thử lại sau."
                 );
-            }
+            },
         });
     });
 
@@ -191,11 +189,17 @@ $(document).ready(function () {
                             '<tr><td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td></tr>'
                         );
                     } else {
-                        const quantity = parseInt(trElement.find("input").val());
-                        const unitPrice = parseInt(trElement.find("input").attr("data-unit-price"));
+                        const quantity = parseInt(
+                            trElement.find("input").val()
+                        );
+                        const unitPrice = parseInt(
+                            trElement.find("input").attr("data-unit-price")
+                        );
                         const preTotal = quantity * unitPrice;
 
-                        const preTotalPrice = parseInt($("#total-price").attr("data-total"));
+                        const preTotalPrice = parseInt(
+                            $("#total-price").attr("data-total")
+                        );
                         newTotalPrice = preTotalPrice - preTotal;
                         trElement.remove();
                     }
@@ -213,12 +217,12 @@ $(document).ready(function () {
                     );
                 }
             },
-            error: function() {
+            error: function () {
                 showToast(
                     "fail",
                     "Rất tiếc đã xảy ra lỗi. Xin vui lòng thử lại sau."
                 );
-            }
+            },
         });
     });
 });
