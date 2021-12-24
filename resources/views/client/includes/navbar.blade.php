@@ -29,16 +29,7 @@
           </div>
 
           <ul class="__nav-list">
-              <li class="__nav-item">
-                  <a class="__nav-link" href="{{ url('') }}">Trang chủ</a>
-              </li>
-              <li class="__nav-item">
-                  <a class="__nav-link" href="{{ url('danh-sach-san-pham') }}">Sản phẩm</a>
-              </li>
-              <li class="__nav-item">
-                  <a class="__nav-link ">Tài khoản</a>
-              </li>
-              <li class="__nav-ite,">
+            <li class="__nav-item">
                 <div class="d-md-none d-inline-block">
                     <form method="GET" action="{{ url('tim-kiem-san-pham') }}">
                         <div class="form-actions no-color">
@@ -47,6 +38,15 @@
                         </div>
                     </form>
                   </div>
+              </li>
+              <li class="__nav-item">
+                  <a class="__nav-link" href="{{ url('') }}">Trang chủ</a>
+              </li>
+              <li class="__nav-item">
+                  <a class="__nav-link" href="{{ url('danh-sach-san-pham') }}">Sản phẩm</a>
+              </li>
+              <li class="__nav-item">
+                  <a class="__nav-link ">Tài khoản</a>
               </li>
               <li class="__nav-item">
                   <a class="__nav-link icon" href="{{ url('/gio-hang') }}"><i class="bx bx-shopping-bag"></i></a>
