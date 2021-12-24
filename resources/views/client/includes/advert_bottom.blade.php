@@ -10,7 +10,7 @@
               <h1>
                   <span>Vừa tốt cho sức khoẻ lại vừa rẻ</span>
               </h1>
-              <a asp-controller="Product" asp-action="FlashSale" class="__btn">Mua ngay</a>
+              <a  href="{{ url('san-pham-khuyen-mai') }}" class="__btn">Mua ngay</a>
           </div>
       </div>
   </div>

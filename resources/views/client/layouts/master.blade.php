@@ -39,7 +39,7 @@
                       <span>Sản phẩm hữu cơ</span>
                       <span>dành cho mọi nhà</span>
                   </h1>
-                  <a class="__btn">Mua ngay</a>
+                  <a class="__btn" href="{{ url('danh-sach-san-pham') }}">Mua ngay</a>
               </div>
           </header>
         @else

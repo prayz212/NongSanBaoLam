@@ -10,7 +10,7 @@
           <div class="__title">
               <h1>Sản phẩm bán chạy</h1>
               <div>
-                  <a class="__view-more">Xem thêm</a>
+                  <a class="__view-more" href="{{ url('san-pham-ban-chay') }}">Xem thêm</a>
               </div>
           </div>
           <div class="__product-center __container">
@@ -66,7 +66,7 @@
             <div class="__title">
                 <h1>Sản phẩm mới</h1>
                 <div>
-                    <a class="__view-more">Xem thêm</a>
+                    <a class="__view-more" href="{{ url('san-pham-moi') }}">Xem thêm</a>
                 </div>
             </div>
 

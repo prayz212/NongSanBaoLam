@@ -47,7 +47,6 @@
                   </div>
 
                   <div class="__product-center px-3">
-                    {{-- @if (count($products->items) > 0) --}}
                         @foreach ($products as $p)
                           <div class="__product">
                               <div class="__product-header">
@@ -89,7 +88,6 @@
                               </div>
                           </div>
                         @endforeach
-                    {{-- @endif --}}
                   </div>
                   <div class="__pagination">
                       <div class="">
