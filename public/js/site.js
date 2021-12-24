@@ -124,6 +124,12 @@ $(document).ready(function () {
                     );
                 }
             },
+            error: function() {
+                showToast(
+                    "fail",
+                    "Rất tiếc đã xảy ra lỗi. Xin vui lòng thử lại sau."
+                );
+            }
         });
     });
 
@@ -166,7 +172,6 @@ $(document).ready(function () {
         var id = trElement.attr("data-id");
         var url = $(this).attr("data-href");
         var data = { id };
-        const _this = $(this);
 
         $.ajax({
             type: "POST",
@@ -177,25 +182,22 @@ $(document).ready(function () {
             data,
             success: function (data) {
                 if (data.status == 200) {
-                    trElement.remove();
-                    const isEmpty = $("tbody tr").length == 1;
-                    console.log(isEmpty);
                     var newTotalPrice = 0;
+                    const isEmpty = $("tbody tr").length == 2;
+
                     if (isEmpty) {
+                        trElement.remove();
                         $("tbody").append(
                             '<tr><td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td></tr>'
                         );
                     } else {
-                        const quantity = parseInt($(_this).find("input").val());
-                        const unitPrice = parseInt(
-                            $(_this).find("input").attr("data-unit-price")
-                        );
+                        const quantity = parseInt(trElement.find("input").val());
+                        const unitPrice = parseInt(trElement.find("input").attr("data-unit-price"));
                         const preTotal = quantity * unitPrice;
 
-                        const preTotalPrice = parseInt(
-                            $("#total-price").attr("data-total")
-                        );
+                        const preTotalPrice = parseInt($("#total-price").attr("data-total"));
                         newTotalPrice = preTotalPrice - preTotal;
+                        trElement.remove();
                     }
                     $("#total-price").attr("data-total", newTotalPrice);
                     $("#total-price").text(
@@ -211,6 +213,12 @@ $(document).ready(function () {
                     );
                 }
             },
+            error: function() {
+                showToast(
+                    "fail",
+                    "Rất tiếc đã xảy ra lỗi. Xin vui lòng thử lại sau."
+                );
+            }
         });
     });
 });
