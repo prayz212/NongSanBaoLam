@@ -8,13 +8,13 @@ class HomeController extends Controller
 {
   public function index() {
     $bestSaler = Product::orderBy('sold', 'DESC')
-      ->with(['main_pic'])
+      ->with(['main_pic', 'avgRating'])
       ->get()
       ->where('isDelete', '=', false)
       ->take(8);
 
     $newProducts = Product::orderBy('created_at', 'DESC')
-      ->with(['main_pic'])
+      ->with(['main_pic', 'avgRating'])
       ->get()
       ->where('isDelete', '=', false)
       ->take(8);
