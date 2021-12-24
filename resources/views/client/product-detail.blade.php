@@ -25,40 +25,32 @@
           <h1>{{ $detail->name }}</h1>
           <div class="__rating-sold">
               <div class="__rating">
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  {{-- @for (int i = 0; i < totalRatings; i++)
-                  {
-                      <i class="bx bxs-star"></i>
-                  }
-
-                  @for (int i = 0; i < 5 - totalRatings; i++)
-                  {
-                      <i class="bx bx-star"></i>
-                  } --}}
+                @php
+                    $avgRating = $detail->avgRating->first()->rating ?? 0;
+                @endphp
+                @for ($i = 0; $i < round($avgRating); $i++)
+                    <i class="bx bxs-star"></i>
+                @endfor
+                @for ($i = 0; $i < 5 - round($avgRating); $i++)
+                    <i class="bx bx-star"></i>
+                @endfor
               </div>
               <div class="__divider">|</div>
               <div class="__sold">
-                  Đã bán: 100
+                  Đã bán: {{ $detail->sold }}
               </div>
           </div>
           <div class="__price-detail">
-              {{-- @if (detail.promotion != null && detail.promotion.Discount > 0 && detail.promotion.From <= DateTime.Now)
-              {
-                  var rawDiscountPrice = detail.Price - (detail.Price * ((double)detail.promotion.Discount / 100));
-                  var discountPrice = Math.Round(rawDiscountPrice / 1000) * 1000;
-
-                  <div class="__final-price">@(discountPrice.ToString("#,###", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")))đ</div>
-                  <div class="__original-price">@(detail.Price.ToString("#,###", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")))đ</div>
-                  <div class="__discount-percent">-@detail.promotion.Discount%</div>
-              }
-              else if (detail.promotion == null || detail.promotion.Discount == 0)
-              {
-                  <div class="__final-price">@(detail.Price.ToString("#,###", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")))đ</div>
-              } --}}
+            @if ($detail->discount)
+                @php
+                $discountPrice = $detail->price - $detail->price * ($detail->discount/(float)100);
+                @endphp
+                <div class="__final-price">{{ number_format(round($discountPrice), 0, ",", ".") }}đ</div>
+                <div class="__original-price">{{ number_format($detail->price, 0, ",", ".") }}đ</div>
+                <div class="__discount-percent">-{{ $detail->discount }}%</div>
+            @else
+                <div class="__final-price">{{ number_format($detail->price, 0, ",", ".") }}đ</div>
+            @endif
           </div>
           <form method="post" id="addToCartForm" action="{{ route('addToCart') }}">
               @csrf
@@ -216,6 +208,10 @@
         <div class="__product">
             <div class="__product-header">
                 <img src="{{ asset('images/products/' . $r->main_pic->url) }}" alt="{{ $r->main_pic->name }}">
+                @if ($r->discount)
+                <img style="width: 7rem; height: 5rem; position: absolute; top: 1%; right: 2%" src="{{ asset('images/sales.png') }}" alt="discount">
+                <span style="position: absolute; top: 6.5%; right: 9%; color: red; font-size: 1.4rem;">-{{$r->discount}}%</span>
+                @endif
                 <a href="{{ url('chi-tiet-san-pham/' . $r->id) }}">
                     <ul class="icons">
                         <span><i class='bx bxs-show show-icons'></i></span>
@@ -227,22 +223,25 @@
                     <h3>{{ $r->name }}</h3>
                 </a>
                 <div class="__rating">
+                @php
+                    $avgRating = $r->avgRating->first()->rating ?? 0;
+                @endphp
+                @for ($i = 0; $i < round($avgRating); $i++)
                     <i class="bx bxs-star"></i>
-                    <i class="bx bxs-star"></i>
-                    <i class="bx bxs-star"></i>
-                    <i class="bx bxs-star"></i>
-                    <i class="bx bxs-star"></i>
-                    {{-- @for (int i = 0; i < product.ratings; i++)
-                    {
-                        <i class="bx bxs-star"></i>
-                    }
-
-                    @for (int i = 0; i < 5 - product.ratings; i++)
-                    {
-                        <i class="bx bx-star"></i>
-                    } --}}
+                @endfor
+                @for ($i = 0; $i < 5 - round($avgRating); $i++)
+                    <i class="bx bx-star"></i>
+                @endfor
                 </div>
+                
+                @if ($r->discount)
+                @php
+                $discountPrice = $r->price - $r->price * ($r->discount/(float)100);
+                @endphp
+                <h4 class="__price">{{ number_format(round($discountPrice), 0, ",", ".") }}đ</h4>
+                @else
                 <h4 class="__price">{{ number_format($r->price, 0, ",", ".") }}đ</h4>
+                @endif
             </div>
         </div>
       @endforeach

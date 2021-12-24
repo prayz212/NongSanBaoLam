@@ -1389,9 +1389,23 @@ th:last-child {
     text-align: right;
 }
 
+.__quantity-plus,
+.__quantity-minus {
+    font-size: 20px;
+    padding: 0px 8px;
+    border: none;
+    background: transparent;
+    width: fit-content;
+}
+
 @media only screen and (max-width: 567px) {
     .__cart-info p {
         display: none;
+    }
+
+    .__quantity-plus,
+    .__quantity-minus {
+        padding: 0px 2px;
     }
 }
 
