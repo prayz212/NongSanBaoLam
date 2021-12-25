@@ -142,7 +142,7 @@ class ProductController extends Controller
                     ->when($type, function ($query, $type) {
                         return $query->where('category_id', $type);
                     })
-                    ->select(DB::raw('id, name, price, discount, sold, price - (price * coalesce(cast(discount as FLOAT), 0)/100) as finalPrice'))
+                    ->select(DB::raw('id, name, price, discount, sold, price - (price * coalesce(cast(discount as FLOAT), 0)/100) as "finalPrice"'))
                     ->orderBy('finalPrice', 'DESC')
                     ->paginate($this->ITEMS_PER_PAGE);
                 break;
@@ -152,7 +152,7 @@ class ProductController extends Controller
                     ->when($type, function ($query, $type) {
                         return $query->where('category_id', $type);
                     })
-                    ->select(DB::raw('id, name, price, discount, sold, price - (price * IFNULL(CAST(discount as FLOAT), 0)/100) as finalPrice'))
+                    ->select(DB::raw('id, name, price, discount, sold, price - (price * coalesce(cast(discount as FLOAT), 0)/100) as "finalPrice"'))
                     ->orderBy('finalPrice', 'ASC')
                     ->paginate($this->ITEMS_PER_PAGE);
                 break;
