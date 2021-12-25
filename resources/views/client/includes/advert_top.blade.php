@@ -1,7 +1,7 @@
 <section class="__advert __section">
   <div class="__advert-center __container">
       <div class="__advert-box">
-          <a>
+          <a href="{{ url('the-loai-san-pham/rau-cu-huu-co') }}">
               <div class="__dotted">
                   <div class="__content">
                       <h2>
@@ -15,11 +15,11 @@
       </div>
 
       <div class="__advert-box">
-          <a asp-controller="Product" asp-action="Index" asp-route-filter="Quần">
+          <a href="{{ url('the-loai-san-pham/trai-cay-da-lat') }}">
               <div class="__dotted">
                   <div class="__content">
                       <h2>
-                          Trái cây tươi
+                          Trái cây Đà Lạt
                       </h2>
                       <h4>"Made in VietNam"</h4>
                   </div>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="__advert-box">
-          <a asp-controller="Product" asp-action="Index" asp-route-filter="Áo sơ mi">
+          <a href="{{ url('the-loai-san-pham/combo-san-pham') }}">
               <div class="__dotted">
                   <div class="__content">
                       <h2>

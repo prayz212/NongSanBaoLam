@@ -16,13 +16,22 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Rau củ'
+                'name' => 'Rau củ hữu cơ'
             ],
             [
-                'name' => 'Trái cây'
+                'name' => 'Rau củ Đà Lạt'
             ],
             [
-                'name' => 'Combo đóng hộp'
+                'name' => 'Rau củ ngoại nhập'
+            ],
+            [
+                'name' => 'Trái cây Đà Lạt'
+            ],
+            [
+                'name' => 'Trái cây ngoại nhập'
+            ],
+            [
+                'name' => 'Combo sản phẩm'
             ]
         ];
 

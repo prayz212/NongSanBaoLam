@@ -43,6 +43,15 @@ $(document).ready(function () {
         });
     });
 
+    $("#sortBy").on("change", function (e) {
+        //get selected value
+        var optionSelected = $(this).find("option:selected");
+        var valueSelected = optionSelected.val();
+        
+        redirectUrl = `${location.protocol}//${location.host + location.pathname}?filter=${valueSelected}`;
+        window.location.href = redirectUrl;
+    });
+
     /*      image click     */
     $(".__thumbnails .__thumbnail img").on("click", function () {
         const selectedImage = $(this).attr("src");
@@ -190,10 +199,10 @@ $(document).ready(function () {
                         );
                     } else {
                         const quantity = parseInt(
-                            trElement.find("input").val()
+                            trElement.find("input[name='items_quantity[]']").val()
                         );
                         const unitPrice = parseInt(
-                            trElement.find("input").attr("data-unit-price")
+                            trElement.find("input[name='items_quantity[]']").attr("data-unit-price")
                         );
                         const preTotal = quantity * unitPrice;
 
