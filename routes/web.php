@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::prefix('/')->group(function () {
     Route::get('/san-pham-ban-chay', [ProductController::class, 'topSales'])->name('topSales');
     Route::get('/san-pham-moi', [ProductController::class, 'newProducts'])->name('topSales');
     Route::get('/san-pham-khuyen-mai', [ProductController::class, 'flashSales'])->name('topSales');
+    Route::get('/the-loai-san-pham/{type}', [ProductController::class, 'category'])->name('productByType');
 
     Route::post('/them-vao-gio-hang', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cap-nhat-so-luong', [CartController::class, 'updateToCart'])->name('updateToCart');

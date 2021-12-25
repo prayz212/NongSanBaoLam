@@ -5,15 +5,15 @@
 <div class="container __section __product-container">
   <div class="row">
       <div class="mb-3 col-lg-3 col-sm-5 col-12 __category-block">
-          <div class="card bg-light mb-3">
+          <div class="card mb-3">
               <div class="card-header text-uppercase py-3 text-center __category-block-title">DANH MỤC SẢN PHẨM</div>
               <ul class="list-group category_block">
-                <a asp-action="Index" asp-route-searchByName="@ViewBag.searchByName" asp-route-filter="Áo thun tay ngắn" asp-route-sortBy="@ViewBag.sortBy"><li class="list-group-item px-5 py-3">Rau củ hữu cơ</li></a>
-                  <a ><li class="list-group-item px-5 py-3">Rau củ Đà Lạt</li></a>
-                  <a ><li class="list-group-item px-5 py-3">Rau củ ngoại nhập</li></a>
-                  <a ><li class="list-group-item px-5 py-3">Trái cây Đà Lạt</li></a>
-                  <a ><li class="list-group-item px-5 py-3">Trái cây ngoại nhập</li></a>
-                  <a ><li class="list-group-item px-5 py-3">Combo trái cây</li></a>
+                  <a href="{{ url('the-loai-san-pham/rau-cu-huu-co') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'rau-cu-huu-co' ? '__selected-category' : '' }}">Rau củ hữu cơ</li></a>
+                  <a href="{{ url('the-loai-san-pham/rau-cu-da-lat') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'rau-cu-da-lat' ? '__selected-category' : '' }}">Rau củ Đà Lạt</li></a>
+                  <a href="{{ url('the-loai-san-pham/rau-cu-ngoai-nhap') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'rau-cu-ngoai-nhap' ? '__selected-category' : '' }}">Rau củ ngoại nhập</li></a>
+                  <a href="{{ url('the-loai-san-pham/trai-cay-da-lat') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'trai-cay-da-lat' ? '__selected-category' : '' }}">Trái cây Đà Lạt</li></a>
+                  <a href="{{ url('the-loai-san-pham/trai-cay-ngoai-nhap') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'trai-cay-ngoai-nhap' ? '__selected-category' : '' }}">Trái cây ngoại nhập</li></a>
+                  <a href="{{ url('the-loai-san-pham/combo-san-pham') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'combo-san-pham' ? '__selected-category' : '' }}">Combo sản phẩm</li></a>
               </ul>
           </div>
       </div>
@@ -24,23 +24,23 @@
                   <div class="__top">
                       <h1>Tất cả sản phẩm</h1>
                       <select name="sortBy" id="sortBy">
-                          <option value="name_asc">
+                          @php
+                            $currentFilter = request()->filter ?? '';
+                          @endphp
+                        <option value="" {{ $currentFilter == '' ? 'selected' : '' }} disabled hidden>
+                            Lọc sản phẩm
+                        </option>
+                          <option value="a-z" {{ $currentFilter == 'a-z' ? 'selected' : '' }}>
                               Tên: A đến Z
                           </option>
-                          <option value="name_desc">
+                          <option value="z-a" {{ $currentFilter == 'z-a' ? 'selected' : '' }}>
                               Tên: Z đến A
                           </option>
-                          <option value="price_asc">
+                          <option value="gia-tang-dan" {{ $currentFilter == 'gia-tang-dan' ? 'selected' : '' }}>
                               Giá: Thấp đến Cao
                           </option>
-                          <option value="price_desc">
+                          <option value="gia-giam-dan"{{ $currentFilter == 'gia-giam-dan' ? 'selected' : '' }}>
                               Giá: Cao đến Thấp
-                          </option>
-                          <option value="rating_asc">
-                              Đánh giá: Thấp đến Cao
-                          </option>
-                          <option value="rating_desc">
-                              Đánh giá: Cao đến Thấp
                           </option>
                           <span><i class='bx bx-chevron-down'></i></span>
                       </select>
