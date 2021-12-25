@@ -43,6 +43,15 @@ $(document).ready(function () {
         });
     });
 
+    $("#sortBy").on("change", function (e) {
+        //get selected value
+        var optionSelected = $(this).find("option:selected");
+        var valueSelected = optionSelected.val();
+        
+        redirectUrl = `${location.protocol}//${location.host + location.pathname}?filter=${valueSelected}`;
+        window.location.href = redirectUrl;
+    });
+
     /*      image click     */
     $(".__thumbnails .__thumbnail img").on("click", function () {
         const selectedImage = $(this).attr("src");
