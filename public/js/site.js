@@ -199,10 +199,10 @@ $(document).ready(function () {
                         );
                     } else {
                         const quantity = parseInt(
-                            trElement.find("input").val()
+                            trElement.find("input[name='items_quantity[]']").val()
                         );
                         const unitPrice = parseInt(
-                            trElement.find("input").attr("data-unit-price")
+                            trElement.find("input[name='items_quantity[]']").attr("data-unit-price")
                         );
                         const preTotal = quantity * unitPrice;
 

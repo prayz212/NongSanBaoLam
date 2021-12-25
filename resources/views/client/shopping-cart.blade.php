@@ -35,15 +35,18 @@
                       </div>
                   </td>
                   <td class="col-sm-2 text-center d-none d-sm-table-cell">{{ $c['item']->category->name }}</td>
+                  @php
+                    $finalPrices = $c['item']->price - ($c['item']->price * ($c['item']->discount ?? 0)/100);
+                  @endphp
                   <td class="col-md-2 col-sm-3 col-4">
                     <div class="d-flex justify-content-center align-items-center qty btn_added">
                       <input type="button" value="+" class="__quantity-plus">
-                      <input type="number" name="items_quantity[]" data-unit-price="{{ $c['item']->price }}" value="{{ $c['qty'] }}" step="1" min="1" max="" class="_form-input text-center px-0" onchange="changeItemPrice(this)" style="margin: 0px 4px 0px 4px; max-width: 6rem;">
+                      <input type="number" name="items_quantity[]" data-unit-price="{{ $finalPrices }}" value="{{ $c['qty'] }}" step="1" min="1" max="" class="_form-input text-center px-0" onchange="changeItemPrice(this)" style="margin: 0px 4px 0px 4px; max-width: 6rem;">
                       <input type="button" value="-"  class="__quantity-minus">
                     </div>
                   </td>
                   <td class="col-md-2 col-sm-2 col-1 text-center">
-                      <div class="items_price">{{ number_format($c['qty'] * $c['item']->price, 0, ",", ".") }}đ</div>
+                      <div class="items_price">{{ number_format($c['qty'] * $finalPrices, 0, ",", ".") }}đ</div>
                   </td>
                   <td class="col-md-1 col-sm-1 col-2">
                       <div class="d-flex justify-content-center">
@@ -53,7 +56,7 @@
               </tr> 
               @php
                 $i++;
-                $totalPrice += ($c['qty'] * $c['item']->price);
+                $totalPrice += ($c['qty'] * $finalPrices);
               @endphp
             @endforeach
           @else
@@ -117,11 +120,10 @@
 
     cbTimeout = setTimeout(function() {
       updateQty($(_this).closest('.items_tr').attr('data-id'), quantity)
-    }, 1500);
+    }, 600);
   }
 
   function updateQty(id, quantity) {
-    // var form = $(this);
     var url = '{{ url('cap-nhat-so-luong' )}}'
     var data = {
       id, quantity
@@ -149,7 +151,6 @@
 
   //plus - minus button
   function wcqib_refresh_quantity_increments() {
-      console.log("function")
     jQuery(
         "div.qty:not(.btn_added), td.qty:not(.btn_added)"
     ).each(function (a, b) {
