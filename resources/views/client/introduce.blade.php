@@ -4,7 +4,7 @@
     p.lead {
         padding-top: 20px;
         font-weight: 400;
-        line-height: 28px;
+        line-height: 40px;
         font-size: 1.7rem;
     }
 </style>
@@ -42,16 +42,16 @@
         <div class="col-md-6 order-md-2">
             <h1 class="featurette-heading"><span class="text-muted">| Tầm nhìn</span></h1>
             <div class="space20">&nbsp;</div>
-            <p class="text-dark" style="font-size: 1.7rem;text-align:justify;line-height: 28px;">
+            <p class="text-dark" style="font-size: 1.7rem;text-align:justify;line-height: 32px;">
                 (*) Với tầm nhìn là thương hiệu bán lẻ sản phẩm nông nghiệp chất lượng số 1 Việt Nam, mang sản phẩm an toàn từ nơi sản xuất đến người tiêu dùng nhanh nhất, chúng tôi mang trong mình 3 giá trị cốt lõi (3C):                                </P>
             </P>
-                <i style="font-size: 1.55rem;text-align:justify;line-height: 28px;" class="text-dark">
+                <i style="font-size: 1.55rem;text-align:justify;line-height: 30px;" class="text-dark">
                     1. Chất lượng sản phẩm: luôn luôn là ưu tiên số 1, là yếu tố tiên quyết bắt buộc, cũng là mục tiêu mà đội ngũ chúng tôi đang nỗ lực cải tiến và hoàn thiện từng ngày.                                </P>
                 </i>
-                <i style="font-size: 1.55rem;text-align:justify;line-height: 28px;" class="text-dark">
+                <i style="font-size: 1.55rem;text-align:justify;line-height: 30px;" class="text-dark">
                 2. Công nghệ cập nhật: là yếu tố "nhanh" trong tầm nhìn của chúng tôi. Công nghệ luôn được chúng tôi chú trọng cập nhật thường xuyên để gia tăng tốc độ xử lý đơn hàng, mang sản phẩm đến tay khách hàng nhanh nhất có thể.                                </P>
                 </i>
-                <i style="font-size: 1.55rem;text-align:justify;line-height: 28px;" class="text-dark">
+                <i style="font-size: 1.55rem;text-align:justify;line-height: 30px;" class="text-dark">
                 3. Cộng đồng tử tế: là cộng đồng trong đó mọi mối quan hệ được kết nối với nhau bởi sự tử tế: Đồng nghiệp tử tế, Đối tác tử tế, Khách hàng tử tế.                                <div class="space20">&nbsp;</div>
                 </i>
         </div>
@@ -62,7 +62,7 @@
 
     <hr class="featurette-divider">
 
-    <div class="row featurette pt-5 px-1">
+    <div class="row featurette pt-3 px-1">
         <div class="col-md-7">
             <h1 class="featurette-heading"><span class="text-muted">| Thông tin liên hệ của cửa hàng</span></h1>
             <div class="space20">&nbsp;</div>
