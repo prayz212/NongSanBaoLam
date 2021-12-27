@@ -10,7 +10,7 @@
       <div class="d-none d-md-inline-block __search-box">
         <form method="GET" action="{{ url('tim-kiem-san-pham') }}">
             <div class="form-actions no-color">
-                <i class='bx bx-search' style="position: absolute; top: 32%; color: black; font-size: 2rem; right: 4%"></i>
+                <button style="position: absolute; top: 32%; right: 4%; background: transparent; border: none;" type="submit"><i class='bx bx-search' style="color: black; font-size: 2rem;"></i></button>
                 <input class="_form-input" type="text" name="key" value="" placeholder="Tìm kiếm theo tên"/>
             </div>
         </form>
@@ -44,6 +44,9 @@
               </li>
               <li class="__nav-item">
                   <a class="__nav-link" href="{{ url('danh-sach-san-pham') }}">Sản phẩm</a>
+              </li>
+              <li class="__nav-item">
+                <a class="__nav-link" href="{{ url('gioi-thieu') }}">Giới thiệu</a>
               </li>
               <li class="__nav-item">
                   <a class="__nav-link ">Tài khoản</a>
