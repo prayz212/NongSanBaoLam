@@ -165,7 +165,7 @@ li {
     display: none;
 }
 
-@media only screen and (max-width: 930px) {
+@media only screen and (max-width: 1020px) {
     .__search-box {
         max-width: 170px;
     }
