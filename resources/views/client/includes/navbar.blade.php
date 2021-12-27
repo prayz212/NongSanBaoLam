@@ -46,6 +46,9 @@
                   <a class="__nav-link" href="{{ url('danh-sach-san-pham') }}">Sản phẩm</a>
               </li>
               <li class="__nav-item">
+                <a class="__nav-link" href="{{ url('gioi-thieu') }}">Giới thiệu</a>
+              </li>
+              <li class="__nav-item">
                   <a class="__nav-link ">Tài khoản</a>
               </li>
               <li class="__nav-item">
