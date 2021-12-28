@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>Homepage - CoolMate thời trang của mọi nhà</title>
+    <title>Nông sản Bảo Lâm - nông sản sạch cho mọi nhà</title>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 

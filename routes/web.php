@@ -25,6 +25,7 @@ use App\Http\Controllers\AccountController;
 
 Route::prefix('/')->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('homepage');
+    Route::get('/gioi-thieu', [HomeController::class, 'introduce'])->name('introducePage');
 
     Route::get('/danh-sach-san-pham', [ProductController::class, 'index'])->name('productpage');
     Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detail'])->name('productDetail');

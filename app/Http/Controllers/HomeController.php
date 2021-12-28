@@ -23,5 +23,10 @@ class HomeController extends Controller
           ->with('bestSaler', $bestSaler)
           ->with('newProducts', $newProducts);
   }
+
+  public function introduce()
+  {
+    return view('client.introduce');
+  }
 }
 
