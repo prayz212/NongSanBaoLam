@@ -120,6 +120,7 @@ li {
 .__nav.__fix-nav .__nav-link,
 .__nav.__fix-nav .__logo,
 .__nav.__fix-nav .__cart-icon,
+.__nav.__fix-nav .__logout-icon,
 .__nav.__fix-nav .__hamburger {
     color: #fff !important;
 }
@@ -165,7 +166,11 @@ li {
     display: none;
 }
 
-@media only screen and (max-width: 930px) {
+.__logout-icon {
+    display: none;
+}
+
+@media only screen and (max-width: 1120px) {
     .__search-box {
         max-width: 170px;
     }
@@ -175,7 +180,7 @@ li {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
     .__menu {
         position: fixed;
         top: 0;
@@ -213,6 +218,11 @@ li {
     }
 
     .__cart-icon {
+        display: block;
+        font-size: 3rem;
+    }
+
+    .__logout-icon {
         display: block;
         font-size: 3rem;
     }
@@ -267,6 +277,13 @@ li {
 
     .__nav-link.icon {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .__nav-link:link,
+    .__nav-link:visited {
+        padding: 0;
     }
 }
 
@@ -1345,7 +1362,7 @@ form span {
     cursor: pointer;
     background-color: #bebebe;
     color: var(--white);
-    padding-left: 4rem!important;
+    padding-left: 4rem !important;
     transition: all 0.4s ease;
 }
 
@@ -1575,7 +1592,7 @@ form ._btn {
     font-size: small;
     font-weight: 200;
     color: red;
-    text-align: start;
+    text-align: center;
     list-style: inside !important;
 }
 

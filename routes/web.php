@@ -6,7 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AccountController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,4 +41,12 @@ Route::prefix('/')->group(function () {
     
     Route::post('/them-binh-luan', [CommentController::class, 'addComment'])->name('addComment');
     Route::post('/tra-loi-binh-luan', [CommentController::class, 'replyComment'])->name('replyComment');
+
+    Route::get('/dang-nhap-dang-ky', [AuthController::class, 'index'])->name('authenticatepage');
+    Route::post('/dang-nhap', [AuthController::class, 'login'])->name('login');
+    Route::post('/dang-ky', [AuthController::class, 'register'])->name('register');
+    Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/tai-khoan', [AccountController::class, 'index'])->name('infopage');
+    Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
 });

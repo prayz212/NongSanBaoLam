@@ -60,7 +60,9 @@ $(document).ready(function () {
 
     const registerErrMsg = $("#error-msg-reg").html();
     if (registerErrMsg != "") {
-        $("#signup_span").click();
+        $("#_RegForm").css("transform", "translateX(-300px)");
+        $("#_LoginForm").css("transform", "translateX(-300px)");
+        $("#_Indicator").css("transform", "translateX(110px)");
     }
 
     $("#signin_span").click(() => {
@@ -236,8 +238,10 @@ $(document).ready(function () {
     });
 });
 
-gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.5, y: -10 });
-gsap.from(".__hamburger", { opacity: 0, duration: 1, delay: 1, x: 20 });
+gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.6, x: -20 });
+gsap.from(".__hamburger", { opacity: 0, duration: 1, delay: 0.6, x: 20 });
+gsap.from(".__cart-icon", { opacity: 0, duration: 1, delay: 0.6, y: -10 });
+gsap.from(".__logout-icon", { opacity: 0, duration: 1, delay: 0.6, y: -10 });
 gsap.from(".__hero-img", { opacity: 0, duration: 1, delay: 1.5, x: -200 });
 gsap.from(".__hero-content h2", { opacity: 0, duration: 1, delay: 2, y: -50 });
 gsap.from(".__hero-content h1", {
