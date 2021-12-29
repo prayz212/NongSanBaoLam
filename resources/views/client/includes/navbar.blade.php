@@ -42,22 +42,32 @@
               <li class="__nav-item">
                   <a class="__nav-link" href="{{ url('') }}">Trang chủ</a>
               </li>
-              <li class="__nav-item">
-                  <a class="__nav-link" href="{{ url('danh-sach-san-pham') }}">Sản phẩm</a>
+              <li class="__nav-item __hoverable">
+                  <a class="__nav-link">Sản phẩm</a>                  
+                  <ul class="__sub-menu">
+                    <li><a href="{{ url('the-loai-san-pham/trai-cay-da-lat') }}">Trái cây Đà Lạt</a></li>
+                    <li><a href="{{ url('the-loai-san-pham/trai-cay-ngoai-nhap') }}">Trái cây ngoại nhập</a></li>
+                    <li><a href="{{ url('the-loai-san-pham/rau-cu-huu-co') }}">Rau củ hữu cơ</a></li>
+                    <li><a href="{{ url('the-loai-san-pham/rau-cu-da-lat') }}">Rau củ Đà Lạt</a></li>
+                    <li><a href="{{ url('the-loai-san-pham/rau-cu-ngoai-nhap') }}">Rau củ ngoại nhập</a></li>
+                    <li><a href="{{ url('the-loai-san-pham/combo-san-pham') }}">Combo sản phẩm</a></li>
+                  </ul>
               </li>
               <li class="__nav-item">
-                <a class="__nav-link" href="{{ url('gioi-thieu') }}">Giới thiệu</a>
+                  <a class="__nav-link" href="{{ url('dang-nhap-dang-ky') }}">Tài khoản</a>
               </li>
               <li class="__nav-item">
-                  <a class="__nav-link ">Tài khoản</a>
+                  <a class="__nav-link" href="{{ url('gioi-thieu') }}">Giới thiệu</a>
               </li>
               <li class="__nav-item">
                   <a class="__nav-link icon" href="{{ url('/gio-hang') }}"><i class="bx bx-shopping-bag"></i></a>
               </li>
 
-              {{-- <li class="__nav-item">
-                  <a class="__nav-link icon"><i class="bx bx-log-out"></i></a>
-              </li> --}}
+              @if (Auth::check())
+              <li class="__nav-item">
+                <a class="__nav-link icon" href="{{ url('/dang-xuat') }}"><i class="bx bx-log-out"></i></a>
+              </li>
+              @endif
           </ul>
       </div>
 
@@ -65,9 +75,11 @@
           <i class="bx bx-shopping-bag"></i>
       </a>
 
-      {{-- <a class="__cart-icon">
+      @if (Auth::check())
+      <a class="__logout-icon" href="{{ url('/dang-xuat') }}">
           <i class='bx bx-log-out'></i>
-      </a> --}}
+      </a>
+      @endif
 
       <div class="__hamburger">
           <i class="bx bx-menu"></i>
