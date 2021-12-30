@@ -39,6 +39,9 @@ Route::prefix('/')->group(function () {
     Route::post('/cap-nhat-so-luong', [CartController::class, 'updateToCart'])->name('updateToCart');
     Route::post('/xoa-khoi-gio-hang', [CartController::class, 'deleteFormCart'])->name('deleteFormCart');
     Route::get('/gio-hang', [CartController::class, 'index'])->name('shoppingCart');
+    Route::middleware('auth')->group(function() {
+        Route::get('/thanh-toan', [CartController::class, 'payment'])->name('payment');
+    });
     
     Route::post('/them-binh-luan', [CommentController::class, 'addComment'])->name('addComment');
     Route::post('/tra-loi-binh-luan', [CommentController::class, 'replyComment'])->name('replyComment');

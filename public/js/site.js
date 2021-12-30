@@ -1,9 +1,3 @@
-// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-// @ts-nocheck
-
 $(document).ready(function () {
     const menu = document.querySelector(".__menu");
     const navOpen = document.querySelector(".__hamburger");
@@ -199,12 +193,14 @@ $(document).ready(function () {
                         $("tbody").append(
                             '<tr><td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td></tr>'
                         );
+                        $('#cart-submit').prop('disabled', true);
+                        $('#cart-submit').addClass('__disabled-btn');
                     } else {
                         const quantity = parseInt(
-                            trElement.find("input[name='items_quantity[]']").val()
+                            trElement.find("input[type='number']").val()
                         );
                         const unitPrice = parseInt(
-                            trElement.find("input[name='items_quantity[]']").attr("data-unit-price")
+                            trElement.find("input[type='number']").attr("data-unit-price")
                         );
                         const preTotal = quantity * unitPrice;
 
@@ -235,6 +231,24 @@ $(document).ready(function () {
                 );
             },
         });
+    });
+
+    /*          PAYMENT            */
+    const currentChecked = $("#payment-method").val();
+    if (currentChecked == "COD") {
+        $('#CreditCard-info').hide();
+    }
+    else if (currentChecked == "CreditCard") {
+        $('#COD-info').hide();
+    }
+    
+    $("input[name$='paymentType']").click(function () {
+        var value = $(this).val();
+        $("#info_Method").val(value);
+
+        $('#COD-info').hide();
+        $('#CreditCard-info').hide();
+        $("#" + value + "-info").show();
     });
 });
 
