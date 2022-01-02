@@ -42,7 +42,7 @@
               <li class="__nav-item">
                   <a class="__nav-link" href="{{ url('') }}">Trang chủ</a>
               </li>
-              <li class="__nav-item __hoverable">
+              <li class="__nav-item __hoverable" id="hoverable-el">
                   <a class="__nav-link">Sản phẩm</a>                  
                   <ul class="__sub-menu">
                     <li><a href="{{ url('the-loai-san-pham/trai-cay-da-lat') }}">Trái cây Đà Lạt</a></li>
