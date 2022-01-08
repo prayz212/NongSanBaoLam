@@ -6,8 +6,10 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Voucher;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -51,6 +53,19 @@ class CartController extends Controller
 
         return view('client.shopping-cart')
             ->with('carts', $carts);
+    }
+
+    public function checkVoucher(Request $request) {
+        $voucherCode = $request->voucher;
+        $isExist = Voucher::where('code', $voucherCode)
+            ->where('start_at', '<=', Carbon::now()->toDateString())
+            ->where('end_at', '>=', Carbon::now()->toDateString())
+            ->where('isUsed', false)
+            ->first();
+
+        return $isExist == NULL 
+            ? response()->json(['status' => 404])
+            : response()->json(['status' => 200, 'voucher' => $isExist]);
     }
 
     public function payment(Request $request) {

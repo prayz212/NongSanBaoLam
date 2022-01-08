@@ -3,7 +3,7 @@
 
 <div class="container __payment-page pt-5">
   <form method="post">
-      <div class="row">
+      <div class="row mb-sm-0 mb-5">
           <div class="col-sm-8 col-12 border-end">
               <div class="mx-4 mx-sm-5">
                   <div class="fs-1 fw-bold mb-3">Thông tin thanh toán</div>
@@ -62,7 +62,7 @@
                           <input id="voucher-input" name="voucher" class="_form-input" type="text" placeholder="Mã voucher" value="{{ old('voucher') ?? '' }}">
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-12">
-                          <button id="voucher-btn" type="button" class="_btn fs-3 w-100">Áp dụng</button>
+                          <button id="voucher-btn" type="button" style="padding-top: 6px;padding-bottom: 6px;" class="_btn fs-3 w-100" data-href="{{ url('kiem-tra-voucher' )}}">Áp dụng</button>
                       </div>
                   </div>
               </div>
@@ -72,20 +72,24 @@
                   <div class="fs-1 fw-bold">Giỏ hàng</div>
                   <table>
                       <tr>
-                          <td class="fs-3">Tổng tiền hàng</td>
-                          <td class="fs-3">{{ number_format($totalPrice, 0, ",", ".") }}đ</td>
+                        <td class="fs-3">Tổng tiền hàng</td>
+                        <td id="total-price-amount" data-amount="{{ $totalPrice }}">{{ number_format($totalPrice, 0, ",", ".") }}đ</td>
+                      </tr>
+                      <tr id="total-discount-tr">
+                        <td class="fs-3">Tổng đã giảm</td>
+                        <td id="total-discount-amount" class="fs-3" data-amount="{{ $totalDiscount }}">{{ number_format($totalDiscount, 0, ",", ".") }}đ</td>
                       </tr>
                       <tr>
-                          <td class="fs-3">Tổng đã giảm</td>
-                          <td class="fs-3">{{ number_format($totalDiscount, 0, ",", ".") }}đ</td>
+                        <td class="fs-3">Voucher giảm giá</td>
+                        <td id="voucher-amount" class="fs-3" data-amount="0">0đ</td>
                       </tr>
                       <tr>
-                          <td class="fs-3">Phí giao hàng</td>
-                          <td class="fs-3">{{ number_format($shippingCost, 0, ",", ".") }}đ</td>
+                        <td class="fs-3">Phí giao hàng</td>
+                        <td id="shipping-cost-amount"class="fs-3" data-amount="{{ $shippingCost }}">{{ number_format($shippingCost, 0, ",", ".") }}đ</td>
                       </tr>
                       <tr class="border-top">
-                          <td class="fs-3">Tổng</td>
-                          <td class="fs-2 fw-bold">{{ number_format($totalPrice - $totalDiscount + $shippingCost, 0, ",", ".") }}đ</td>
+                        <td class="fs-3">Tổng</td>
+                        <td id="total-pay-amount" class="fs-2 fw-bold">{{ number_format($totalPrice - $totalDiscount + $shippingCost, 0, ",", ".") }}đ</td>
                       </tr>
                   </table>
                   <div class="">
@@ -97,4 +101,19 @@
   </form>
 </div>
 
+<div class="__wrapper" id="toast_success">
+    <div id="toast">
+        <div class="container-1">
+            <i class='bx bx-cart'></i>
+        </div>
+        <div class="container-2 my-2">
+            <p class="toast-sta"></p>
+            <p class="toast-msg"></p>
+        </div>
+        <button id="close">
+            <i class='bx bx-x'></i>
+        </button>
+    </div>
+</div>
 @endsection
+

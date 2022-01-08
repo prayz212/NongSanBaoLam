@@ -250,6 +250,70 @@ $(document).ready(function () {
         $('#CreditCard-info').hide();
         $("#" + value + "-info").show();
     });
+
+    $('#voucher-btn').click(function() {
+        const _this = $(this);
+        var url = $(this).attr('data-href');
+        const voucherCode = $('#voucher-input').val();
+        if (!voucherCode) return;
+    
+        var data = {
+            voucher: voucherCode
+        }
+    
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url,
+            data,
+            success: function (data) {
+                if (data.status == 200) {
+                    console.log("voucher valid")
+    
+                    const voucher = data.voucher;
+                    $('#voucher-amount').text(
+                        voucher.discount.toLocaleString("it-IT", {currency: "VND",}) + "đ"
+                    );
+
+                    $('#voucher-amount').attr('data-amount', voucher.discount)
+
+                    $('#voucher-input').attr('readonly', true);
+                    _this.text("Đã áp dụng")
+                    _this.addClass("bg-success");
+                    _this.attr('disabled', true);
+                    _this.css("cursor", "not-allowed")
+                    
+                    updateTotalPayAmount();
+
+                    showToast(
+                        "success", 
+                        "Quý khách đã được giảm " + voucher.discount.toLocaleString("it-IT", {currency: "VND",}) + "đ"
+                    );
+                } else {
+                    console.log("voucher invalid")
+                }
+            },
+            error: function() {
+                console.log("failed")
+            }
+        });
+    })
+
+    function updateTotalPayAmount() {
+        let totalPrice = parseInt($('#total-price-amount').attr('data-amount'))
+        let totalDiscount = parseInt($('#total-discount-amount').attr('data-amount'))
+        let totalVoucher = parseInt($('#voucher-amount').attr('data-amount'))
+        let totalShipping = parseInt($('#shipping-cost-amount').attr('data-amount'))
+        let newTotalPay = totalPrice + totalShipping - totalDiscount - totalVoucher;
+
+        if (newTotalPay < 0) {newTotalPay = 0;}
+        
+        const _el = $('#total-pay-amount')
+        _el.attr('data-amount', newTotalPay)
+        _el.text(newTotalPay.toLocaleString("it-IT", {currency: "VND",}) + "đ")
+    }
 });
 
 gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.6, x: -20 });
