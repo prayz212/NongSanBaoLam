@@ -10,7 +10,7 @@ class BillDetail extends Model
     use HasFactory;
 
     protected $table = 'bill_detail';
-    protected $fillable = ['unit_price', 'quantity'];   
+    protected $fillable = ['bill_id', 'product_id', 'unit_price', 'quantity'];
 }
 
 
