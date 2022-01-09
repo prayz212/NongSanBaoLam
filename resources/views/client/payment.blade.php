@@ -2,7 +2,8 @@
 @section('main')
 
 <div class="container __payment-page pt-5">
-  <form method="post">
+  <form method="post" action = {{ route('postPayment') }}>
+    @csrf
       <div class="row mb-sm-0 mb-5">
           <div class="col-sm-8 col-12 border-end">
               <div class="mx-4 mx-sm-5">
@@ -11,47 +12,73 @@
                   <div class="row">
                       <div class="col-lg-8 col-md-8 col-sm-12">
                           <input name="fullname" class="_form-input" type="text" placeholder="Họ tên" value="{{ old('fullname') ? old('fullname') : $customer->fullname ?? '' }}">
+                          <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('fullname') ?? '' }}</div>
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-12">
                           <input name="phone" class="_form-input" type="text" placeholder="Số điện thoại" value="{{ old('phone') ? old('phone') : $customer->phone ?? '' }}">
+                          <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('phone') ?? '' }}</div>
                       </div>
                   </div>
 
                   <input name="email" class="_form-input" type="text" placeholder="Email" value="{{ old('email') ? old('email') : $customer->email ?? '' }}">
+                  <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('email') ?? '' }}</div>
                   <input name="address" class="_form-input" type="text" placeholder="Địa chỉ" value="{{ old('address') ? old('address') : $customer->address ?? '' }}">
+                  <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('address') ?? '' }}</div>
 
                   <input name="notes" class="_form-input" type="text" placeholder="Ghi chú (Ví dụ: Giao giờ hành chính)" value="{{ old('notes') ?? '' }}">
-
+                  @php
+                    if (old('paymentType') == null) {
+                        if ($errors->first('cardNumber') != null || $errors->first('validDate') != null || $errors->first('secretNumber') != null) {
+                            $currentMethod = "CreditCard";
+                        }
+                        else {
+                            $currentMethod = old('paymentType');
+                        }
+                    } else {
+                        $currentMethod = old('paymentType');
+                    }
+                  @endphp
+                  {{old('paymentType')}}
                   <div class="fs-1 fw-bold mt-4 mb-3">Hình thức thanh toán</div>
                   <div class="px-3">
-                      <input id="payment-method" hidden value="{{ old('method') ?? 'COD' }}">
+                      <input id="payment-method" hidden value="{{ $currentMethod ?? 'COD' }}">
                       <div class="form-check form-check-inline col-6">
-                          <input class="form-check-input" type="radio" name="paymentType" id="COD" {{ old('method') ?? 'COD' == 'COD' ? 'checked' : '' }} value="COD">
+                          <input class="form-check-input" type="radio" name="paymentType" id="COD" {{ $currentMethod ?? 'COD' == 'COD' ? 'checked' : '' }} value="COD">
                           <label class="form-check-label" for="COD">
                               COD
                           </label>
                       </div>
                       <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="paymentType" id="CreditCard" {{ old('method') ?? 'COD' == 'CreditCard' ? 'checked' : '' }} value="CreditCard">
+                          <input class="form-check-input" type="radio" name="paymentType" id="CreditCard" {{ $currentMethod ?? 'COD' == 'CreditCard' ? 'checked' : '' }} value="CreditCard">
                           <label class="form-check-label" for="CreditCard">
                               Thẻ tín dụng
                           </label>
                       </div>
+                      <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('paymentType') ?? '' }}</div>
                   </div>
                   <div class="__payment-info">
                       <div id="COD-info" class="fs-3 mt-3 mb-4">
                           Khách hàng sẽ thanh toán khi nhận được hàng từ đơn vị vận chuyển
                       </div>
                       <div id="CreditCard-info" class="mt-3 mb-4">
-                          <input name="cardNumber" class="_form-input" type="text" placeholder="Số thẻ">
+                          <input name="cardNumber" class="_form-input" type="text" placeholder="Số thẻ" value="{{ old('cardNumber') ?? '' }}">
+                          <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('cardNumber') ?? '' }}</div>
                           <div class="row">
                               <div class="col-6">
-                                  <input name="validDate" class="_form-input" type="date" placeholder="Ngày hết hạn">
+                                  <input name="validDate" class="_form-input" type="date" placeholder="Ngày hết hạn" value="{{ old('validDate') ?? '' }}">
+                                  <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('validDate') ?? '' }}</div>
                               </div>
                               <div class="col-6">
-                                  <input name="secretNumber" class="_form-input" type="text" placeholder="CVV/CVV2">
+                                  <input name="secretNumber" class="_form-input" type="text" placeholder="CVV/CVV2" value="{{ old('secretNumber') ?? '' }}">
+                                  <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('secretNumber') ?? '' }}</div>
                               </div>
                           </div>
+
+                          @if (Session::has('payment-error'))
+                          <div class="text-danger pt-2" style="margin-left: 3px">
+                              {{ Session::get('payment-error') }}
+                          </div>
+                          @endif
                       </div>
                   </div>
 

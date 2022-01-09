@@ -36,4 +36,8 @@ class AccountController extends Controller
 
         return redirect()->route('infopage')->with('info-noti-success', 'Cập nhật thành công');
     }
+
+    public function billDetail($id) {
+        die('ok');
+    }
 }

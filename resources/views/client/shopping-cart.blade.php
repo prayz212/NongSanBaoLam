@@ -68,10 +68,15 @@
         </tr>
         @endif
     </table>
+    @if (Session::has('cart-error'))
+    <div class="p-3 d-flex flex-row-reverse">
+      <div id="error-msg-cart" class="text-danger">{{ Session::get('cart-error') }}</div>
+    </div>
+    @endif
     <div class="d-flex flex-row-reverse align-items-center">
       <div style="min-width: fit-content">
         @if (Auth::check()) 
-        <a id="cart-submit" type="button" href="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
+        <a id="cart-submit" type="button" data-href-check="{{ route('checkQuantity') }}" data-href-redirect="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
         @else  
         <a href="{{ route('authenticatepage') }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
         @endif

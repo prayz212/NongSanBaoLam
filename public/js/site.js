@@ -72,7 +72,7 @@ $(document).ready(function () {
     });
 
     let x;
-    function showToast(mess, toastMess) {
+    function showToast(mess, toastMess, toastTitle = null) {
         clearTimeout(x);
 
         if (mess == "success") {
@@ -93,6 +93,10 @@ $(document).ready(function () {
         } else {
             $(".toast-sta").text("Thất bại");
             $(".toast-msg").text(toastMess);
+        }
+
+        if (toastTitle) {
+            $(".toast-sta").text(toastTitle);
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -233,6 +237,36 @@ $(document).ready(function () {
         });
     });
 
+    $('#cart-submit').click(function() {
+        const _this = $(this);
+        const checkQuantityURL = _this.attr('data-href-check');
+        const redirectURL = _this.attr('data-href-redirect');
+    
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: checkQuantityURL,
+            success: function (data) {
+                if (data.isEnough == 1) {
+                    window.location.href = redirectURL;
+                } else if (data.isEnough == 0) {
+                    showToast(
+                        "fail", 
+                        data.remaining == 0 
+                        ? data.product + " hiện tại đã hết hàng"
+                        : data.product + " chỉ còn " + data.remaining + "kg",
+                        "Không đủ số lượng"
+                    );
+                }
+            },
+            error: function() {
+                console.log("failed")
+            }
+        });
+    });
+
     /*          PAYMENT            */
     const currentChecked = $("#payment-method").val();
     if (currentChecked == "COD") {
@@ -292,7 +326,10 @@ $(document).ready(function () {
                         "Quý khách đã được giảm " + voucher.discount.toLocaleString("it-IT", {currency: "VND",}) + "đ"
                     );
                 } else {
-                    console.log("voucher invalid")
+                    showToast(
+                        "fail", 
+                        "Voucher không hợp lệ hoặc đã hết hạn"
+                    );
                 }
             },
             error: function() {

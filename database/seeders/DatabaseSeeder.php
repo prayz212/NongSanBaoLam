@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             ImageSeeder::class,
             CommentSeeder::class,
             RatingSeeder::class,
-            CustomerSeeder::class
+            CustomerSeeder::class,
+            CardSeeder::class,
+            VoucherSeeder::class,
         ]);
     }
 }

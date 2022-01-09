@@ -27,8 +27,8 @@ class RemoveFkVoucherTable extends Migration
     public function down()
     {
         Schema::table('voucher', function (Blueprint $table) {
-            $table->bigInteger('bill_id')->unsigned()->index();
-            $table->foreign('bill_id')->references('id')->on('bill')->onDelete('cascade');
+            // $table->bigInteger('bill_id')->unsigned()->index();
+            // $table->foreign('bill_id')->references('id')->on('bill')->onDelete('cascade');
         });
     }
 }

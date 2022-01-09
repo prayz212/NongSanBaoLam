@@ -30,7 +30,15 @@ class CustomerSeeder extends Seeder
                 'fullname' => 'Diệc Lữ Chí Vĩ',
                 'phone' => '0977026888',
                 'address' => '192 Lê Trọng Tấn P.12 Q.Tân Bình'
-            ]
+            ],
+            [
+                'username' => 'phuoctran',
+                'password' => bcrypt('qwertqwert'),
+                'email' => 'tranthanhphuoc@tdtu.edu.vn',
+                'fullname' => 'Trần Thanh Phước',
+                'phone' => '0908350132',
+                'address' => '19 Nguyễn Hữu Thọ Q.7'
+            ],
         ]);
     }
 }
