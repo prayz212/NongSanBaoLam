@@ -38,7 +38,16 @@ Route::prefix('/')->group(function () {
     Route::post('/them-vao-gio-hang', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cap-nhat-so-luong', [CartController::class, 'updateToCart'])->name('updateToCart');
     Route::post('/xoa-khoi-gio-hang', [CartController::class, 'deleteFormCart'])->name('deleteFormCart');
+    Route::post('/kiem-tra-voucher', [CartController::class, 'checkVoucher'])->name('checkVoucher');
     Route::get('/gio-hang', [CartController::class, 'index'])->name('shoppingCart');
+
+    Route::middleware('auth')->group(function() {
+        Route::get('/thanh-toan', [CartController::class, 'payment'])->name('payment');
+        Route::post('/thuc-hien-thanh-toan', [CartController::class, 'paymentProcess'])->name('postPayment');
+        Route::post('/kiem-tra-so-luong', [CartController::class, 'checkProductQuantity'])->name('checkQuantity');
+
+        Route::get('/chi-tiet-hoa-don/{id}', [AccountController::class, 'billDetail'])->name('billDetail');
+    });
     
     Route::post('/them-binh-luan', [CommentController::class, 'addComment'])->name('addComment');
     Route::post('/tra-loi-binh-luan', [CommentController::class, 'replyComment'])->name('replyComment');

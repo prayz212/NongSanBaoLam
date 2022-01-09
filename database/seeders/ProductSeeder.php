@@ -21,7 +21,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 10
+                'sold' => 10,
+                'discount' => 15
             ],
             [
                 'name' => 'Ổi',
@@ -29,7 +30,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 20
+                'sold' => 20,
+                'discount' => NULL
             ],
             [
                 'name' => 'Nho',
@@ -37,7 +39,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 0
+                'sold' => 0,
+                'discount' => 10
             ],
             [
                 'name' => 'Xoài',
@@ -45,7 +48,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 0
+                'sold' => 0,
+                'discount' => NULL
             ],
             [
                 'name' => 'Dưa hấu',
@@ -53,7 +57,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 15
+                'sold' => 15,
+                'discount' => NULL
             ],
             [
                 'name' => 'Dưa lưới',
@@ -61,7 +66,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 22
+                'sold' => 22,
+                'discount' => NULL
             ],
             [
                 'name' => 'Đu đủ',
@@ -69,7 +75,8 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'category_id' => 1,
                 'quantity' => 100,
-                'sold' => 0
+                'sold' => 0,
+                'discount' => 20
             ]
         ];
 
