@@ -11,6 +11,7 @@ $(document).ready(function () {
     navClose.addEventListener("click", () => {
         menu.classList.remove("__show");
         document.body.classList.remove("__show");
+        $(".__sub-menu").removeAttr("style");
     });
 
     // Scroll To
@@ -37,12 +38,30 @@ $(document).ready(function () {
         });
     });
 
+    $("#hoverable-el").click(function () {
+        const submenu = $(".__nav-list .__nav-item ul");
+        const isEnable = $(document).width() <= 850;
+
+        if (!isEnable) {
+            $(".__sub-menu").removeAttr("style");
+            return;
+        }
+        const isShow = submenu.css("display") == "block";
+        submenu.css({
+            visibility: isShow ? "hidden" : "visible",
+            opacity: isShow ? "0" : "1",
+            display: isShow ? "none" : "block",
+        });
+    });
+
     $("#sortBy").on("change", function (e) {
         //get selected value
         var optionSelected = $(this).find("option:selected");
         var valueSelected = optionSelected.val();
-        
-        redirectUrl = `${location.protocol}//${location.host + location.pathname}?filter=${valueSelected}`;
+
+        redirectUrl = `${location.protocol}//${
+            location.host + location.pathname
+        }?filter=${valueSelected}`;
         window.location.href = redirectUrl;
     });
 
@@ -275,11 +294,10 @@ $(document).ready(function () {
     else if (currentChecked == "CreditCard") {
         $('#COD-info').hide();
     }
-    
+   
     $("input[name$='paymentType']").click(function () {
         var value = $(this).val();
         $("#info_Method").val(value);
-
         $('#COD-info').hide();
         $('#CreditCard-info').hide();
         $("#" + value + "-info").show();
