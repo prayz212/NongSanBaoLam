@@ -144,22 +144,22 @@ class CartController extends Controller
             $totalAmount['totalPay'] -= $voucher->discount;   
         }
 
-        $bill = new Bill;
-        $bill->customer_id = Auth::user()->id;
-        $bill->fullname = $request->fullname;
-        $bill->email = $request->email;
-        $bill->address = $request->address;
-        $bill->phone = $request->phone;
-        $bill->notes = $request->notes ?? '';
-        $bill->status = $this->BILL_STATUS['IN_PROCESS'];
-        $bill->totalPrice = $totalAmount['totalPrice'];
-        $bill->totalDiscount = $totalAmount['totalDiscount'];
-        $bill->shippingCost = $totalAmount['totalShippingCost'];
-        $bill->voucher_id = $voucher->id ?? null;
-        $bill->method = $request->paymentType;
-        $bill->card_id = $card->id ?? null;
-        $bill->totalPay = $totalAmount['totalPay'];
-        $bill->save();
+        $bill = Bill::create([
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'notes' => $request->notes ?? '',
+            'status' => $this->BILL_STATUS['IN_PROCESS'],
+            'totalPrice' => $totalAmount['totalPrice'],
+            'totalDiscount' => $totalAmount['totalDiscount'],
+            'shippingCost' => $totalAmount['totalShippingCost'],
+            'totalPay' => $totalAmount['totalPay'],
+            'voucher_id' => $voucher->id ?? null,
+            'method' => $request->paymentType,
+            'card_id' => $card->id ?? null,
+            'customer_id' => Auth::user()->id,
+        ]);
 
         if (isset($voucher)) {
             $voucher->isUsed = true;
