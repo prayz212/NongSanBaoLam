@@ -2,80 +2,89 @@
 @section('main')
 
 <div class="__container __cart">
-  <form asp-controller="Cart" asp-action="" id="paymentForm">
-      <table>
-          <tr>
-              <th class="col-md-1 d-none d-sm-table-cell text-center">STT</th>
-              <th class="col-md-4 col-5 py-4 text-center">Sản phẩm</th>
-              <th class="col-md-2 d-none d-sm-table-cell text-center">Phân loại</th>
-              <th class="col-md-1 col-4 text-center">Số lượng</th>
-              <th class="col-md-2 col-2 text-center">Số tiền</th>
-              <th class="col-md-2 col-1 text-center">Thao tác</th>
-          </tr>
-          @if ($carts and count($carts->items))
-            @php
-              $i = 1;
-              $totalPrice = 0;
-            @endphp
-            @foreach($carts->items as $c)
-               <tr class="border items_tr" data-id="{{ $c['item']->id }}">
-                  <td class="col-md-1 text-center d-none d-md-table-cell">
-                    <div> {{ $i }} </div>
-                  </td>
-                  <td class="col-sm-4 col-5" onclick="location.href ='{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}'" style="cursor: pointer">
-                      <div class="__cart-info row">
-                          <div class="col-12 col-sm-3 px-4 px-sm-0">
-                              <img src="{{ asset('images/products/' . $c['item']->main_pic->url) }}" alt="{{ $c['item']->main_pic->name }}">
-                          </div>
-                          <div class="d-sm-flex d-none align-items-center col-0 col-sm-9">
-                              <div class="d-flex align-items-center">
-                                  <a href="{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}" class="fs-2"><p class="text-break"></p> {{ $c['item']->name }} </a>
-                              </div>
-                          </div>
-                      </div>
-                  </td>
-                  <td class="col-sm-2 text-center d-none d-sm-table-cell">{{ $c['item']->category->name }}</td>
-                  @php
-                    $finalPrices = $c['item']->price - ($c['item']->price * ($c['item']->discount ?? 0)/100);
-                  @endphp
-                  <td class="col-md-2 col-sm-3 col-4">
-                    <div class="d-flex justify-content-center align-items-center qty btn_added">
-                      <input type="button" value="+" class="__quantity-plus">
-                      <input type="number" name="items_quantity[]" data-unit-price="{{ $finalPrices }}" value="{{ $c['qty'] }}" step="1" min="1" max="" class="_form-input text-center px-0" onchange="changeItemPrice(this)" style="margin: 0px 4px 0px 4px; max-width: 6rem;">
-                      <input type="button" value="-"  class="__quantity-minus">
+    <table>
+        <tr>
+            <th class="col-md-1 d-none d-sm-table-cell text-center">STT</th>
+            <th class="col-md-4 col-5 py-4 text-center">Sản phẩm</th>
+            <th class="col-md-2 d-none d-sm-table-cell text-center">Phân loại</th>
+            <th class="col-md-1 col-4 text-center">Số lượng</th>
+            <th class="col-md-2 col-2 text-center">Số tiền</th>
+            <th class="col-md-2 col-1 text-center">Thao tác</th>
+        </tr>
+        @if ($carts and count($carts->items))
+          @php
+            $i = 1;
+            $totalPrice = 0;
+            $emptyCart = false;
+          @endphp
+          @foreach($carts->items as $c)
+            <tr class="border items_tr" data-id="{{ $c['item']->id }}">
+                <td class="col-md-1 text-center d-none d-md-table-cell">
+                  <div> {{ $i }} </div>
+                </td>
+                <td class="col-sm-4 col-5" onclick="location.href ='{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}'" style="cursor: pointer">
+                    <div class="__cart-info row">
+                        <div class="col-12 col-sm-3 px-4 px-sm-0">
+                            <img src="{{ asset('images/products/' . $c['item']->main_pic->url) }}" alt="{{ $c['item']->main_pic->name }}">
+                        </div>
+                        <div class="d-sm-flex d-none align-items-center col-0 col-sm-9">
+                            <div class="d-flex align-items-center">
+                                <a href="{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}" class="fs-2"><p class="text-break"></p> {{ $c['item']->name }} </a>
+                            </div>
+                        </div>
                     </div>
-                  </td>
-                  <td class="col-md-2 col-sm-2 col-1 text-center">
-                      <div class="items_price">{{ number_format($c['qty'] * $finalPrices, 0, ",", ".") }}đ</div>
-                  </td>
-                  <td class="col-md-1 col-sm-1 col-2">
-                      <div class="d-flex justify-content-center">
-                          <a data-href="{{ url('xoa-khoi-gio-hang') }}" style="cursor: pointer" class="text-decoration-none text-center remove-item-from-cart">Xóa</a>
-                      </div>
-                  </td>
-              </tr> 
-              @php
-                $i++;
-                $totalPrice += ($c['qty'] * $finalPrices);
-              @endphp
-            @endforeach
-          @else
-          <tr>
-            <td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td>
-          </tr>
-          @endif
-      </table>
-  </form>
-
-  <div class="d-flex flex-row-reverse align-items-center">
-    <div style="min-width: fit-content">
-      <button id="payment_btn" class="checkout _btn text-light d-flex justify-content-center">Mua hàng</button>
+                </td>
+                <td class="col-sm-2 text-center d-none d-sm-table-cell">{{ $c['item']->category->name }}</td>
+                @php
+                  $finalPrices = $c['item']->price - ($c['item']->price * ($c['item']->discount ?? 0)/100);
+                @endphp
+                <td class="col-md-2 col-sm-3 col-4">
+                  <div class="d-flex justify-content-center align-items-center qty btn_added">
+                    <input type="button" value="+" class="__quantity-plus">
+                    <input type="number" data-unit-price="{{ $finalPrices }}" value="{{ $c['qty'] }}" step="1" min="1" max="" class="_form-input text-center px-0" onchange="changeItemPrice(this)" style="margin: 0px 4px 0px 4px; max-width: 6rem;">
+                    <input type="button" value="-"  class="__quantity-minus">
+                  </div>
+                </td>
+                <td class="col-md-2 col-sm-2 col-1 text-center">
+                    <div class="items_price">{{ number_format($c['qty'] * $finalPrices, 0, ",", ".") }}đ</div>
+                </td>
+                <td class="col-md-1 col-sm-1 col-2">
+                    <div class="d-flex justify-content-center">
+                        <a data-href="{{ url('xoa-khoi-gio-hang') }}" style="cursor: pointer" class="text-decoration-none text-center remove-item-from-cart">Xóa</a>
+                    </div>
+                </td>
+            </tr> 
+            @php
+              $i++;
+              $totalPrice += ($c['qty'] * $finalPrices);
+            @endphp
+          @endforeach
+        @else
+        @php
+            $emptyCart = true;
+        @endphp
+        <tr>
+          <td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td>
+        </tr>
+        @endif
+    </table>
+    @if (Session::has('cart-error'))
+    <div class="p-3 d-flex flex-row-reverse">
+      <div id="error-msg-cart" class="text-danger">{{ Session::get('cart-error') }}</div>
     </div>
-    <div class="mx-4">
-      Tổng thành tiền: <b class="fs-1 text-primary" id="total-price" data-total="{{ $totalPrice ?? 0 }}">{{ number_format($totalPrice ?? 0, 0, ",", ".") }}đ</b>
+    @endif
+    <div class="d-flex flex-row-reverse align-items-center">
+      <div style="min-width: fit-content">
+        @if (Auth::check()) 
+        <a id="cart-submit" type="button" data-href-check="{{ route('checkQuantity') }}" data-href-redirect="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
+        @else  
+        <a href="{{ route('authenticatepage') }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
+        @endif
+      </div>
+      <div class="mx-4">
+        Tổng thành tiền: <b class="fs-1 text-primary" id="total-price" data-total="{{ $totalPrice ?? 0 }}">{{ number_format($totalPrice ?? 0, 0, ",", ".") }}đ</b>
+      </div>
     </div>
-  </div>
-
 </div>
 
 <div class="__wrapper" id="toast_success">

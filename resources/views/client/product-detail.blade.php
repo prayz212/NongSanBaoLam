@@ -263,6 +263,6 @@
   </div>
 </div>
 
-<script src="{{ asset('js/quantity_btn.js') }}" asp-append-version="true"></script>
+<script src="{{ asset('js/quantity_btn.js') }}"></script>
 @endif
 @endsection

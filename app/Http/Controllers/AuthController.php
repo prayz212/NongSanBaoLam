@@ -12,6 +12,9 @@ use App\Models\Customer;
 class AuthController extends Controller
 {
     public function index() {
+        if (Auth::check()) {
+            return redirect()->route('infopage');
+        }
         return view('client.authenticate-page');
     }
 

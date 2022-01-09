@@ -1,9 +1,3 @@
-// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-// @ts-nocheck
-
 $(document).ready(function () {
     const menu = document.querySelector(".__menu");
     const navOpen = document.querySelector(".__hamburger");
@@ -97,7 +91,7 @@ $(document).ready(function () {
     });
 
     let x;
-    function showToast(mess, toastMess) {
+    function showToast(mess, toastMess, toastTitle = null) {
         clearTimeout(x);
 
         if (mess == "success") {
@@ -118,6 +112,10 @@ $(document).ready(function () {
         } else {
             $(".toast-sta").text("Thất bại");
             $(".toast-msg").text(toastMess);
+        }
+
+        if (toastTitle) {
+            $(".toast-sta").text(toastTitle);
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -218,16 +216,14 @@ $(document).ready(function () {
                         $("tbody").append(
                             '<tr><td colspan="6" class="text-center border h4">Giỏ hàng rỗng, bạn chưa chọn mua sản phẩm nào.</td></tr>'
                         );
-                        $("#cart-submit").prop("disabled", true);
-                        $("#cart-submit").addClass("__disabled-btn");
+                        $('#cart-submit').prop('disabled', true);
+                        $('#cart-submit').addClass('__disabled-btn');
                     } else {
                         const quantity = parseInt(
-                            trElement.find("input[name='items_quantity[]']").val()
+                            trElement.find("input[type='number']").val()
                         );
                         const unitPrice = parseInt(
-                            trElement
-                                .find("input[type='number']")
-                                .attr("data-unit-price")
+                            trElement.find("input[type='number']").attr("data-unit-price")
                         );
                         const preTotal = quantity * unitPrice;
 
@@ -260,22 +256,119 @@ $(document).ready(function () {
         });
     });
 
+    $('#cart-submit').click(function() {
+        const _this = $(this);
+        const checkQuantityURL = _this.attr('data-href-check');
+        const redirectURL = _this.attr('data-href-redirect');
+    
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: checkQuantityURL,
+            success: function (data) {
+                if (data.isEnough == 1) {
+                    window.location.href = redirectURL;
+                } else if (data.isEnough == 0) {
+                    showToast(
+                        "fail", 
+                        data.remaining == 0 
+                        ? data.product + " hiện tại đã hết hàng"
+                        : data.product + " chỉ còn " + data.remaining + "kg",
+                        "Không đủ số lượng"
+                    );
+                }
+            },
+            error: function() {
+                console.log("failed")
+            }
+        });
+    });
+
     /*          PAYMENT            */
     const currentChecked = $("#payment-method").val();
     if (currentChecked == "COD") {
-        $("#CreditCard-info").hide();
-    } else if (currentChecked == "CreditCard") {
-        $("#COD-info").hide();
+        $('#CreditCard-info').hide();
     }
-
+    else if (currentChecked == "CreditCard") {
+        $('#COD-info').hide();
+    }
+   
     $("input[name$='paymentType']").click(function () {
         var value = $(this).val();
         $("#info_Method").val(value);
-
-        $("#COD-info").hide();
-        $("#CreditCard-info").hide();
+        $('#COD-info').hide();
+        $('#CreditCard-info').hide();
         $("#" + value + "-info").show();
     });
+
+    $('#voucher-btn').click(function() {
+        const _this = $(this);
+        var url = $(this).attr('data-href');
+        const voucherCode = $('#voucher-input').val();
+        if (!voucherCode) return;
+    
+        var data = {
+            voucher: voucherCode
+        }
+    
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url,
+            data,
+            success: function (data) {
+                if (data.status == 200) {
+                    console.log("voucher valid")
+    
+                    const voucher = data.voucher;
+                    $('#voucher-amount').text(
+                        voucher.discount.toLocaleString("it-IT", {currency: "VND",}) + "đ"
+                    );
+
+                    $('#voucher-amount').attr('data-amount', voucher.discount)
+
+                    $('#voucher-input').attr('readonly', true);
+                    _this.text("Đã áp dụng")
+                    _this.addClass("bg-success");
+                    _this.attr('disabled', true);
+                    _this.css("cursor", "not-allowed")
+                    
+                    updateTotalPayAmount();
+
+                    showToast(
+                        "success", 
+                        "Quý khách đã được giảm " + voucher.discount.toLocaleString("it-IT", {currency: "VND",}) + "đ"
+                    );
+                } else {
+                    showToast(
+                        "fail", 
+                        "Voucher không hợp lệ hoặc đã hết hạn"
+                    );
+                }
+            },
+            error: function() {
+                console.log("failed")
+            }
+        });
+    })
+
+    function updateTotalPayAmount() {
+        let totalPrice = parseInt($('#total-price-amount').attr('data-amount'))
+        let totalDiscount = parseInt($('#total-discount-amount').attr('data-amount'))
+        let totalVoucher = parseInt($('#voucher-amount').attr('data-amount'))
+        let totalShipping = parseInt($('#shipping-cost-amount').attr('data-amount'))
+        let newTotalPay = totalPrice + totalShipping - totalDiscount - totalVoucher;
+
+        if (newTotalPay < 0) {newTotalPay = 0;}
+        
+        const _el = $('#total-pay-amount')
+        _el.attr('data-amount', newTotalPay)
+        _el.text(newTotalPay.toLocaleString("it-IT", {currency: "VND",}) + "đ")
+    }
 });
 
 gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.6, x: -20 });
