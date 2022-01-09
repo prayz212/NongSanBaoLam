@@ -10,5 +10,5 @@ class Bill extends Model
     use HasFactory;
 
     protected $table = 'bill';
-    protected $fillable = ['id', 'fullname', 'phone', 'email', 'address', 'notes', 'totalPrice', 'totalDiscount', 'shippingCost', 'totalPay', 'method', 'delivery_at'];
+    protected $fillable = ['id', 'fullname', 'phone', 'email', 'address', 'notes', 'status', 'totalPrice', 'totalDiscount', 'shippingCost', 'totalPay', 'method', 'delivery_at', 'customer_id'];
 }
