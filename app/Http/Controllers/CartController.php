@@ -168,12 +168,12 @@ class CartController extends Controller
 
         foreach($carts as $key => $value)
         {
-            $bill_detail = new BillDetail;
-            $bill_detail->bill_id = $bill->id;
-            $bill_detail->product_id = $key;
-            $bill_detail->quantity = $value['qty'];
-            $bill_detail->unit_price = $value['item']->price;
-            $bill_detail->save();
+            $bill_detail = BillDetail::create([
+                'bill_id' => $bill->id,
+                'product_id' => $key,
+                'quantity' => $value['qty'],
+                'unit_price' => $value['item']->price,
+            ]);
 
             $product = Product::find($key);
             $product->sold += $value['qty'];
