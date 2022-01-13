@@ -4,7 +4,7 @@
 @if (!empty($customer))
 <div class="container my-5 py-5">
   <div class="row gutters">
-      <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12">
           <div class="border p-5">
               <div>
                   <div class="account-settings">
@@ -33,7 +33,7 @@
               </div>
           </div>
       </div>
-      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 pt-3 px-5">
+      <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 col-12 pt-3 px-5">
           <div class="h-100 px-lg-5 px-md-3 mt-lg-0 mt-5">
               <form method="post" action="{{ route('updateInfo') }}">
                   @csrf

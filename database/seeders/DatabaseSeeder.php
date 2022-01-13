@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             CardSeeder::class,
             VoucherSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ProductController;
+use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\CommentController;
+use App\Http\Controllers\Client\CategoryController;
+use App\Http\Controllers\Client\AuthController;
+use App\Http\Controllers\Client\AccountController;
+
+use App\Http\Controllers\Admin\AdminAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,4 +64,8 @@ Route::prefix('/')->group(function () {
 
     Route::get('/tai-khoan', [AccountController::class, 'index'])->name('infopage');
     Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
+});
+
+Route::prefix('/admin')->group(function () {
+    Route::get('/dang-nhap', [AdminAuthController::class, 'index'])->name('adminLogin');
 });

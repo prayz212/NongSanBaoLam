@@ -85,10 +85,10 @@
                   <div class="fs-1 fw-bold mb-3">Voucher giảm giá</div>
 
                   <div class="row mb-4">
-                      <div class="col-lg-8 col-md-8 col-sm-12">
+                      <div class="col-lg-8 col-md-7 col-sm-12">
                           <input id="voucher-input" name="voucher" class="_form-input" type="text" placeholder="Mã voucher" value="{{ old('voucher') ?? '' }}">
                       </div>
-                      <div class="col-lg-4 col-md-4 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-12">
                           <button id="voucher-btn" type="button" style="padding-top: 6px;padding-bottom: 6px;" class="_btn fs-3 w-100" data-href="{{ url('kiem-tra-voucher' )}}">Áp dụng</button>
                       </div>
                   </div>
