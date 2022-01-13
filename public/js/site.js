@@ -356,6 +356,13 @@ $(document).ready(function () {
         });
     })
 
+    $('#voucher-input').keypress(function (e) {
+        if (e.which == '13') {
+            e.preventDefault();
+            $('#voucher-btn').click()
+        }
+    });
+
     function updateTotalPayAmount() {
         let totalPrice = parseInt($('#total-price-amount').attr('data-amount'))
         let totalDiscount = parseInt($('#total-discount-amount').attr('data-amount'))
