@@ -356,6 +356,13 @@ $(document).ready(function () {
         });
     })
 
+    $('#voucher-input').keypress(function (e) {
+        if (e.which == '13') {
+            e.preventDefault();
+            $('#voucher-btn').click()
+        }
+    });
+
     function updateTotalPayAmount() {
         let totalPrice = parseInt($('#total-price-amount').attr('data-amount'))
         let totalDiscount = parseInt($('#total-discount-amount').attr('data-amount'))
@@ -369,6 +376,16 @@ $(document).ready(function () {
         _el.attr('data-amount', newTotalPay)
         _el.text(newTotalPay.toLocaleString("it-IT", {currency: "VND",}) + "đ")
     }
+
+    /*          BILLS            */
+    $('#bill-table tr').click(function () {
+        const _this = $(this);
+        const href = _this.attr('data-href');
+
+        if (href) {
+            window.location.href = href;
+        }
+    });
 });
 
 gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.6, x: -20 });

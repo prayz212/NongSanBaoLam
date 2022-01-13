@@ -29,9 +29,6 @@ class PaymentRequest extends FormRequest
             'address' => ['required'],
             'phone' => ['required', 'digits:10'],
             'paymentType' => ['required'],
-            // 'cardNumber' => 'required_if:paymentType,==,CreditCard|integer',
-            // 'validDate' => 'required_if:paymentType,==,CreditCard|integer',
-            // 'secretNumber' => 'required_if:paymentType,==,CreditCard|integer',
         ];
     }
 

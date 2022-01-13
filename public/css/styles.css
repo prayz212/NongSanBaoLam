@@ -1900,7 +1900,7 @@ input::-webkit-inner-spin-button {
 }
 
 /*Rating star*/
-.__popup-rating {
+.__popup-rating, .__popup-rated {
     background: #0000008c;
     display: none;
     height: 100%;
@@ -1911,13 +1911,13 @@ input::-webkit-inner-spin-button {
     z-index: 10000;
 }
 
-.__popup-rating .helper {
+.__popup-rating .helper, .__popup-rated .helper {
     display: inline-block;
     height: 100%;
     vertical-align: middle;
 }
 
-.__popup-rating > div {
+.__popup-rating > div, .__popup-rated > div {
     background-color: #fff;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
@@ -1931,7 +1931,7 @@ input::-webkit-inner-spin-button {
     padding: 15px 5%;
 }
 
-.popupCloseButton {
+.__popup-close {
     background-color: #fff;
     border: 1px solid #000;
     border-radius: 50px;
@@ -1940,8 +1940,8 @@ input::-webkit-inner-spin-button {
     font-family: arial;
     font-weight: bold;
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: -15px;
+    right: -15px;
     font-size: 25px;
     line-height: 30px;
     width: 30px;
@@ -1949,7 +1949,7 @@ input::-webkit-inner-spin-button {
     text-align: center;
 }
 
-.popupCloseButton:hover {
+.__popup-close:hover {
     background-color: #ccc;
 }
 
@@ -1962,7 +1962,12 @@ input::-webkit-inner-spin-button {
         padding: 6px 18px;
     }
 
-    .__popup-rating > div {
+    .__popup-rating > div, .__popup-rated > div {
         width: 80%;
     }
+}
+
+/*          BILL LIST            */
+#bill-table .__bill-row:hover {
+    background-color: #F0F0F0;
 }

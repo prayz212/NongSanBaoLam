@@ -263,6 +263,6 @@
   </div>
 </div>
 
-<script src="{{ asset('js/quantity_btn.js') }}"></script>
+<script src="{{ asset('js/quantity-btn.js') }}"></script>
 @endif
 @endsection
