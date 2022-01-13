@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\RatingRequest;
 
 class ProductController extends Controller
 {
@@ -132,6 +134,28 @@ class ProductController extends Controller
         else {
             return redirect()->route('productpage');
         }
+    }
+
+    public function rating(RatingRequest $request) {
+        $rating = Rating::where('product_id', $request->productId)
+            ->where('bill_id', $request->billId)
+            ->first();
+
+        if ($rating) {
+            return response()->json([
+                'status' => 400
+            ]);
+        }
+
+        Rating::create([
+            'product_id' => $request->productId,
+            'bill_id' => $request->billId,
+            'star' => $request->rating,
+        ]);
+
+        return response()->json([
+            'status' => 200
+        ]);
     }
 
     private function getFilterProducts($filter, $type = false) {

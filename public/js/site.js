@@ -376,6 +376,16 @@ $(document).ready(function () {
         _el.attr('data-amount', newTotalPay)
         _el.text(newTotalPay.toLocaleString("it-IT", {currency: "VND",}) + "đ")
     }
+
+    /*          BILLS            */
+    $('#bill-table tr').click(function () {
+        const _this = $(this);
+        const href = _this.attr('data-href');
+
+        if (href) {
+            window.location.href = href;
+        }
+    });
 });
 
 gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.6, x: -20 });
