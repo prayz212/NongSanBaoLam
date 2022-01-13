@@ -10,9 +10,13 @@ class Rating extends Model
     use HasFactory;
 
     protected $table = 'rating';
-    protected $fillable = ['id', 'star', 'product_id'];
+    protected $fillable = ['id', 'star', 'product_id', 'bill_id'];
 
     public function product() {
         return $this->belongsTo('App\Models\Product');
+    }
+
+    public function bill() {
+        return $this->belongsTo('App\Models\Bill');
     }
 }

@@ -230,13 +230,10 @@ class CartController extends Controller
             $price = $c['item']->price;
             $discount = $c['item']->discount;
 
-            if ($discount == NULL) {
-                $totalPrice += ($qty * $price);
-            }
-            else if ($discount != NULL) {
+            $totalPrice += ($qty * $price);
+            if ($discount != NULL) {
                 $finalPrice = $price - ($price * (float)$discount/100);
                 $totalDiscount += ($price - $finalPrice) * $qty;
-                $totalPrice += ($qty * $finalPrice);
             }
         }
 
