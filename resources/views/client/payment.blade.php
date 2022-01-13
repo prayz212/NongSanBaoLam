@@ -64,11 +64,11 @@
                           <input name="cardNumber" class="_form-input" type="text" placeholder="Số thẻ" value="{{ old('cardNumber') ?? '' }}">
                           <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('cardNumber') ?? '' }}</div>
                           <div class="row">
-                              <div class="col-6">
+                              <div class="col-12 col-sm-6">
                                   <input name="validDate" class="_form-input" type="date" placeholder="Ngày hết hạn" value="{{ old('validDate') ?? '' }}">
                                   <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('validDate') ?? '' }}</div>
                               </div>
-                              <div class="col-6">
+                              <div class="col-12 col-sm-6">
                                   <input name="secretNumber" class="_form-input" type="text" placeholder="CVV/CVV2" value="{{ old('secretNumber') ?? '' }}">
                                   <div class="__notify-msg" style="font-size: smaller; color: red; margin-left: 5px;">{{ $errors->first('secretNumber') ?? '' }}</div>
                               </div>

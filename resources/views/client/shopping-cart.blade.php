@@ -76,7 +76,7 @@
     <div class="d-flex flex-row-reverse align-items-center">
       <div style="min-width: fit-content">
         @if (Auth::check()) 
-        <a id="cart-submit" type="button" data-href-check="{{ route('checkQuantity') }}" data-href-redirect="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
+        <a style="cursor: pointer" id="cart-submit" data-href-check="{{ route('checkQuantity') }}" data-href-redirect="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
         @else  
         <a href="{{ route('authenticatepage') }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
         @endif
