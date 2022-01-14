@@ -27,7 +27,7 @@
                       @endif
 
                       <div class="d-flex justify-content-center">
-                          <a class="_btn"><p class="text-white mb-0 text-center">Lịch sử đơn hàng</p></a>
+                          <a class="_btn" href="{{route('bills')}}"><p class="text-white mb-0 text-center">Lịch sử đơn hàng</p></a>
                       </div>
                   </div>
               </div>

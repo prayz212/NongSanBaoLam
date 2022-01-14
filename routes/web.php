@@ -47,6 +47,9 @@ Route::prefix('/')->group(function () {
         Route::post('/kiem-tra-so-luong', [CartController::class, 'checkProductQuantity'])->name('checkQuantity');
 
         Route::get('/chi-tiet-hoa-don/{id}', [AccountController::class, 'billDetail'])->name('billDetail');
+        Route::get('/danh-sach-hoa-don', [AccountController::class, 'bills'])->name('bills');
+
+        Route::post('/danh-gia-san-pham', [ProductController::class, 'rating'])->name('rating');
     });
     
     Route::post('/them-binh-luan', [CommentController::class, 'addComment'])->name('addComment');
