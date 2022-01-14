@@ -22,7 +22,7 @@
                           <input class="_form-input" type="password" placeholder="Mật khẩu" name="password">
                           <div id="error-msg-log" class="__error-msg">{{ $errors->login->first() ? $errors->login->first() : Session::get('login-error') ?? '' }}</div>
                           <button type="submit" class="_btn">Đăng nhập</button>
-                          <a >Quên mật khẩu</a>
+                          <a href="{{ route('resetRequest') }}">Quên mật khẩu</a>
                       </form>
 
                       <form id="_RegForm" method="post" action="{{ route('register') }}">

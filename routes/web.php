@@ -56,6 +56,10 @@ Route::prefix('/')->group(function () {
     Route::post('/dang-nhap', [AuthController::class, 'login'])->name('login');
     Route::post('/dang-ky', [AuthController::class, 'register'])->name('register');
     Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/quen-mat-khau', [AuthController::class, 'resetPassword'])->name('resetRequest');
+    Route::post('/yeu-cau-quen-mat-khau', [AuthController::class, 'requestResetPassword'])->name('requestResetPassword');
+    Route::get('/cap-nhat-mat-khau/{token}', [AuthController::class, 'updatePassword'])->name('updatePassword');
+    Route::post('/cap-nhat-mat-khau-moi/{token}', [AuthController::class, 'updateNewPassword'])->name('updateNewPassword');
 
     Route::get('/tai-khoan', [AccountController::class, 'index'])->name('infopage');
     Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
