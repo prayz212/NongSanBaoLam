@@ -27,6 +27,11 @@ class AuthController extends Controller
     }
 
     public function login(LoginRequest $request) {
+        //check if the user logged in as an admin => logout it
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        }
+
         $result = Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
         if ($result) {
             return redirect()->route('infopage');

@@ -14,11 +14,11 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('customer')->insert([
+        DB::table('admin')->insert([
             [
                 'username' => 'admin_nongsanbaolam',
                 'password' => bcrypt('qwertqwert'),
-                'email' => 'quanghuy@gmail.com',
+                'email' => 'chivi@gmail.com',
                 'fullname' => 'Nông sản Bảo Lâm',
             ],
         ]);

@@ -10,6 +10,7 @@ use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\AccountController;
 
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminHomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +22,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
+/*          CLIENT          */
 Route::prefix('/')->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('homepage');
     Route::get('/gioi-thieu', [HomeController::class, 'introduce'])->name('introducePage');
@@ -70,6 +68,12 @@ Route::prefix('/')->group(function () {
     Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
 });
 
+/*          ADMIN          */
 Route::prefix('/admin')->group(function () {
     Route::get('/dang-nhap', [AdminAuthController::class, 'index'])->name('adminLogin');
+    Route::post('/yeu-cau-dang-nhap', [AdminAuthController::class, 'login'])->name('adminLoginRequest');
+
+    Route::group(['middleware' => 'auth:admin'], function() {
+        Route::get('/trang-chu', [AdminHomeController::class, 'index'])->name('dashboard');
+    });
 });

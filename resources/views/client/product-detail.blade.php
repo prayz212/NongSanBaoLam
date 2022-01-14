@@ -1,5 +1,10 @@
 @extends('client.layouts.master')
 @section('main')
+
+@php
+    $isAdmin = Auth::guard('admin')->check();
+@endphp
+
 @if (!empty($detail))
 <section class="__section __product-detail">
   <div class="__details __container-md">
@@ -126,7 +131,7 @@
                     <div class="post-comments">
                         <div class="input-group mb-3">
                             <div id="customerNameText" style="padding: 0.65rem 0.75rem!important; font-size: 1.4rem!important;" class="input-group-text">Bình luận với tên: </div>
-                            <input type="text" name="name" style="padding: 0.65rem 0.75rem!important; font-size: 1.4rem!important;" class="form-control" placeholder="Nhập tên...">
+                            <input type="text" name="name" style="padding: 0.65rem 0.75rem!important; font-size: 1.4rem!important;" class="form-control" placeholder="Nhập tên..." value="{{Auth::guard('web')->user()->fullname ?? ''}}">
                         </div>
                         <input type="text" name="content" style="padding: 0.65rem 0.75rem!important; font-size: 1.4rem!important;" class="form-control" placeholder="Nhập nội dung bình luận...">
 
@@ -146,7 +151,7 @@
                         @if($c->reply_id == 0)
                         <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
                         <div class="post-comments">
-                            <p class="meta">{{ $c->name }} bình luận lúc {{ $c->created_at->format('H:i:s d/m/Y') }}: <i class="float-end"><a class="__reply-button" role="button"><small>Trả lời</small></a></i></p>
+                            <p class="meta">{{ $c->name }} bình luận lúc {{ $c->created_at->format('H:i d/m/Y') }}: {!! $isAdmin ? '<i class="float-end"><a class="__reply-button" role="button"><small>Trả lời</small></a></i>' : '' !!} </p>
                             <p>
                                 {{ $c->content }}
                             </p>
@@ -157,7 +162,7 @@
                                 <li class="clearfix">
                                     <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                                     <div class="post-comments">
-                                        <p class="meta">{{ $r->name }} trả lời lúc {{ $r->created_at->format('H:i:s d/m/Y') }}: </p>
+                                        <p class="meta">{{ $r->name }} trả lời lúc {{ $r->created_at->format('H:i d/m/Y') }}: </p>
                                         <p>
                                             {{ $r->content }}
                                         </p>
@@ -169,6 +174,7 @@
                                 @csrf
                                 <input hidden value="{{ $detail->id }}" name="product_id" />
                                 <input hidden value="{{ $c->id }}" name="comment_id" />
+                                <input hidden value="{{ $isAdmin ? Auth::guard('admin')->user()->fullname : '' }}" name="name" />
                                 <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                                 <div class="post-comments">
                                     <div class="row">
@@ -180,9 +186,7 @@
                                             <button type="button" class="_btn _submit-comment mt-3 replyCommentSubmit" style="font-size: 1.4rem!important; width: auto">Gửi</button>
                                         </div>
 
-                                        <div class="replyCommentError" class="col-12 text-danger">
-                                            
-                                        </div>
+                                        <div class="replyCommentError text-danger"></div>
                                     </div>
                                 </div>
                             </form>
