@@ -86,6 +86,5 @@ Route::prefix('/admin')->group(function () {
         Route::get('/nhap-kho', [AdminProductController::class, 'stockIn'])->name('productStockIn');
         Route::post('/yeu-cau-nhap-kho', [AdminProductController::class, 'stockInProcess'])->name('stockInProcess');
         Route::get('/api-danh-sach-san-pham', [AdminProductController::class, 'productsByCategory'])->name('getProductByCategory');
-        
     });
 });
