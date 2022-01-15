@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <title>Trang quản trị nông sản Bảo Lâm</title>
 
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -15,7 +16,7 @@
     <script src="{{ asset('admin/js/scripts.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    {{-- <script src="~/assets/js/datatables-simple-demo.js"></script> --}}
+    <script src="{{ asset('admin/js/table-demo.js') }}"></script>
 
     <!-- Select2 -->
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

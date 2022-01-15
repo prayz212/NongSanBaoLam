@@ -7,7 +7,7 @@
     
     <title>Nông sản Bảo Lâm - nông sản sạch cho mọi nhà</title>
 
-    <link rel="shortcut icon" href="{{ asset('client/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="{{ asset('client/css/styles.css') }}" />
