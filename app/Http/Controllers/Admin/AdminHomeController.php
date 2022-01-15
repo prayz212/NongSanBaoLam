@@ -9,6 +9,6 @@ use App\Http\Controllers\Controller;
 class AdminHomeController extends Controller
 {
     public function index() {
-        dd(Auth::guard('admin'));
+        return view('admin.dashboard');
     }
 }

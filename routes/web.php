@@ -38,16 +38,20 @@ Route::prefix('/')->group(function () {
     Route::post('/them-vao-gio-hang', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cap-nhat-so-luong', [CartController::class, 'updateToCart'])->name('updateToCart');
     Route::post('/xoa-khoi-gio-hang', [CartController::class, 'deleteFormCart'])->name('deleteFormCart');
-    Route::post('/kiem-tra-voucher', [CartController::class, 'checkVoucher'])->name('checkVoucher');
     Route::get('/gio-hang', [CartController::class, 'index'])->name('shoppingCart');
 
     Route::middleware('auth')->group(function() {
         Route::get('/thanh-toan', [CartController::class, 'payment'])->name('payment');
         Route::post('/thuc-hien-thanh-toan', [CartController::class, 'paymentProcess'])->name('postPayment');
         Route::post('/kiem-tra-so-luong', [CartController::class, 'checkProductQuantity'])->name('checkQuantity');
+        Route::post('/kiem-tra-voucher', [CartController::class, 'checkVoucher'])->name('checkVoucher');
 
+        Route::get('/tai-khoan', [AccountController::class, 'index'])->name('infopage');
+        Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
         Route::get('/chi-tiet-hoa-don/{id}', [AccountController::class, 'billDetail'])->name('billDetail');
         Route::get('/danh-sach-hoa-don', [AccountController::class, 'bills'])->name('bills');
+
+        Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 
         Route::post('/danh-gia-san-pham', [ProductController::class, 'rating'])->name('rating');
     });
@@ -58,14 +62,10 @@ Route::prefix('/')->group(function () {
     Route::get('/dang-nhap-dang-ky', [AuthController::class, 'index'])->name('authenticatepage');
     Route::post('/dang-nhap', [AuthController::class, 'login'])->name('login');
     Route::post('/dang-ky', [AuthController::class, 'register'])->name('register');
-    Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
     Route::get('/quen-mat-khau', [AuthController::class, 'resetPassword'])->name('resetRequest');
     Route::post('/yeu-cau-quen-mat-khau', [AuthController::class, 'requestResetPassword'])->name('requestResetPassword');
     Route::get('/cap-nhat-mat-khau/{token}', [AuthController::class, 'updatePassword'])->name('updatePassword');
     Route::post('/cap-nhat-mat-khau-moi/{token}', [AuthController::class, 'updateNewPassword'])->name('updateNewPassword');
-
-    Route::get('/tai-khoan', [AccountController::class, 'index'])->name('infopage');
-    Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
 });
 
 /*          ADMIN          */
@@ -75,5 +75,7 @@ Route::prefix('/admin')->group(function () {
 
     Route::group(['middleware' => 'auth:admin'], function() {
         Route::get('/trang-chu', [AdminHomeController::class, 'index'])->name('dashboard');
+
+        Route::get('/dang-xuat', [AdminAuthController::class, 'logout'])->name('adminLogout');
     });
 });
