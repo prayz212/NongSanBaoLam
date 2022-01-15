@@ -193,5 +193,5 @@
     </div>
 @endif
 
-<script src="{{ asset('js/popup-rating.js') }}"></script>
+<script src="{{ asset('client/js/popup-rating.js') }}"></script>
 @endsection
