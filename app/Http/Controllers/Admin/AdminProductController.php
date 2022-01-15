@@ -76,7 +76,8 @@ class AdminProductController extends Controller
         if ($request->has('category') && $request->has('product') && $request->has('quantity')) {
             $product = Product::where('category_id', $request->category)
                 ->where('isDelete', false)
-                ->find($request->product);
+                ->where('id', $request->product)
+                ->first();
             
             $product->quantity += $request->quantity;
             $product->save();
