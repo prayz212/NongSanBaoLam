@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\AccountController;
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AdminProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,7 +76,15 @@ Route::prefix('/admin')->group(function () {
 
     Route::group(['middleware' => 'auth:admin'], function() {
         Route::get('/trang-chu', [AdminHomeController::class, 'index'])->name('dashboard');
-
         Route::get('/dang-xuat', [AdminAuthController::class, 'logout'])->name('adminLogout');
+
+        Route::get('/quan-ly-san-pham', [AdminProductController::class, 'index'])->name('productManagement');
+        Route::get('/thong-tin-san-pham/{id}', [AdminProductController::class, 'detail'])->name('productInfo');
+        Route::get('/chinh-sua-san-pham/{id}', [AdminProductController::class, 'update'])->name('updateProduct');
+        Route::post('/yeu-cau-chinh-sua-san-pham', [AdminProductController::class, 'updateProcess'])->name('updateProcess');
+        Route::get('/xoa-san-pham/{id}', [AdminProductController::class, 'delete'])->name('deleteProduct');
+        Route::get('/nhap-kho', [AdminProductController::class, 'stockIn'])->name('productStockIn');
+        Route::post('/yeu-cau-nhap-kho', [AdminProductController::class, 'stockInProcess'])->name('stockInProcess');
+        Route::get('/api-danh-sach-san-pham', [AdminProductController::class, 'productsByCategory'])->name('getProductByCategory');
     });
 });

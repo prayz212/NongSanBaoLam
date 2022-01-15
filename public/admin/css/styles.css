@@ -12878,3 +12878,183 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+/*      PRODUCT      */
+.__product-main {
+  background: #f5f5f5;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.__product-info-box {
+  margin: 15px 0;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 5px;
+}
+
+.__product-title-box {
+  margin: 15px 0;
+  background-color: #fff;
+  padding: 14px 16px;
+  border-radius: 5px;
+}
+
+.__product-info-box p {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #d5dadb;
+}
+
+.__product-info-box p:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.__product-image-box {
+  background-color: #dbd7d2;
+  height: 36.3rem;
+  padding: 1.6rem;
+  border-radius: 5px;
+}
+
+.__thumbnails {
+  margin-right: 1.8rem;
+}
+
+.__imgae-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.__main-pic-section {
+  margin-right: 1.2rem;
+}
+
+.__main-pic {
+  height: 100%;
+  align-items: center;
+}
+
+.__main-pic img,
+.__thumbnail-pic img,
+.__thumbnail-input-pic img {
+  max-width: 100%;
+  object-fit: contain;
+  height: 100%;
+  cursor: pointer;
+}
+
+.__thumbnail-pic {
+  width: 8.8rem;
+  height: 8.8rem;
+  margin: 6px 0;
+  background-color: #dbd7d2;
+  text-align: center;
+}
+
+@media only screen and (max-width: 991px) {
+  .__main-pic-section {
+    margin-right: 0;
+  }
+
+  .__left-infor-section {
+    margin: 15px 0;
+  }
+
+  .__imgae-section {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .__product-image-box {
+    height: 28.3rem;
+    padding: 1.1rem;
+    border-radius: 5px;
+  }
+
+  .__thumbnail-pic {
+    width: 5.5rem;
+    height: 6.8rem;
+  }
+
+  .__thumbnails {
+    margin-right: 8px;
+  }
+}
+
+/*      POPUP       */
+.__popup {
+  background: #0000008c;
+  display: none;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+}
+
+.__popup .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.__popup > div {
+  background-color: #fff;
+  box-shadow: 10px 10px 60px #555;
+  display: inline-block;
+  height: auto;
+  max-width: 420px;
+  min-height: 100px;
+  vertical-align: middle;
+  width: 36%;
+  position: relative;
+  border-radius: 8px;
+  padding: 15px 4%;
+}
+
+.popupCloseButton {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: arial;
+  font-weight: bold;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 25px;
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.popupCloseButton:hover {
+  background-color: #ccc;
+}
+
+@media only screen and (max-width: 991px) {
+  .__popup > div {
+    width: 46%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .__popup > div {
+    width: 83%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #stock-in-btn {
+    width: 100%;
+  }
+}

@@ -7,11 +7,11 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-chart-line fa-fw"></i></div>
                 Tổng quan
               </a>
-              <a class="nav-link {{Request::is('admin/quan-ly-hoa-don') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-hoa-don') ? 'background-color: #424242' : ''}}" >
+              <a class="nav-link {{Request::is('admin/quan-ly-hoa-don/') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-hoa-don') ? 'background-color: #424242' : ''}}" >
                   <div class="sb-nav-link-icon"><i class="fas fa-file-invoice fa-fw"></i></div>
                   Quản lý hóa đơn
               </a>
-              <a class="nav-link {{Request::is('admin/quan-ly-san-pham') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-san-pham') ? 'background-color: #424242' : ''}}" >
+              <a class="nav-link {{Request::is('admin/quan-ly-san-pham/', 'admin/thong-tin-san-pham/*') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-san-pham') ? 'background-color: #424242' : ''}}" href="{{ route('productManagement') }}">
                   <div class="sb-nav-link-icon"><i class="fas fa-warehouse fa-fw"></i></div>
                   Quản lý sản phẩm
               </a>
