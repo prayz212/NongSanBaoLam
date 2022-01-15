@@ -49,7 +49,7 @@
                 <div class="col-6"> Tình trạng: </div>
                 <div class="col-6"> {{$bill->status}} </div>
             </div>
-            <div class="px-4 pb-3 py-sm-4 __break-word-dots">Ghi chú: {{$bill->notes}}</div>
+            <div class="px-4 pb-3 py-sm-4 __break-word-dots fs-3">Ghi chú: {{$bill->notes}}</div>
         </div>
     </div>
 
@@ -60,7 +60,7 @@
             <th class="col-md-1 col-1 py-4 text-center">STT</th>
             <th class="col-md-4 col-3 py-4 text-center">Sản phẩm</th>
             <th class="col-md-2 d-none d-md-table-cell text-center"> Phân loại </th>
-            <th class="col-md-2 col-2 text-center">Số lượng </th>
+            <th class="col-md-2 col-2 text-center">Số lượng (kg)</th>
             <th class="col-md-1 col-3 text-center">Đơn giá </th>
             <th class="col-md-2 col-3 text-center">Thành tiền</th>
         </tr>

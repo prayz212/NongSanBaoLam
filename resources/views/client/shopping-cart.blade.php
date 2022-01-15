@@ -7,7 +7,7 @@
             <th class="col-md-1 d-none d-sm-table-cell text-center">STT</th>
             <th class="col-md-4 col-5 py-4 text-center">Sản phẩm</th>
             <th class="col-md-2 d-none d-sm-table-cell text-center">Phân loại</th>
-            <th class="col-md-1 col-4 text-center">Số lượng</th>
+            <th class="col-md-1 col-4 text-center">Số lượng (kg)</th>
             <th class="col-md-2 col-2 text-center">Số tiền</th>
             <th class="col-md-2 col-1 text-center">Thao tác</th>
         </tr>
@@ -40,9 +40,9 @@
                 @endphp
                 <td class="col-md-2 col-sm-3 col-4">
                   <div class="d-flex justify-content-center align-items-center qty btn_added">
-                    <input type="button" value="+" class="__quantity-plus">
-                    <input type="number" data-unit-price="{{ $finalPrices }}" value="{{ $c['qty'] }}" step="1" min="1" max="" class="_form-input text-center px-0" onchange="changeItemPrice(this)" style="margin: 0px 4px 0px 4px; max-width: 6rem;">
                     <input type="button" value="-"  class="__quantity-minus">
+                    <input type="number" data-unit-price="{{ $finalPrices }}" value="{{ $c['qty'] }}" step="1" min="1" max="" class="_form-input text-center px-0" onchange="changeItemPrice(this)" style="margin: 0px 4px 0px 4px; max-width: 6rem;">
+                    <input type="button" value="+" class="__quantity-plus">
                   </div>
                 </td>
                 <td class="col-md-2 col-sm-2 col-1 text-center">
