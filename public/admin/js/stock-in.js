@@ -69,7 +69,7 @@ function getProductByCategoryId(id, href) {
         if (products.length > 0) {
           htmlContent = '<option value="" selected disabled hidden>Chọn sản phẩm</option>';
           products.forEach(el => {
-            htmlContent += `<option value=${el.id}">${el.name}</option>`;
+            htmlContent += `<option value="${el.id}">${el.name}</option>`;
           });
           $('#product-selector').prop('disabled', false);
         } else {
