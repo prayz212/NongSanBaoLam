@@ -45,7 +45,7 @@ $(document).ready(function () {
         }
       },
       error: function () {
-        
+        showNotifyPopup('fail', 'Thất bại', 'Đã có lỗi xảy ra trong quá trình nhập kho, vui lòng thử lại sau', 'fas fa-exclamation-triangle fa-3x');
       },
     });
   });
