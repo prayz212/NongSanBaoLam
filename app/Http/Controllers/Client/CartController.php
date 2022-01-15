@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Cart;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Requests\PaymentRequest;
+use App\Notifications\PaymentInvoiceNotification;
 
 class CartController extends Controller
 {
@@ -180,6 +182,10 @@ class CartController extends Controller
             $product->save();
         }
 
+        // send invoice to customer email
+        $customer = Customer::where('id', Auth::user()->id)->firstOrFail();
+        $customer->notify(new PaymentInvoiceNotification($carts, $bill, isset($voucher) ? $voucher : NULL));
+        
         Session::forget('cart');
         return redirect()->route('billDetail', $bill->id);
     }
