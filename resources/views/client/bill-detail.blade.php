@@ -113,7 +113,7 @@
                     <td>{{number_format(round($bill->totalPrice), 0, ",", ".")}}đ</td>
                 </tr>
                 <tr>
-                    <td>Giảm giá hóa đơn:</td>
+                    <td>Chiết khấu:</td>
                     <td>{{number_format(round($bill->totalDiscount), 0, ",", ".")}}đ</td>
                 </tr>
                 <tr>

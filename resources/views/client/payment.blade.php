@@ -5,8 +5,8 @@
   <form method="post" action = {{ route('postPayment') }}>
     @csrf
       <div class="row mb-sm-0 mb-5">
-          <div class="col-sm-8 col-12 border-end">
-              <div class="mx-4 mx-sm-5">
+          <div class="col-sm-8 col-md-7 col-12 border-end">
+              <div class="mx-4 mr-sm-5">
                   <div class="fs-1 fw-bold mb-3">Thông tin thanh toán</div>
 
                   <div class="row">
@@ -94,7 +94,7 @@
                   </div>
               </div>
           </div>
-          <div class="col-sm-4 col-12">
+          <div class="col-sm-4 col-md-5 col-12">
               <div class="mx-4 mx-sm-3">
                   <div class="fs-1 fw-bold">Giỏ hàng</div>
                   <table>
@@ -103,7 +103,7 @@
                         <td id="total-price-amount" data-amount="{{ $totalPrice }}">{{ number_format($totalPrice, 0, ",", ".") }}đ</td>
                       </tr>
                       <tr id="total-discount-tr">
-                        <td class="fs-3">Tổng đã giảm</td>
+                        <td class="fs-3">Chiết khấu</td>
                         <td id="total-discount-amount" class="fs-3" data-amount="{{ $totalDiscount }}">{{ number_format($totalDiscount, 0, ",", ".") }}đ</td>
                       </tr>
                       <tr>
