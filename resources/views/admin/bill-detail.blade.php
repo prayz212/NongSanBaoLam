@@ -85,7 +85,7 @@
                                                     <div class="d-flex justify-content-end col-6 print-total-value">{{ number_format(round($bill->totalPrice), 0, ",", ".") }}đ</div> 
                                                 </div>
                                                 <div class="row print-total-content">
-                                                    <div class="col-6 print-total"> Giảm giá hóa đơn: </div>
+                                                    <div class="col-6 print-total"> Chiết khấu: </div>
                                                     <div class="d-flex justify-content-end col-6 print-total-value">{{ number_format(round($bill->totalDiscount), 0, ",", ".") }}đ</div> 
                                                 </div>
                                                 <div class="row print-total-content">
@@ -93,7 +93,7 @@
                                                     <div class="d-flex justify-content-end col-6 print-total-value">{{ $bill->voucher != NULL ? number_format(round($bill->voucher->discount), 0, ",", ".") : '0'}}đ</div> 
                                                 </div>
                                                 <div class="row print-total-content">
-                                                    <div class="col-6 print-total"> Phí vận chuyển: </div>
+                                                    <div class="col-6 print-total"> Chi phí vận chuyển: </div>
                                                     <div class="d-flex justify-content-end col-6 print-total-value">{{ number_format(round($bill->shippingCost), 0, ",", ".") }}đ</div> 
                                                 </div>
                                                 
