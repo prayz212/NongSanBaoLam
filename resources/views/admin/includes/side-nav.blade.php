@@ -7,7 +7,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-chart-line fa-fw"></i></div>
                 Tổng quan
               </a>
-              <a class="nav-link {{Request::is('admin/quan-ly-hoa-don/') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-hoa-don') ? 'background-color: #424242' : ''}}" >
+              <a class="nav-link {{Request::is('admin/quan-ly-hoa-don', 'admin/thong-tin-hoa-don/*') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-hoa-don', 'admin/thong-tin-hoa-don/*') ? 'background-color: #424242' : ''}}" href="{{ route('adminBill') }}">
                   <div class="sb-nav-link-icon"><i class="fas fa-file-invoice fa-fw"></i></div>
                   Quản lý hóa đơn
               </a>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\AccountController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminBillController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +77,11 @@ Route::prefix('/admin')->group(function () {
 
     Route::group(['middleware' => 'auth:admin'], function() {
         Route::get('/trang-chu', [AdminHomeController::class, 'index'])->name('dashboard');
+        
+        Route::get('/quan-ly-hoa-don', [AdminBillController::class, 'index'])->name('adminBill');
+        Route::get('/thong-tin-hoa-don/{id}', [AdminBillController::class, 'billDetail'])->name('adminBillDetail');
+        Route::post('/cap-nhat-hoa-don', [AdminBillController::class, 'billUpdateStatus'])->name('adminBillUpdate');
+
         Route::get('/dang-xuat', [AdminAuthController::class, 'logout'])->name('adminLogout');
 
         Route::get('/quan-ly-san-pham', [AdminProductController::class, 'index'])->name('productManagement');
