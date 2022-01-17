@@ -170,7 +170,7 @@
                                                     <td width="25%" align="right" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 10px 10px 5px 10px; border-top: 3px solid #eeeeee;"> {{ number_format(round($bill->totalPrice), 0, ",", ".") }}đ </td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="75%" align="left" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Giảm giá hóa đơn: </td>
+                                                    <td width="75%" align="left" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Chiết khấu: </td>
                                                     <td width="25%" align="right" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> {{ number_format(round($bill->totalDiscount), 0, ",", ".") }}đ </td>
                                                 </tr>
                                                 <tr>
