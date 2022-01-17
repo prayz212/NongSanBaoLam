@@ -19,7 +19,7 @@
                 <div class="col-6"> {{$bill->method == 'CreditCard' ? 'Thẻ tín dụng' : 'Thu hộ'}} </div>
             </div>
             <div class="px-4 pb-3 py-sm-4 row fs-3">
-                <div class="col-6"> Số thẻ Visa: </div>
+                <div class="col-6"> Số thẻ {{ $bill->card != NULL ? $bill->card->brand : '' }}: </div>
                 <div class="col-6"> {{$bill->card->number ?? 'Không có'}} </div>
             </div>
         </div>
