@@ -9,7 +9,7 @@
                 <div class="print-title">
                     <h4 >Thông tin hóa đơn</h4>
                     <ol class="breadcrumb none-print" style="margin-bottom: 0px">
-                        <li class="breadcrumb-item"><a href="https://nongsanbaolam.herokuapp.com/admin/quan-ly-hoa-don">Quản lý hóa đơn</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('adminBill') }}">Quản lý hóa đơn</a></li>
                         <li class="breadcrumb-item active">Hóa đơn {{ $bill->id }}</li>
                     </ol>
                 </div>
@@ -78,7 +78,7 @@
                                 <tr class="bg-white">
                                     <td colspan="1" class="d-none d-sm-table-cell border-end-0"></td>
                                     <td colspan="4" class="border-start-0 print-table-border">
-                                        <div class="d-flex justify-content-end">
+                                        <div class="d-flex justify-content-end" style="line-height: 2rem">
                                             <div class="col-12 col-md-8 col-lg-6">
                                                 <div class="row print-total-content">
                                                     <div class="col-6 print-total"> Tổng tiền hàng: </div>
