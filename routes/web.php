@@ -80,6 +80,8 @@ Route::prefix('/admin')->group(function () {
 
         Route::get('/quan-ly-san-pham', [AdminProductController::class, 'index'])->name('productManagement');
         Route::get('/thong-tin-san-pham/{id}', [AdminProductController::class, 'detail'])->name('productInfo');
+        Route::get('/tao-moi-san-pham', [AdminProductController::class, 'create'])->name('createProduct');
+        Route::post('/yeu-cau-tao-moi-san-pham', [AdminProductController::class, 'createProcess'])->name('createProcess');
         Route::get('/chinh-sua-san-pham/{id}', [AdminProductController::class, 'update'])->name('updateProduct');
         Route::post('/yeu-cau-chinh-sua-san-pham', [AdminProductController::class, 'updateProcess'])->name('updateProcess');
         Route::get('/xoa-san-pham/{id}', [AdminProductController::class, 'delete'])->name('deleteProduct');

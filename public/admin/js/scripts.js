@@ -13,29 +13,36 @@ $(document).ready(function () {
     });
 
     /*      delete popup        */
-    var redirectUrl = null;
     $("#deleteButton").on("click", function () {
-        showConfirmPopup('Xác nhận xoá', 'Bạn có chắc chắn xoá sản phẩm này?', 'fa fa-exclamation-circle fa-3x');
-        redirectUrl = $(this).attr("data-href");
+        const redirectUrl = $(this).attr("data-href");
+        showConfirmPopup('Xác nhận xoá', 'Bạn có chắc chắn xoá sản phẩm này?', redirectUrl, 'fa fa-exclamation-circle fa-3x');
     });
 
-    $("#closePopupButton").click(function () {
+    /*      cancel popup        */
+    $("#cancelButton").on("click", function () {
+        const redirectUrl = $(this).attr("data-href");
+        showConfirmPopup('Xác nhận huỷ thao tác', 'Bạn có chắc chắn huỷ bỏ thao tác vừa nhập này?', redirectUrl, 'fa fa-exclamation-circle fa-3x');
+    });
+
+    $("#pop-up-close-btn").click(function () {
         $(".__popup").hide();
     });
 
-    $("#confirmPopupButton").click(function () {
+    $("#pop-up-confirm-btn").click(function () {
+        const redirectUrl = $(this).attr('data-href');
         if (redirectUrl) {
             window.location.replace(redirectUrl);
         }
     });
 });
 
-function showConfirmPopup(title, messages, icon = null) {
+function showConfirmPopup(title, messages, href, icon = null) {
     const _this = $(".__popup-confirm");
 
     _this.find('#pop-up-title').html(title);
     _this.find('#pop-up-message').html(messages);
 
+    $('#pop-up-confirm-btn').attr('data-href', href);
     $('#pop-up-icon')
         .removeClass()
         .addClass(icon);

@@ -92,4 +92,14 @@ class AdminProductController extends Controller
 
         return $response;
     }
+
+    public function create() {
+        $categories = Category::get();
+        return view('admin.product-create')
+            ->with('categories', $categories);
+    }
+
+    public function createProcess() {
+        die('ok');
+    }
 }
