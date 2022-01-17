@@ -12879,6 +12879,16 @@ body {
   border-radius: 0.25rem !important;
 }
 
+@media only screen and (max-width: 576px) {
+  .dataTable-top .dataTable-dropdown {
+    display: none;
+  }
+
+  .dataTable-top .dataTable-search {
+    width: 100%;
+  }
+}
+
 /*      PRODUCT      */
 .__product-main {
   background: #f5f5f5;
