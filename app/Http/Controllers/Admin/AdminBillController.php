@@ -41,7 +41,6 @@ class AdminBillController extends Controller
         }
         $bill->save();
 
-
         return response()->json(['status' => 200, 'delivery_at' => $date ?? NULL, 'bill_status' => $bill->status]);
     }
 }
