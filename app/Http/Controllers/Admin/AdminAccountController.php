@@ -8,6 +8,7 @@ use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Models\Customer;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminAccountController extends Controller
 {
@@ -31,9 +32,10 @@ class AdminAccountController extends Controller
                         ->leftJoin('bill', 'customer.id', '=', 'bill.customer_id')
                         ->groupBy('customer.id')
                         ->where('customer.id', $id)
+                        ->where('isDelete', false)
                         ->firstOrFail();
 
-        if ($customer->isDelete == true) {
+        if ($customer == NULL) {
             return redirect()->route('accountManagement');
         }
 
@@ -48,9 +50,10 @@ class AdminAccountController extends Controller
                         ->leftJoin('bill', 'customer.id', '=', 'bill.customer_id')
                         ->groupBy('customer.id')
                         ->where('customer.id', $id)
-                        ->firstOrFail();
+                        ->where('isDelete', false)
+                        ->first();
 
-        if ($customer->isDelete == true) {
+        if ($customer == NULL) {
             return redirect()->route('accountManagement');
         }
                         
@@ -104,6 +107,7 @@ class AdminAccountController extends Controller
         $customer = Customer::create([
             'username' => $request->username,
             'fullname' => $request->fullname,
+            'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address

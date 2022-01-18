@@ -26,6 +26,7 @@ class CreateAccountRequest extends FormRequest
         return [
             'username' => ['required', 'min: 6', 'max: 55'],
             'fullname' => ['required'],
+            'password' => ['required', 'min:8'],
             'phone' => ['required', 'digits:10'],
             'email' => ['required', 'max:255'],
             'address' => ['required']
@@ -44,6 +45,8 @@ class CreateAccountRequest extends FormRequest
             'address.required' => 'Yêu cầu nhập địa chỉ',
             'phone.digits' => 'Số điện thoại không hợp lệ',
             'email.max' => 'Email có tối đa 255 ký tự',
+            'password.required' => 'Yêu cầu nhập mật khẩu',
+            'password.min' => 'Mật khẩu phải có tối thiểu 8 ký tự',
         ];
     }
 }
