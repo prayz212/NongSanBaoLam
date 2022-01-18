@@ -26,7 +26,7 @@ class Customer extends Authenticatable
 
     public function totalPay() {
         return $this->bill()
-            ->selectRaw('sum(totalPay) as total, customer_id')
+            ->selectRaw('sum("totalPay") as total, customer_id')
             ->groupBy('customer_id');
     }
 
