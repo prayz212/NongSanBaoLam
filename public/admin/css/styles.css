@@ -13125,11 +13125,12 @@ body {
     width: 5.5rem;
     height: 6.8rem;
   }
-}
+} 
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
 
 /*  admin invoice page  */
 .invoice-container {
