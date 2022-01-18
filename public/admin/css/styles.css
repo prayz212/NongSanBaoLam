@@ -13191,10 +13191,6 @@ input::-webkit-inner-spin-button {
   }
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-
 /*  admin invoice page  */
 .invoice-container {
   padding: 1rem;
@@ -13252,11 +13248,6 @@ input::-webkit-inner-spin-button {
     width: 5.5rem;
     height: 6.8rem;
   }
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
 }
 
 /*  admin invoice page  */
@@ -13445,9 +13436,4 @@ input::-webkit-inner-spin-button {
     width: 5.5rem;
     height: 6.8rem;
   }
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
 }
