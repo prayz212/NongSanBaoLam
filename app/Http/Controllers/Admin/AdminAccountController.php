@@ -43,8 +43,7 @@ class AdminAccountController extends Controller
         }
                         
         return view('admin.account-edit')
-                ->with('customer', $customer)
-                ->with('page', 'edit');
+                ->with('customer', $customer);
     }
 
     public function updateProcess($id, UpdateInfoRequest $request) {
@@ -69,9 +68,7 @@ class AdminAccountController extends Controller
     }
 
     public function create() {
-        return view('admin.account-edit')
-                ->with('customer', NULL)
-                ->with('page', 'create');
+        return view('admin.account-create');
     }
 
     public function createProcess(CreateAccountRequest $request) {
