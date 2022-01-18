@@ -15,7 +15,7 @@
                   <div class="sb-nav-link-icon"><i class="fas fa-warehouse fa-fw"></i></div>
                   Quản lý sản phẩm
               </a>
-              <a class="nav-link {{Request::is('admin/quan-ly-tai-khoan') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-tai-khoan') ? 'background-color: #424242' : ''}}" >
+              <a class="nav-link {{Request::is('admin/quan-ly-tai-khoan', 'admin/thong-tin-tai-khoan/*', 'admin/chinh-sua-tai-khoan/*', 'admin/tao-moi-tai-khoan') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-tai-khoan', 'admin/thong-tin-tai-khoan/*', 'admin/chinh-sua-tai-khoan/*', 'admin/tao-moi-tai-khoan') ? 'background-color: #424242' : ''}}" href="{{ route('accountManagement') }}">
                   <div class="sb-nav-link-icon"><i class="fas fa-users fa-fw"></i></div>
                   Quản lý tài khoản
               </a>

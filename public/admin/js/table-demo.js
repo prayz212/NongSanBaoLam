@@ -9,8 +9,8 @@ window.addEventListener('DOMContentLoaded', event => {
       new simpleDatatables.DataTable(productTables);
   }
 
-  // const warehouseTables = document.getElementById("warehouseDatatables");
-  // if (warehouseTables) {
-  //     new simpleDatatables.DataTable(warehouseTables);
-  // }
+  const accountTables = document.getElementById("accountTables");
+  if (accountTables) {
+      new simpleDatatables.DataTable(accountTables);
+  }
 });
