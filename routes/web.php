@@ -12,6 +12,8 @@ use App\Http\Controllers\Client\AccountController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminBillController;
+use App\Http\Controllers\Admin\AdminAccountController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,9 +79,23 @@ Route::prefix('/admin')->group(function () {
     Route::group(['middleware' => 'auth:admin'], function() {
         Route::get('/trang-chu', [AdminHomeController::class, 'index'])->name('dashboard');
         Route::get('/dang-xuat', [AdminAuthController::class, 'logout'])->name('adminLogout');
+        
+        Route::get('/quan-ly-hoa-don', [AdminBillController::class, 'index'])->name('adminBill');
+        Route::get('/thong-tin-hoa-don/{id}', [AdminBillController::class, 'billDetail'])->name('adminBillDetail');
+        Route::post('/cap-nhat-hoa-don', [AdminBillController::class, 'billUpdateStatus'])->name('adminBillUpdate');
+
+        Route::get('/quan-ly-tai-khoan', [AdminAccountController::class, 'index'])->name('accountManagement');
+        Route::get('/thong-tin-tai-khoan/{id}', [AdminAccountController::class, 'accountInfo'])->name('adminAccountInfo');
+        Route::get('/chinh-sua-tai-khoan/{id}', [AdminAccountController::class, 'update'])->name('updateAccount');
+        Route::post('/yeu-cau-chinh-sua-tai-khoan/{id}', [AdminAccountController::class, 'updateProcess'])->name('updateAccountProcess');
+        Route::get('/tao-moi-tai-khoan', [AdminAccountController::class, 'create'])->name('createAccount');
+        Route::post('/yeu-cau-tao-moi-tai-khoan', [AdminAccountController::class, 'createProcess'])->name('createAccountProcess');
+        Route::get('/xoa-tai-khoan/{id}', [AdminAccountController::class, 'delete'])->name('deleteAccount');
 
         Route::get('/quan-ly-san-pham', [AdminProductController::class, 'index'])->name('productManagement');
         Route::get('/thong-tin-san-pham/{id}', [AdminProductController::class, 'detail'])->name('productInfo');
+        Route::get('/tao-moi-san-pham', [AdminProductController::class, 'create'])->name('createProduct');
+        Route::post('/yeu-cau-tao-moi-san-pham', [AdminProductController::class, 'createProcess'])->name('createProcess');
         Route::get('/chinh-sua-san-pham/{id}', [AdminProductController::class, 'update'])->name('updateProduct');
         Route::post('/yeu-cau-chinh-sua-san-pham', [AdminProductController::class, 'updateProcess'])->name('updateProcess');
         Route::get('/xoa-san-pham/{id}', [AdminProductController::class, 'delete'])->name('deleteProduct');

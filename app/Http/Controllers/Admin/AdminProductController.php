@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Image;
 use App\Models\Category;
+use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use Carbon\Carbon;
 
 class AdminProductController extends Controller
 {
@@ -37,12 +41,15 @@ class AdminProductController extends Controller
     }
 
     public function update($id) {
-        $product = Product::with('main_pic', 'category', 'avgRating', 'image')
+        $product = Product::with('category', 'avgRating', 'image')
             ->where('isDelete', false)
             ->find($id);
 
+        $categories = Category::get();
+
         return view('admin.product-edit')
-            ->with('product', $product);
+            ->with('product', $product)
+            ->with('categories', $categories);
     }
 
     public function stockIn() {
@@ -92,5 +99,56 @@ class AdminProductController extends Controller
         }
 
         return $response;
+    }
+
+    public function create() {
+        $categories = Category::get();
+        return view('admin.product-create')
+            ->with('categories', $categories);
+    }
+
+    public function createProcess(CreateProductRequest $request) {
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->type,
+            'price' => $request->price,
+            'quantity' => 0,
+            'discount' => $request->discount != null ? $request->discount : null,
+        ]);
+
+        $product_id = $product->id;
+        $now = Carbon::now()->timestamp;
+        foreach($request->file('images') as $image)
+        {
+            $file = $image->getClientOriginalName();
+            $name = pathinfo($file, PATHINFO_FILENAME) . '_' . $now;
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+            $new_name = $name . '.' . $extension;
+            $url = public_path() . '/images/uploads/';
+
+            $image->move($url, $new_name);  
+            $data[] = ['name' => $new_name, 'url' => $url . $new_name, 'product_id' => $product_id];
+        }
+
+        $images = Image::insert($data);
+
+        return redirect()->route('productInfo', $product_id);
+    }
+
+    public function updateProcess(Request $request) {
+        die('ok');
+        // $old_images = Image::where('product_id', $request->id)
+        //     ->get();
+
+        // dd([$old_images]);
+
+        // foreach($request->file('images') as $image)
+        // {
+        //     $name = $image->getClientOriginalName(); 
+        //     $data[] = $name;
+        // }
+
+        // dd([$old_images, $data]);
     }
 }

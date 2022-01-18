@@ -23,6 +23,8 @@ $(document).ready(function () {
     if (!validation.isValid) {
       $('#validation-error-msg').html(validation.messages[0]);
       return;
+    } else {
+      $('#validation-error-msg').html('');
     }
 
     let form = $('#stock-in-form');

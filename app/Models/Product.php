@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'product';
-    protected $fillable = ['id', 'name', 'description', 'price', 'isDetele'];
+    protected $fillable = ['id', 'name', 'description', 'price', 'quantity', 'discount', 'category_id', 'isDetele'];
 
     public function image() {
         return $this->hasMany('App\Models\Image');
