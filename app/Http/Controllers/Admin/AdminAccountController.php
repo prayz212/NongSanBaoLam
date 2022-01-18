@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Models\Customer;
-use DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminAccountController extends Controller
@@ -35,14 +34,9 @@ class AdminAccountController extends Controller
     }
 
     public function update($id) {
-        $customer = Customer::select('customer.*', 
-                        DB::raw('SUM(bill.totalPay) As totalPay'),
-                        DB::raw('COUNT(bill.id) As totalBill'))
-                        ->leftJoin('bill', 'customer.id', '=', 'bill.customer_id')
-                        ->groupBy('customer.id')
-                        ->where('customer.id', $id)
-                        ->where('isDelete', false)
-                        ->first();
+        $customer = Customer::with(['totalPay', 'totalBill'])
+            ->where('isDelete', false)
+            ->find($id);
 
         if ($customer == NULL) {
             return redirect()->route('accountManagement');

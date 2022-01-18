@@ -39,11 +39,11 @@
                         <ul class="list-group list-group-flush border-top">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <span> Tổng số hóa đơn:</span>
-                                <span class="text-secondary">{{ $customer->totalBill ?? 0 }} hóa đơn</span>
+                                <span class="text-secondary">{{ $customer->totalBill->first() ? $customer->totalBill->first()->total : '0' }} hóa đơn</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <span> Tổng tiền đã mua:</span>
-                                <span class="text-secondary">{{ $customer != NULL ? ($customer->totalPay != NULL ? number_format(round($customer->totalPay), 0, ",", ".") : "0") : "0" }}đ</span>
+                                <span class="text-secondary">{{ $customer->totalPay->first() ? number_format(round($customer->totalPay->first()->total), 0, ",", ".") : "0" }}đ</span>
                             </li>
                         </ul>
                     </div>
