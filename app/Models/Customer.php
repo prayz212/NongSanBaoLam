@@ -19,4 +19,20 @@ class Customer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function bill() {
+        return $this->hasMany('App\Models\Bill');
+    }
+
+    public function totalPay() {
+        return $this->bill()
+            ->selectRaw('sum(totalPay) as total, customer_id')
+            ->groupBy('customer_id');
+    }
+
+    public function totalBill() {
+        return $this->bill()
+            ->selectRaw('count(id) as total, customer_id')
+            ->groupBy('customer_id');
+    }
 }
