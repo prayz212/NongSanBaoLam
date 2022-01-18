@@ -42,8 +42,8 @@
                                 <td>{{ $customer->fullname}}</td>
                                 <td>{{ $customer->email}}</td>
                                 <td>{{ $customer->phone}}</td>
-                                <td>{{ $customer->totalBill }}</td>
-                                <td>{{ $customer->totalPay != NULL ? number_format(round($customer->totalPay), 0, ",", ".") : "0" }}đ </td>
+                                <td>{{ $customer->totalBill->first() ? $customer->totalBill->first()->total : '0' }}</td>
+                                <td>{{ $customer->totalPay->first() ? number_format(round($customer->totalPay->first()->total), 0, ",", ".") : "0" }}đ </td>
                             </tr>
                         @endforeach
                     </tbody>
