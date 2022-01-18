@@ -3,7 +3,20 @@
 
 <main class="__product-main">
   <div class="container-fluid px-4">
-      <form action="" enctype="multipart/form-data" method="post" onsubmit="return checkImage()">
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <div class="__product-title-box" style="margin: 0px">
+                <h4>Thêm sản phẩm mới</h4>
+                <ol class="breadcrumb" style="margin-bottom: 0px">
+                <li class="breadcrumb-item"><a href="{{route('productManagement')}}">Quản lý sản phẩm</a></li>
+                <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+      
+      <form action="{{ route('createProcess') }}" enctype="multipart/form-data" method="post">
+        @csrf
           <div class="row">
               <div class="col-sm-12 col-lg-6">
                   <div class="__imgae-section">
@@ -13,7 +26,8 @@
                               <button type="button" class="btn" onclick="document.getElementById('input1').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="input1" type="file" name="image1" style="display: none" onchange="readURL(this);" accept="image/*" />
+                              <input id="input1" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
@@ -21,7 +35,8 @@
                               <button type="button" class="btn" onclick="document.getElementById('input2').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="input2" type="file" name="image2" style="display: none" onchange="readURL(this);" accept="image/*" />
+                              <input id="input2" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
@@ -29,7 +44,8 @@
                               <button type="button" class="btn" onclick="document.getElementById('input3').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="input3" type="file" name="image3" style="display: none" onchange="readURL(this);" accept="image/*" />
+                              <input id="input3" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
@@ -37,13 +53,18 @@
                               <button type="button" class="btn" onclick="document.getElementById('input4').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="input4" type="file" name="image4" style="display: none" onchange="readURL(this);" accept="image/*" />
+                              <input id="input4" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                       </div>
                       <div class="__product-image-box __nonselection w-100">
                           <div class="__main-pic">
-                              <p class="d-flex justify-content-center align-items-center">Chưa chọn ảnh nào</p>
+                            @if($errors->has('images'))
+                                <p class="d-flex justify-content-center align-items-center text-danger">{{ $errors->first('images') }}</p>
+                            @else
+                                <p class="d-flex justify-content-center align-items-center">Chưa chọn ảnh nào</p>
+                            @endif
                               <img src="" alt="product-image" style="display: none; width: 100%" />
                           </div>
                       </div>
@@ -54,48 +75,58 @@
                   <div class="__product-input-box mt-2 mt-sm-0">
                       <div class="row m-3">
                           <div class="col-sm-3 align-self-center">
-                              <div class="__input-label">Tên sản phẩm</div>
+                              <h6 class="__input-label">Tên sản phẩm</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="name" placeholder="Tên sản phẩm" type="text" class="form-control shadow-none" />
+                              <input name="name" placeholder="Tên sản phẩm" type="text" class="form-control shadow-none" value="{{ old('name') }}"/>
+                              <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('name') ?? '' }}</div>
                           </div>
                       </div>
                       <div class="row m-3">
                           <div class="col-sm-3 align-self-center">
-                              <div class="__input-label">Loại sản phẩm</div>
+                              <h6 class="__input-label">Loại sản phẩm</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
                               <select class="form-control shadow-none" name="type">
-                                  <option value="null" selected disabled hidden>Chọn loại sản phẩm</option>
+                                  @if (old('type') === null)
+                                    <option selected disabled hidden>Chọn loại sản phẩm</option>
+                                  @endif
                                   @foreach ($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @if (old('type') == $category->id)
+                                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                    @else
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
                                   @endforeach
                               </select>
+                              <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('type') ?? '' }}</div>
                           </div>
                       </div>
                       <div class="row m-3">
                           <div class="col-sm-3 align-self-center">
-                              <div class="__input-label">Giá sản phẩm</div>
+                              <h6 class="__input-label">Giá sản phẩm</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="price" placeholder="Giá sản phẩm" type="number" class="form-control shadow-none" />
+                              <input name="price" placeholder="Giá sản phẩm" type="number" class="form-control shadow-none"  value="{{ old('price') }}"/>
+                              <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('price') ?? '' }}</div>
                           </div>
                       </div>
                       <div class="row m-3">
                           <div class="col-sm-3 align-self-center">
-                              <div class="__input-label">Chiết khấu</div>
+                              <h6 class="__input-label">Chiết khấu</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="discount" placeholder="Phần trăm chiết khấu (%)" type="number" class="form-control shadow-none" />
+                              <input name="discount" placeholder="Phần trăm chiết khấu (%)" type="number" class="form-control shadow-none"  value="{{ old('discount') }}"/>
+                              <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('discount') ?? '' }}</div>
                           </div>
                       </div>
                       <div class="row m-3 mt-sm-4">
                           <div class="col-12 align-self-center">
-                              <div class="__input-label">Mô tả sản phẩm</div>
+                              <h6 class="__input-label">Mô tả sản phẩm</h6>
                           </div>
                           <div class="col-12 text-secondary mt-sm-2">
-                              <textarea class="form-control shadow-none" name="description" rows="8" cols="50" placeholder="Mô tả chi tiết về sản phẩm">
-                              </textarea>
+                              <textarea class="form-control shadow-none" name="description" rows="8" cols="50" placeholder="Mô tả chi tiết về sản phẩm">{{ old('description') }}</textarea>
+                              <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('description') ?? '' }}</div>
                           </div>
                       </div>
                       <div class="row mx-3 my-2">
@@ -108,11 +139,6 @@
                               </a>
                           </div>
                       </div>
-
-                      {{-- <div class="row m-3">
-                          <div id="errorMsg" class="AcCreateMess text-danger">@ViewBag.acCreateError</div>
-                          <div asp-validation-summary="All" class="text-danger"></div>
-                      </div> --}}
                   </div>
               </div>
           </div>
@@ -120,31 +146,8 @@
   </div>
 </main>
 
-{{-- <script>
-  function checkImage() {
-      let srcs = [];
-      srcs.push($('.__thumbnails .__thumbnail-input-pic img').eq(0).attr('src'))
-      srcs.push($('.__thumbnails .__thumbnail-input-pic img').eq(1).attr('src'))
-      srcs.push($('.__thumbnails .__thumbnail-input-pic img').eq(2).attr('src'))
-      srcs.push($('.__thumbnails .__thumbnail-input-pic img').eq(3).attr('src'))
-
-      let count = srcs.filter(function (element) {
-          return element !== undefined;
-      }).length;
-
-      if (count == 0) {
-          $('#errorMsg').html('<ul style="margin-bottom: 0rem"><li>Sản phẩm phải có ít nhất 1 hình</li></ul>')
-      }
-      else {
-          $('#errorMsg').html('')
-      }
-
-      return count >= 1;
-  }
-</script> --}}
-
 @include('admin.includes.pop-up-confirm')
 
-<script src="{{ asset('admin/js/create-product.js') }}"></script>
+<script src="{{ asset('admin/js/create-edit-product.js') }}"></script>
 
 @endsection

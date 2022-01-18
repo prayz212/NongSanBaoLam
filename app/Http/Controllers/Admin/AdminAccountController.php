@@ -16,7 +16,7 @@ class AdminAccountController extends Controller
         $customers = Customer::with(['totalPay', 'totalBill'])
             ->where('isDelete', false)
             ->get();
-            
+      
         return view('admin.account-page')
                 ->with('customers', $customers);
     }

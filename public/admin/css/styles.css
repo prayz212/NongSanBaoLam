@@ -12971,7 +12971,7 @@ body {
   }
 
   .__left-infor-section {
-    margin: 15px 0;
+    margin-top: 15px;
   }
 
   .__imgae-section {
@@ -12993,6 +12993,10 @@ body {
 
   .__thumbnails {
     margin-right: 8px;
+  }
+
+  .__left-infor-section {
+    margin: 0;
   }
 }
 
@@ -13075,6 +13079,133 @@ body {
   background-color: #fff;
   padding: 10px 0;
   border-radius: 5px;
+}
+
+.__input-label {
+  font-size: 0.999rem;
+}
+
+.__thumbnail-input-pic {
+  width: 8.8rem;
+  height: 8.8rem;
+  margin: 6px 0;
+  background-color: #c0c0c0;
+  text-align: center;
+  border: 4px dashed #696969;
+}
+
+.__thumbnail-input-pic button {
+  width: 100%;
+  height: 100%;
+}
+
+.__thumbnail-input-pic button:focus {
+  box-shadow: none;
+}
+
+.__nonselection {
+  background-color: #c0c0c0;
+}
+
+.__main-pic p {
+  height: 100%;
+  text-align: center;
+}
+
+.__remove-image {
+  position: absolute;
+  top: -24px;
+  right: -12px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 576px) {
+  .__thumbnail-input-pic {
+    width: 5.5rem;
+    height: 6.8rem;
+  }
+} 
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/*  admin invoice page  */
+.invoice-container {
+  padding: 1rem;
+}
+
+.invoice-container .invoice-header .invoice-logo {
+  margin: 0.8rem 0 0 0;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2e323c;
+}
+
+.__input-label {
+  font-size: 0.999rem;
+}
+
+.__thumbnail-input-pic {
+  width: 8.8rem;
+  height: 8.8rem;
+  margin: 6px 0;
+  background-color: #c0c0c0;
+  text-align: center;
+  border: 4px dashed #696969;
+}
+
+.__thumbnail-input-pic button {
+  width: 100%;
+  height: 100%;
+}
+
+.__thumbnail-input-pic button:focus {
+  box-shadow: none;
+}
+
+.__nonselection {
+  background-color: #c0c0c0;
+}
+
+.__main-pic p {
+  height: 100%;
+  text-align: center;
+}
+
+.__remove-image {
+  position: absolute;
+  top: -24px;
+  right: -12px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 576px) {
+  .__thumbnail-input-pic {
+    width: 5.5rem;
+    height: 6.8rem;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+
+/*  admin invoice page  */
+.invoice-container {
+  padding: 1rem;
+}
+
+.invoice-container .invoice-header .invoice-logo {
+  margin: 0.8rem 0 0 0;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2e323c;
 }
 
 .__input-label {
