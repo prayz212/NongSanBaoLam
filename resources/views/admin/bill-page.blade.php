@@ -26,7 +26,6 @@
                     <tbody>
                         @foreach ($bills as $bill)
                         
-                        <!-- <tr style="cursor: pointer" onclick="location.href = '@(Url.Action("Details", "Receipt", new { id = receipt.ID }))'"> -->
                         <tr style="cursor: pointer" onclick="window.location = '{{ route('adminBillDetail', ['id' => $bill->id]) }}'">
                             <td>{{ $bill->id}}</td>
                             <td>{{ $bill->fullname }}</td>

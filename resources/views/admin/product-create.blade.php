@@ -27,6 +27,7 @@
                                   Thêm ảnh
                               </button>
                               <input id="input1" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
@@ -35,6 +36,7 @@
                                   Thêm ảnh
                               </button>
                               <input id="input2" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
@@ -43,6 +45,7 @@
                                   Thêm ảnh
                               </button>
                               <input id="input3" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
@@ -51,6 +54,7 @@
                                   Thêm ảnh
                               </button>
                               <input id="input4" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
                               <img alt="project-image" style="display: none; width: 100%" />
                           </div>
                       </div>
