@@ -12971,7 +12971,7 @@ body {
   }
 
   .__left-infor-section {
-    margin: 15px 0;
+    margin-top: 15px;
   }
 
   .__imgae-section {
@@ -12993,6 +12993,10 @@ body {
 
   .__thumbnails {
     margin-right: 8px;
+  }
+
+  .__left-infor-section {
+    margin: 0;
   }
 }
 
