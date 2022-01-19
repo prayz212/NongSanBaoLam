@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminBillController;
 use App\Http\Controllers\Admin\AdminAccountController;
+use App\Http\Controllers\Admin\AdminVoucherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,6 +92,12 @@ Route::prefix('/admin')->group(function () {
         Route::get('/tao-moi-tai-khoan', [AdminAccountController::class, 'create'])->name('createAccount');
         Route::post('/yeu-cau-tao-moi-tai-khoan', [AdminAccountController::class, 'createProcess'])->name('createAccountProcess');
         Route::get('/xoa-tai-khoan/{id}', [AdminAccountController::class, 'delete'])->name('deleteAccount');
+
+        Route::get('/quan-ly-voucher', [AdminVoucherController::class, 'index'])->name('voucherManagement');
+        Route::get('/thong-tin-voucher/{code}', [AdminVoucherController::class, 'detail'])->name('voucherInfo');
+        Route::get('/tao-moi-voucher', [AdminVoucherController::class, 'create'])->name('createVoucher');
+        Route::post('/yeu-cau-tao-moi-voucher', [AdminVoucherController::class, 'createProcess'])->name('createVoucherProcess');
+        Route::get('/xoa-voucher/{code}', [AdminVoucherController::class, 'delete'])->name('deleteVoucher');
 
         Route::get('/quan-ly-san-pham', [AdminProductController::class, 'index'])->name('productManagement');
         Route::get('/thong-tin-san-pham/{id}', [AdminProductController::class, 'detail'])->name('productInfo');
