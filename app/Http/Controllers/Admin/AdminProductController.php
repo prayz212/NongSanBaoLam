@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Carbon\Carbon;
+use JD\Cloudder\Facades\Cloudder;
 
 class AdminProductController extends Controller
 {
@@ -123,16 +124,20 @@ class AdminProductController extends Controller
         {
             $file = $image->getClientOriginalName();
             $name = pathinfo($file, PATHINFO_FILENAME) . '_' . $now;
-            $extension = pathinfo($file, PATHINFO_EXTENSION);
-            $new_name = $name . '.' . $extension;
-            $url = public_path() . '/images/uploads/';
 
-            $image->move($url, $new_name);  
-            $data[] = ['name' => $new_name, 'url' => $url . $new_name, 'product_id' => $product_id];
+            Cloudder::upload($image, 'NongSanBaoLam/' . $name, array(
+                'overwrite' => FALSE,
+                "resource_type" => 'image',
+                'use_filename' => true,
+                'unique_filename' => true,
+            ));
+
+            $public_id = Cloudder::getPublicId();
+            $result = Cloudder::getResult();
+            $data[] = ['name' => $name, 'url' => $result['secure_url'], 'product_id' => $product_id, 'public_id' => $public_id];
         }
 
         $images = Image::insert($data);
-
         return redirect()->route('productInfo', $product_id);
     }
 
