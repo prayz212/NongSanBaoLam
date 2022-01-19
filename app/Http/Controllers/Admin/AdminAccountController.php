@@ -7,33 +7,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Models\Customer;
-use DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminAccountController extends Controller
 {
     public function index() {
-        $customers = Customer::select('customer.*', 
-                                DB::raw('SUM(bill.totalPay) As totalPay'),
-                                DB::raw('COUNT(bill.id) As totalBill'))
-                                ->leftJoin('bill', 'customer.id', '=', 'bill.customer_id')
-                                ->groupBy('customer.id')
-                                ->where('isDelete', false)
-                                ->get();
-
+        $customers = Customer::with(['totalPay', 'totalBill'])
+            ->where('isDelete', false)
+            ->get();
+      
         return view('admin.account-page')
                 ->with('customers', $customers);
     }
 
     public function accountInfo($id) {
-        $customer = Customer::select('customer.*', 
-                        DB::raw('SUM(bill.totalPay) As totalPay'),
-                        DB::raw('COUNT(bill.id) As totalBill'))
-                        ->leftJoin('bill', 'customer.id', '=', 'bill.customer_id')
-                        ->groupBy('customer.id')
-                        ->where('customer.id', $id)
-                        ->where('isDelete', false)
-                        ->firstOrFail();
+        $customer = Customer::with(['totalPay', 'totalBill'])
+            ->where('isDelete', false)
+            ->find($id);
 
         if ($customer == NULL) {
             return redirect()->route('accountManagement');
@@ -44,22 +34,16 @@ class AdminAccountController extends Controller
     }
 
     public function update($id) {
-        $customer = Customer::select('customer.*', 
-                        DB::raw('SUM(bill.totalPay) As totalPay'),
-                        DB::raw('COUNT(bill.id) As totalBill'))
-                        ->leftJoin('bill', 'customer.id', '=', 'bill.customer_id')
-                        ->groupBy('customer.id')
-                        ->where('customer.id', $id)
-                        ->where('isDelete', false)
-                        ->first();
+        $customer = Customer::with(['totalPay', 'totalBill'])
+            ->where('isDelete', false)
+            ->find($id);
 
         if ($customer == NULL) {
             return redirect()->route('accountManagement');
         }
                         
         return view('admin.account-edit')
-                ->with('customer', $customer)
-                ->with('page', 'edit');
+                ->with('customer', $customer);
     }
 
     public function updateProcess($id, UpdateInfoRequest $request) {
@@ -84,9 +68,7 @@ class AdminAccountController extends Controller
     }
 
     public function create() {
-        return view('admin.account-edit')
-                ->with('customer', NULL)
-                ->with('page', 'create');
+        return view('admin.account-create');
     }
 
     public function createProcess(CreateAccountRequest $request) {
