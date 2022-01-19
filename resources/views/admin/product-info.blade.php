@@ -22,15 +22,15 @@
                   <div class="__thumbnails">
                       @foreach ($product->image as $k => $i)
                           <div class="__thumbnail-pic rounded" {!! $k == 0 ? 'style="margin-top: 0"' : '' !!}>
-                              <img src="{{ asset('images/products/' . $i->url) }}"
-                                   alt="{{ $i->name }}" />
+                              {{-- <img src="{{ asset('images/products/' . $i->url) }}" alt="{{ $i->name }}" /> --}}
+                              <img src="{{ $i->url }}" alt="{{ $i->name }}" />
                           </div>
                       @endforeach
                   </div>
                   <div class="__product-image-box __main-pic-section">
                       <div class="__main-pic">
-                          <img src="{{ asset('images/products/' . $product->main_pic->url) }}"
-                               alt="{{ $product->main_pic->name }}" />
+                          {{-- <img src="{{ asset('images/products/' . $product->main_pic->url) }}" alt="{{ $product->main_pic->name }}" /> --}}
+                          <img src="{{ $product->main_pic->url }}" alt="{{ $product->main_pic->name }}" />
                       </div>
                   </div>
               </div>
