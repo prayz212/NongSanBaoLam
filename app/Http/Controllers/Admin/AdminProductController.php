@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Image;
 use App\Models\Category;
+use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use Carbon\Carbon;
+use JD\Cloudder\Facades\Cloudder;
 
 class AdminProductController extends Controller
 {
@@ -37,12 +42,15 @@ class AdminProductController extends Controller
     }
 
     public function update($id) {
-        $product = Product::with('main_pic', 'category', 'avgRating', 'image')
+        $product = Product::with('category', 'avgRating', 'image')
             ->where('isDelete', false)
             ->find($id);
 
+        $categories = Category::get();
+
         return view('admin.product-edit')
-            ->with('product', $product);
+            ->with('product', $product)
+            ->with('categories', $categories);
     }
 
     public function stockIn() {
@@ -76,7 +84,8 @@ class AdminProductController extends Controller
         if ($request->has('category') && $request->has('product') && $request->has('quantity')) {
             $product = Product::where('category_id', $request->category)
                 ->where('isDelete', false)
-                ->find($request->product);
+                ->where('id', $request->product)
+                ->first();
             
             $product->quantity += $request->quantity;
             $product->save();
@@ -91,5 +100,60 @@ class AdminProductController extends Controller
         }
 
         return $response;
+    }
+
+    public function create() {
+        $categories = Category::get();
+        return view('admin.product-create')
+            ->with('categories', $categories);
+    }
+
+    public function createProcess(CreateProductRequest $request) {
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->type,
+            'price' => $request->price,
+            'quantity' => 0,
+            'discount' => $request->discount != null ? $request->discount : null,
+        ]);
+
+        $product_id = $product->id;
+        $now = Carbon::now()->timestamp;
+        foreach($request->file('images') as $image)
+        {
+            $file = $image->getClientOriginalName();
+            $name = pathinfo($file, PATHINFO_FILENAME) . '_' . $now;
+
+            Cloudder::upload($image, 'NongSanBaoLam/' . $name, array(
+                'overwrite' => FALSE,
+                "resource_type" => 'image',
+                'use_filename' => true,
+                'unique_filename' => true,
+            ));
+
+            $public_id = Cloudder::getPublicId();
+            $result = Cloudder::getResult();
+            $data[] = ['name' => $name, 'url' => $result['secure_url'], 'product_id' => $product_id, 'public_id' => $public_id];
+        }
+
+        $images = Image::insert($data);
+        return redirect()->route('productInfo', $product_id);
+    }
+
+    public function updateProcess(Request $request) {
+        die('ok');
+        // $old_images = Image::where('product_id', $request->id)
+        //     ->get();
+
+        // dd([$old_images]);
+
+        // foreach($request->file('images') as $image)
+        // {
+        //     $name = $image->getClientOriginalName(); 
+        //     $data[] = $name;
+        // }
+
+        // dd([$old_images, $data]);
     }
 }

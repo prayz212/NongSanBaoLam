@@ -72,7 +72,7 @@
   </div>
 </main>
 
-@include('admin.includes.pop-up-notify');
+@include('admin.includes.pop-up-notify')
 
 <script src="{{ asset('admin/js/stock-in.js') }}"></script>
 

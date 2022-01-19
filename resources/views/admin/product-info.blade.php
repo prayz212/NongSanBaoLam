@@ -22,22 +22,22 @@
                   <div class="__thumbnails">
                       @foreach ($product->image as $k => $i)
                           <div class="__thumbnail-pic rounded" {!! $k == 0 ? 'style="margin-top: 0"' : '' !!}>
-                              <img src="{{ asset('images/products/' . $i->url) }}"
-                                   alt="{{ $i->name }}" />
+                              {{-- <img src="{{ asset('images/products/' . $i->url) }}" alt="{{ $i->name }}" /> --}}
+                              <img src="{{ $i->url }}" alt="{{ $i->name }}" />
                           </div>
                       @endforeach
                   </div>
                   <div class="__product-image-box __main-pic-section">
                       <div class="__main-pic">
-                          <img src="{{ asset('images/products/' . $product->main_pic->url) }}"
-                               alt="{{ $product->main_pic->name }}" />
+                          {{-- <img src="{{ asset('images/products/' . $product->main_pic->url) }}" alt="{{ $product->main_pic->name }}" /> --}}
+                          <img src="{{ $product->main_pic->url }}" alt="{{ $product->main_pic->name }}" />
                       </div>
                   </div>
               </div>
           </div>
 
           <div class="col-lg-5 col-sm-12 __left-infor-section">
-              <div class="__product-info-box mt-2 mt-sm-0">
+              <div class="__product-info-box mt-3 mt-sm-0">
                   <p><b>Mã sản phẩm:</b> #{{ $product->id }}</p>
                   <p><b>Tên sản phẩm:</b> {{ $product->name }}</p>
                   <p><b>Loại sản phẩm:</b> {{ $product->category->name }}</p>
@@ -47,7 +47,7 @@
                   <p><b>Trung bình đánh giá:</b> {{ $product->avgRating->first() ? round($product->avgRating->first()->rating) . ' sao' : 'Chưa có đánh giá' }} </p>
               </div>
 
-              <div class="__product-info-box">
+              <div class="__product-info-box mb-0">
                   <p><b>Đang khuyến mãi:</b> {{ $product->discount ? 'Có' : 'Không' }}</p>
                   <p><b>Chiết khấu:</b> {{ $product->discount ?? 0 }}%</p>
               </div>
@@ -56,7 +56,7 @@
 
       <div class="row">
           <div class="col-sm-12">
-              <div class="__product-info-box mt-0 mt-sm-4">
+              <div class="__product-info-box">
                   <h5>Mô tả sản phẩm</h5>
                   <p class="mb-0">
                     {{ $product->description }}

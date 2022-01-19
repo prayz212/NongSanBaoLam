@@ -10,7 +10,7 @@
           
           <div class="col-sm-4 col-md-5 col-12 align-items-center">
               <div class="d-block d-sm-flex flex-row-reverse">
-                <div class="mx-sm-3 mb-sm-0 mb-2"><a class="btn btn-primary w-100" >Thêm mới</a></div>
+                <div class="mx-sm-3 mb-sm-0 mb-2"><a class="btn btn-primary w-100" href="{{ route('createProduct') }}">Thêm mới</a></div>
                 <div><a class="btn btn-success w-100" href="{{ route('productStockIn') }}">Nhập kho</a></div>
               </div>
           </div>

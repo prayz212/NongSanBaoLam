@@ -23,6 +23,8 @@ $(document).ready(function () {
     if (!validation.isValid) {
       $('#validation-error-msg').html(validation.messages[0]);
       return;
+    } else {
+      $('#validation-error-msg').html('');
     }
 
     let form = $('#stock-in-form');
@@ -45,7 +47,7 @@ $(document).ready(function () {
         }
       },
       error: function () {
-        
+        showNotifyPopup('fail', 'Thất bại', 'Đã có lỗi xảy ra trong quá trình nhập kho, vui lòng thử lại sau', 'fas fa-exclamation-triangle fa-3x');
       },
     });
   });
@@ -69,7 +71,7 @@ function getProductByCategoryId(id, href) {
         if (products.length > 0) {
           htmlContent = '<option value="" selected disabled hidden>Chọn sản phẩm</option>';
           products.forEach(el => {
-            htmlContent += `<option value=${el.id}">${el.name}</option>`;
+            htmlContent += `<option value="${el.id}">${el.name}</option>`;
           });
           $('#product-selector').prop('disabled', false);
         } else {

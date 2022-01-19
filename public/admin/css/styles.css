@@ -12879,6 +12879,16 @@ body {
   border-radius: 0.25rem !important;
 }
 
+@media only screen and (max-width: 576px) {
+  .dataTable-top .dataTable-dropdown {
+    display: none;
+  }
+
+  .dataTable-top .dataTable-search {
+    width: 100%;
+  }
+}
+
 /*      PRODUCT      */
 .__product-main {
   background: #f5f5f5;
@@ -12961,7 +12971,7 @@ body {
   }
 
   .__left-infor-section {
-    margin: 15px 0;
+    margin-top: 15px;
   }
 
   .__imgae-section {
@@ -12983,6 +12993,10 @@ body {
 
   .__thumbnails {
     margin-right: 8px;
+  }
+
+  .__left-infor-section {
+    margin: 0;
   }
 }
 
@@ -13057,4 +13071,208 @@ body {
   #stock-in-btn {
     width: 100%;
   }
+}
+
+/*      CREATE PRODUCT     */
+.__product-input-box {
+  margin: 15px 0;
+  background-color: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.__input-label {
+  font-size: 0.999rem;
+}
+
+.__thumbnail-input-pic {
+  width: 8.8rem;
+  height: 8.8rem;
+  margin: 6px 0;
+  background-color: #c0c0c0;
+  text-align: center;
+  border: 4px dashed #696969;
+}
+
+.__thumbnail-input-pic button {
+  width: 100%;
+  height: 100%;
+}
+
+.__thumbnail-input-pic button:focus {
+  box-shadow: none;
+}
+
+.__nonselection {
+  background-color: #c0c0c0;
+}
+
+.__main-pic p {
+  height: 100%;
+  text-align: center;
+}
+
+.__remove-image {
+  position: absolute;
+  top: -24px;
+  right: -12px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 576px) {
+  .__thumbnail-input-pic {
+    width: 5.5rem;
+    height: 6.8rem;
+  }
+} 
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/*  admin invoice page  */
+.invoice-container {
+  padding: 1rem;
+}
+
+.invoice-container .invoice-header .invoice-logo {
+  margin: 0.8rem 0 0 0;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2e323c;
+}
+
+.invoice-container .invoice-details {
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  line-height: 180%;
+  background: #f5f6fa;
+}
+
+.invoice-container .invoice-details .invoice-num {
+  text-align: right;
+  font-size: 0.8rem;
+}
+
+.custom-table {
+  border: 1px solid #e0e3ec;
+}
+
+.custom-table thead {
+  background: #007ae1;
+}
+
+.custom-table thead th {
+  border: 0;
+  color: #ffffff;
+}
+
+.custom-table > tbody tr:hover {
+  background: #fafafa;
+}
+
+.custom-table > tbody tr:nth-of-type(even) {
+  background-color: #ffffff;
+}
+
+.custom-table > tbody td {
+  border: 1px solid #e6e9f0;
+}
+
+.__card {
+  background: #f5f5f5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+.__text-success {
+  color: #00bb42 !important;
+}
+
+.__text-muted {
+  color: #9fa8b9 !important;
+}
+
+.custom-actions-btns .btn {
+  margin: 0.3rem 0 0.3rem 0.3rem;
+}
+
+/* top-left border-radius */
+.__invoice-table tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+}
+
+/* top-right border-radius */
+.__invoice-table tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+/* bottom-left border-radius */
+.__invoice-table tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+
+/* bottom-right border-radius */
+.__invoice-table tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+.__break-word-dots {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/*   admin invoice print    */
+@media print {
+  .none-print {
+      display: none;
+  }
+
+  .print-col-6 {
+      width: 50%;
+  }
+
+  .table-responsive {
+      overflow: hidden;
+  }
+
+  table, th, td {
+      border: 1px solid black !important;
+      border-collapse: collapse !important;
+  }
+
+  .invoice-container .invoice-details {
+      padding: 0;
+  }
+
+  .print-title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .print-table-border {
+    border: 1px solid black !important;
+  }
+
+  .print-total-value, .print-total {
+    width: 30% !important;
+  }
+
+  .print-total-content {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+/*  admin account page  */
+
+.__ac-page-me-2 {
+  margin-right: 0.5rem !important;
 }

@@ -6,42 +6,57 @@
     <div class="row mb-3">
         <div class="col-sm-12">
             <div class="__product-title-box" style="margin: 0px">
-                <h4>Cập nhật thông tin sản phẩm</h4>
+                <h4>Thêm sản phẩm mới</h4>
                 <ol class="breadcrumb" style="margin-bottom: 0px">
                 <li class="breadcrumb-item"><a href="{{route('productManagement')}}">Quản lý sản phẩm</a></li>
-                <li class="breadcrumb-item"><a href="{{route('productInfo', $product->id)}}">{{ $product->name }}</a></li>
-                <li class="breadcrumb-item active">Chỉnh sửa</li>
+                <li class="breadcrumb-item active">Thêm mới</li>
                 </ol>
             </div>
         </div>
     </div>
       
-      <form action="{{ route('updateProcess') }}" enctype="multipart/form-data" method="post">
+      <form action="{{ route('createProcess') }}" enctype="multipart/form-data" method="post">
         @csrf
           <div class="row">
               <div class="col-sm-12 col-lg-6">
                   <div class="__imgae-section">
                       <div class="__thumbnails">
-                          @foreach ($product->image as $index => $image)
-                          <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
-                              <div class="__remove-image" style="display: block; cursor: pointer">&times;</div>
-                              <button type="button" class="btn" style="display: none;" onclick="document.getElementById('{{ 'input' . $index }}').click();">
-                                  Thêm ảnh
-                              </button>
-                              <input id="{{ 'input' . $index }}" type="file" style="display: none" onchange="readURL(this);" accept="image/*" value="{{ $image->url ?? '' }}"/>
-                              <img src="{{ asset('images/products/' . $image->url) }}" alt="project-image" style="display: block; width: 100%" />
-                          </div>
-                          @endforeach
-                          @for ($i = count($product->image); $i < 4; $i++)
                           <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
                               <div class="__remove-image" style="display: none; cursor: pointer">&times;</div>
-                              <button type="button" class="btn" style="display: block;" onclick="document.getElementById('{{ 'input' . $i }}').click();">
+                              <button type="button" class="btn" onclick="document.getElementById('input1').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="{{ 'input' . $i }}" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
-                              <img src="" alt="project-image" style="display: none; width: 100%" />
-                          </div>                              
-                          @endfor
+                              <input id="input1" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
+                              <img alt="project-image" style="display: none; width: 100%" />
+                          </div>
+                          <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
+                              <div class="__remove-image" style="display: none; cursor: pointer">&times;</div>
+                              <button type="button" class="btn" onclick="document.getElementById('input2').click();">
+                                  Thêm ảnh
+                              </button>
+                              <input id="input2" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
+                              <img alt="project-image" style="display: none; width: 100%" />
+                          </div>
+                          <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
+                              <div class="__remove-image" style="display: none; cursor: pointer">&times;</div>
+                              <button type="button" class="btn" onclick="document.getElementById('input3').click();">
+                                  Thêm ảnh
+                              </button>
+                              <input id="input3" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
+                              <img alt="project-image" style="display: none; width: 100%" />
+                          </div>
+                          <div class="__thumbnail-input-pic rounded" style="margin-top: 0; position: relative ">
+                              <div class="__remove-image" style="display: none; cursor: pointer">&times;</div>
+                              <button type="button" class="btn" onclick="document.getElementById('input4').click();">
+                                  Thêm ảnh
+                              </button>
+                              <input id="input4" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+
+                              <img alt="project-image" style="display: none; width: 100%" />
+                          </div>
                       </div>
                       <div class="__product-image-box __nonselection w-100">
                           <div class="__main-pic">
@@ -60,18 +75,10 @@
                   <div class="__product-input-box mt-2 mt-sm-0">
                       <div class="row m-3">
                           <div class="col-sm-3 align-self-center">
-                              <h6 class="__input-label">Mã sản phẩm</h6>
-                          </div>
-                          <div class="col-sm-9 text-secondary">
-                              <input name="id" readonly class="form-control shadow-none" value="{{ $product->id }}"/>
-                          </div>
-                      </div>
-                      <div class="row m-3">
-                          <div class="col-sm-3 align-self-center">
                               <h6 class="__input-label">Tên sản phẩm</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="name" placeholder="Tên sản phẩm" type="text" class="form-control shadow-none" value="{{ $product->name }}"/>
+                              <input name="name" placeholder="Tên sản phẩm" type="text" class="form-control shadow-none" value="{{ old('name') }}"/>
                               <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('name') ?? '' }}</div>
                           </div>
                       </div>
@@ -81,8 +88,11 @@
                           </div>
                           <div class="col-sm-9 text-secondary">
                               <select class="form-control shadow-none" name="type">
+                                  @if (old('type') === null)
+                                    <option selected disabled hidden>Chọn loại sản phẩm</option>
+                                  @endif
                                   @foreach ($categories as $category)
-                                    @if ($product->category->id == $category->id)
+                                    @if (old('type') == $category->id)
                                         <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                     @else
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -97,7 +107,7 @@
                               <h6 class="__input-label">Giá sản phẩm</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="price" placeholder="Giá sản phẩm" type="number" class="form-control shadow-none"  value="{{ $product->price }}"/>
+                              <input name="price" placeholder="Giá sản phẩm" type="number" class="form-control shadow-none"  value="{{ old('price') }}"/>
                               <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('price') ?? '' }}</div>
                           </div>
                       </div>
@@ -106,7 +116,7 @@
                               <h6 class="__input-label">Chiết khấu</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="discount" placeholder="Phần trăm chiết khấu (%)" type="number" class="form-control shadow-none"  value="{{ $product->discount ?? 0 }}"/>
+                              <input name="discount" placeholder="Phần trăm chiết khấu (%)" type="number" class="form-control shadow-none"  value="{{ old('discount') }}"/>
                               <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('discount') ?? '' }}</div>
                           </div>
                       </div>
@@ -115,7 +125,7 @@
                               <h6 class="__input-label">Mô tả sản phẩm</h6>
                           </div>
                           <div class="col-12 text-secondary mt-sm-2">
-                              <textarea class="form-control shadow-none" name="description" rows="8" cols="50" placeholder="Mô tả chi tiết về sản phẩm">{{ $product->description }}</textarea>
+                              <textarea class="form-control shadow-none" name="description" rows="8" cols="50" placeholder="Mô tả chi tiết về sản phẩm">{{ old('description') }}</textarea>
                               <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('description') ?? '' }}</div>
                           </div>
                       </div>
@@ -124,10 +134,16 @@
                               <button type="submit" class="btn btn-primary shadow-none">
                                   Lưu
                               </button>
-                              <a id="cancelButton" class="btn btn-danger mx-3" data-href="{{ route('productInfo', $product->id) }}">
+                              <a id="cancelButton" class="btn btn-danger mx-3" data-href="{{ route('productManagement') }}">
                                   Huỷ
                               </a>
                           </div>
+
+                          @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div>{{$error}}</div>
+                                @endforeach
+                            @endif
                       </div>
                   </div>
               </div>
