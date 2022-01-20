@@ -14,8 +14,7 @@
             </div>
         </div>
     </div>
-      
-      <form action="{{ route('createProcess') }}" enctype="multipart/form-data" method="post">
+      <form action="{{ route('createProcess') }}" enctype="multipart/form-data" method="post" id="create-product-form">
         @csrf
           <div class="row">
               <div class="col-sm-12 col-lg-6">
@@ -62,6 +61,8 @@
                           <div class="__main-pic">
                             @if($errors->has('images'))
                                 <p class="d-flex justify-content-center align-items-center text-danger">{{ $errors->first('images') }}</p>
+                            @elseif (Session::has('upload-image-error'))
+                                <p class="d-flex justify-content-center align-items-center text-danger">{{ Session::get('upload-image-error') }}</p>
                             @else
                                 <p class="d-flex justify-content-center align-items-center">Chưa chọn ảnh nào</p>
                             @endif
@@ -116,7 +117,7 @@
                               <h6 class="__input-label">Chiết khấu</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
-                              <input name="discount" placeholder="Phần trăm chiết khấu (%)" type="number" class="form-control shadow-none"  value="{{ old('discount') }}"/>
+                              <input name="discount" placeholder="Phần trăm chiết khấu (%)" type="number" class="form-control shadow-none"  value="{{ old('discount') ?? '0' }}"/>
                               <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('discount') ?? '' }}</div>
                           </div>
                       </div>
@@ -131,8 +132,12 @@
                       </div>
                       <div class="row mx-3 my-2">
                           <div class="d-flex flex-row-reverse">
-                              <button type="submit" class="btn btn-primary shadow-none">
+                              <button id="create-product-btn" class="btn btn-primary shadow-none">
                                   Lưu
+                              </button>
+                              <button id="create-product-loading-btn" class="btn btn-primary" type="button" disabled style="display: none">
+                                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                  Đang lưu...
                               </button>
                               <a id="cancelButton" class="btn btn-danger mx-3" data-href="{{ route('productManagement') }}">
                                   Huỷ

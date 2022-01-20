@@ -16,8 +16,9 @@
         </div>
     </div>
       
-      <form action="{{ route('updateProcess') }}" enctype="multipart/form-data" method="post">
+      <form id="update-product-form" action="{{ route('updateProcess') }}" enctype="multipart/form-data" method="post">
         @csrf
+        <input id="removed-images" name="removed" type="text" style="display: none" />
           <div class="row">
               <div class="col-sm-12 col-lg-6">
                   <div class="__imgae-section">
@@ -28,8 +29,8 @@
                               <button type="button" class="btn" style="display: none;" onclick="document.getElementById('{{ 'input' . $index }}').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="{{ 'input' . $index }}" type="file" style="display: none" onchange="readURL(this);" accept="image/*" value="{{ $image->url ?? '' }}"/>
-                              <img src="{{ asset('images/products/' . $image->url) }}" alt="project-image" style="display: block; width: 100%" />
+                              <input id="{{ 'input' . $index }}" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" data-hasValue="true" />
+                              <img src="{{ $image->url }}" alt="project-image" style="display: block; width: 100%" />
                           </div>
                           @endforeach
                           @for ($i = count($product->image); $i < 4; $i++)
@@ -38,7 +39,7 @@
                               <button type="button" class="btn" style="display: block;" onclick="document.getElementById('{{ 'input' . $i }}').click();">
                                   Thêm ảnh
                               </button>
-                              <input id="{{ 'input' . $i }}" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" />
+                              <input id="{{ 'input' . $i }}" type="file" name="images[]" style="display: none" onchange="readURL(this);" accept="image/*" data-hasValue="false" />
                               <img src="" alt="project-image" style="display: none; width: 100%" />
                           </div>                              
                           @endfor
@@ -47,6 +48,8 @@
                           <div class="__main-pic">
                             @if($errors->has('images'))
                                 <p class="d-flex justify-content-center align-items-center text-danger">{{ $errors->first('images') }}</p>
+                            @elseif (Session::has('upload-image-error'))
+                                <p class="d-flex justify-content-center align-items-center text-danger">{{ Session::get('upload-image-error') }}</p>
                             @else
                                 <p class="d-flex justify-content-center align-items-center">Chưa chọn ảnh nào</p>
                             @endif
@@ -116,13 +119,17 @@
                           </div>
                           <div class="col-12 text-secondary mt-sm-2">
                               <textarea class="form-control shadow-none" name="description" rows="8" cols="50" placeholder="Mô tả chi tiết về sản phẩm">{{ $product->description }}</textarea>
-                              <div class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('description') ?? '' }}</div>
+                              <div id="update-error-msg" class="__notify-msg" style="font-size: smaller; color: red; margin-top: 4px; margin-left: 4px;">{{ $errors->first('description') ?? '' }}</div>
                           </div>
                       </div>
                       <div class="row mx-3 my-2">
                           <div class="d-flex flex-row-reverse">
-                              <button type="submit" class="btn btn-primary shadow-none">
+                              <button id="update-product-btn" class="btn btn-primary shadow-none">
                                   Lưu
+                              </button>
+                              <button id="update-product-loading-btn" class="btn btn-primary" type="button" disabled style="display: none">
+                                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                  Đang lưu...
                               </button>
                               <a id="cancelButton" class="btn btn-danger mx-3" data-href="{{ route('productInfo', $product->id) }}">
                                   Huỷ

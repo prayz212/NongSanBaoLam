@@ -17,7 +17,7 @@
               @foreach ($bestSaler as $p)
                   <div class="__product">
                       <div class="__product-header">
-                          <img src="{{ asset('images/products/' . $p->main_pic->url) }}" alt="">
+                          <img src="{{ $p->main_pic->url }}" alt="">
                           @if ($p->discount)
                           <img style="width: 7rem; height: 5rem; position: absolute; top: 1%; right: 2%" src="{{ asset('images/sales.png') }}" alt="discount">
                           <span style="position: absolute; top: 6.5%; right: 9%; color: red; font-size: 1.4rem;">-{{$p->discount}}%</span>
@@ -74,7 +74,7 @@
                 @foreach ($newProducts as $np)
                     <div class="__product">
                         <div class="__product-header">
-                            <img src="{{ asset('images/products/' . $np->main_pic->url) }}" alt="{{ $np->main_pic->name }}">
+                            <img src="{{ $np->main_pic->url }}" alt="{{ $np->main_pic->name }}">
                             @if ($np->discount)
                             <img style="width: 7rem; height: 5rem; position: absolute; top: 1%; right: 2%" src="{{ asset('images/sales.png') }}" alt="discount">
                             <span style="position: absolute; top: 6.5%; right: 9%; color: red; font-size: 1.4rem;">-{{$np->discount}}%</span>

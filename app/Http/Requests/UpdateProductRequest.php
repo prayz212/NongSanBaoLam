@@ -25,7 +25,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'id' => ['required'],
-            'images.*'  => ['image', 'mimes:jpeg,jpg,png', 'max:5000'], //maximun: 5mb
+            'images.*'  => ['image', 'mimes:jpeg,jpg,png'], //maximun: 5mb
             'name' => ['required', 'max:255'],
             'type' => ['required'],
             'price' => ['required', 'numeric', 'min:1000'],
@@ -38,8 +38,6 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'id.required' => 'Mã sản phẩm là bắt buộc',
-            'images.required' => 'Yêu cầu chọn hình ảnh sản phẩm',
-            'images.*.max' => 'Ảnh sản phẩm có dung lượng tối đa 5Mb',
             'images.*.mimes' => 'Ảnh sản phẩm không hợp lệ',
             'name.required' => 'Yêu cầu nhập tên sản phẩm',
             'type.required' => 'Yêu cầu chọn thể loại sản phẩm',

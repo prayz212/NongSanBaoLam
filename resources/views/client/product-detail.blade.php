@@ -10,12 +10,12 @@
   <div class="__details __container-md">
       <div class="__left">
           <div class="__main">
-              <img src="{{ asset('images/products/' . $detail->image[0]->url) }}" alt="{{ $detail->image[0]->name }}">
+              <img src="{{ $detail->image[0]->url }}" alt="{{ $detail->image[0]->name }}">
           </div>
           <div class="__thumbnails">
               @foreach ($detail->image as $img)
                   <div class="__thumbnail">
-                      <img src="{{ asset('images/products/' . $img->url) }}" alt="{{ $img->name }}">
+                      <img src="{{ $img->url }}" alt="{{ $img->name }}">
                   </div>
               @endforeach
           </div>
@@ -211,7 +211,7 @@
       @foreach ($relative as $r)
         <div class="__product">
             <div class="__product-header">
-                <img src="{{ asset('images/products/' . $r->main_pic->url) }}" alt="{{ $r->main_pic->name }}">
+                <img src="{{ $r->main_pic->url }}" alt="{{ $r->main_pic->name }}">
                 @if ($r->discount)
                 <img style="width: 7rem; height: 5rem; position: absolute; top: 1%; right: 2%" src="{{ asset('images/sales.png') }}" alt="discount">
                 <span style="position: absolute; top: 6.5%; right: 9%; color: red; font-size: 1.4rem;">-{{$r->discount}}%</span>

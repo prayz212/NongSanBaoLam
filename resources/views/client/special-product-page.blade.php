@@ -11,7 +11,7 @@
                 @foreach ($products as $p)
                 <div class="__product">
                     <div class="__product-header">
-                        <img src="{{ asset('images/products/' . $p->main_pic->url) }}" alt="{{ $p->main_pic->name }}">
+                        <img src="{{ $p->main_pic->url }}" alt="{{ $p->main_pic->name }}">
                         @if ($p->discount)
                         <img style="width: 7rem; height: 5rem; position: absolute; top: 1%; right: 2%" src="{{ asset('images/sales.png') }}" alt="discount">
                         <span style="position: absolute; top: 6.5%; right: 9%; color: red; font-size: 1.4rem;">-{{$p->discount}}%</span>

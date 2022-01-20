@@ -25,7 +25,7 @@
                 <td class="col-sm-4 col-5" onclick="location.href ='{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}'" style="cursor: pointer">
                     <div class="__cart-info row">
                         <div class="col-12 col-sm-3 px-4 px-sm-0">
-                            <img src="{{ asset('images/products/' . $c['item']->main_pic->url) }}" alt="{{ $c['item']->main_pic->name }}">
+                            <img src="{{ $c['item']->main_pic->url }}" alt="{{ $c['item']->main_pic->name }}">
                         </div>
                         <div class="d-sm-flex d-none align-items-center col-0 col-sm-9">
                             <div class="d-flex align-items-center">
