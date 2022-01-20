@@ -19,6 +19,10 @@
                   <div class="sb-nav-link-icon"><i class="fas fa-users fa-fw"></i></div>
                   Quản lý tài khoản
               </a>
+              <a class="nav-link {{Request::is('admin/quan-ly-voucher', 'admin/thong-tin-voucher/*', 'admin/tao-moi-voucher') ? 'active' : ''}}" style="{{Request::is('admin/quan-ly-voucher', 'admin/thong-tin-voucher/*', 'admin/tao-moi-voucher') ? 'background-color: #424242' : ''}}" href="{{ route('voucherManagement') }}">
+                  <div class="sb-nav-link-icon pt-1"><i class="fas fa-ticket-alt fa-fw"></i></i></div>
+                  Quản lý voucher
+              </a>
           </div>
       </div>
   </nav>

@@ -13,4 +13,9 @@ window.addEventListener('DOMContentLoaded', event => {
   if (accountTables) {
       new simpleDatatables.DataTable(accountTables);
   }
+
+  const voucherTables = document.getElementById("voucherTables");
+  if (voucherTables) {
+      new simpleDatatables.DataTable(voucherTables);
+  }
 });
