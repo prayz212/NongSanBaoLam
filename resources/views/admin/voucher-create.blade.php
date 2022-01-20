@@ -74,10 +74,11 @@
                       </div>
                   </div>
                   <div class="row m-3">
-                    <div class="col-12 d-md-flex justify-content-end d-inline">
-                      <div class="col-md-6 col-12 text-secondary d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary shadow-none" >Lưu</button>
-                      </div>
+                    <div class="col-12 d-flex justify-content-end d-inline">
+                      <a id="cancelButton" class="btn btn-danger mx-3" data-href="{{ route('voucherManagement') }}">
+                        Huỷ
+                      </a>
+                      <button type="submit" class="btn btn-primary shadow-none" >Lưu</button>
                     </div>
                   </div>
                 </form>
@@ -88,5 +89,7 @@
     </div>
   </div>
 </main>
+
+@include('admin.includes.pop-up-confirm')
 
 @endsection
