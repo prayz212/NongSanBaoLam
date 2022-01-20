@@ -91,6 +91,12 @@
                       <div class="col-lg-4 col-md-5 col-sm-12">
                           <button id="voucher-btn" type="button" style="padding-top: 6px;padding-bottom: 6px;" class="_btn fs-3 w-100" data-href="{{ url('kiem-tra-voucher' )}}">Áp dụng</button>
                       </div>
+                      
+                      @if (Session::has('payment-voucher-error'))
+                          <div class="text-danger pt-2" style="margin-left: 3px">
+                              {{ Session::get('payment-voucher-error') }}
+                          </div>
+                      @endif
                   </div>
               </div>
           </div>
