@@ -68,7 +68,7 @@ class CartController extends Controller
         $isExist = Voucher::where('code', $voucherCode)
             ->where('start_at', '<=', Carbon::now()->toDateString())
             ->where('end_at', '>=', Carbon::now()->toDateString())
-            ->where('isUsed', false)
+            ->where('is_used', false)
             ->where('isDelete', false)
             ->first();
 
@@ -142,7 +142,7 @@ class CartController extends Controller
             $voucher = Voucher::where('code', $request->voucher)
                 ->where('start_at', '<=', Carbon::now()->toDateString())
                 ->where('end_at', '>=', Carbon::now()->toDateString())
-                ->where('isUsed', false)
+                ->where('is_used', false)
                 ->where('isDelete', false)
                 ->first();
             if ($voucher != NULL) {
@@ -173,7 +173,7 @@ class CartController extends Controller
         ]);
 
         if (isset($voucher)) {
-            $voucher->isUsed = true;
+            $voucher->is_used = true;
             $voucher->save();
         }
 
