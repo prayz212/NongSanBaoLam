@@ -17,7 +17,7 @@ class CreateVoucherTable extends Migration
             $table->id();
             $table->string('code');
             $table->integer('discount');
-            $table->boolean('isUsed')->default(false);
+            $table->boolean('is_used')->default(false);
             $table->timestamp('start_at')->nullable()->default(null);
             $table->timestamp('end_at')->nullable()->default(null);
             $table->bigInteger('bill_id')->unsigned()->index();
