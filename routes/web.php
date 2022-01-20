@@ -51,6 +51,8 @@ Route::prefix('/')->group(function () {
         Route::post('/kiem-tra-voucher', [CartController::class, 'checkVoucher'])->name('checkVoucher');
 
         Route::get('/tai-khoan', [AccountController::class, 'index'])->name('infopage');
+        Route::get('/thay-doi-mat-khau', [AccountController::class, 'resetPassword'])->name('resetPassword');
+        Route::post('/yeu-cau-thay-doi-mat-khau', [AccountController::class, 'requestNewPassword'])->name('requestNewPassword');
         Route::post('/cap-nhat-tai-khoan', [AccountController::class, 'updateInfo'])->name('updateInfo');
         Route::get('/chi-tiet-hoa-don/{id}', [AccountController::class, 'billDetail'])->name('billDetail');
         Route::get('/danh-sach-hoa-don', [AccountController::class, 'bills'])->name('bills');
