@@ -10,53 +10,26 @@ use App\Http\Requests\CreateVoucherRequest;
 class AdminVoucherController extends Controller
 {
     public function index() {
-        // Groupby voucher code and count quantity of each code
-        $vouchers_quantity = Voucher::selectRaw('*, COUNT(id) as quantity')
+        $vouchers = Voucher::selectRaw('*, COUNT(id) as quantity, COUNT(case isUsed when true then 1 else null end) as used, 
+                                                (COUNT(id) - COUNT(case isUsed when true then 1 else null end)) as remain')
+                        ->where('isDelete', false)
                         ->groupBy('code')
                         ->get();
-
-        // Groupby voucher code and number of used
-        $vouchers_numOfUsed = Voucher::selectRaw('*, COUNT(id) as used')
-                        ->where('isUsed', true)
-                        ->groupBy('code')
-                        ->get();
-
-        // calculation remain and used of each voucher code                
-        foreach ($vouchers_quantity as $voucher1) {
-            foreach ($vouchers_numOfUsed as $voucher2) {
-                if ($voucher1->code == $voucher2->code) {
-                    $voucher1->used = $voucher2->used;
-                    $voucher1->remain = $voucher1->quantity - $voucher2->used;
-                }
-            }
-        }
 
         return view('admin.voucher-page')
-                ->with('vouchers', $vouchers_quantity);
+                ->with('vouchers', $vouchers);
     }
 
     public function detail($code) {
-        $voucher_quantity = Voucher::selectRaw('*, COUNT(id) as quantity')
+        $voucher = Voucher::selectRaw('*, COUNT(id) as quantity, COUNT(case isUsed when true then 1 else null end) as used, 
+                                                (COUNT(id) - COUNT(case isUsed when true then 1 else null end)) as remain')
+                        ->where('isDelete', false)
                         ->where('code', $code)
                         ->groupBy('code')
-                        ->get();
-
-        $voucher_numOfUsed = Voucher::selectRaw('*, COUNT(id) as used')
-                        ->where('code', $code)
-                        ->where('isUsed', true)
-                        ->groupBy('code')
-                        ->get();
-
-        if (!$voucher_numOfUsed) {
-            $voucher_quantity->first()->used = $voucher_numOfUsed->first()->used;
-            $voucher_quantity->first()->remain = $voucher_quantity->first()->quantity - $voucher_numOfUsed->first()->used;
-        } else {
-            $voucher_quantity->first()->used = 0;
-            $voucher_quantity->first()->remain = $voucher_quantity->first()->quantity;
-        }
+                        ->first();
 
         return view('admin.voucher-info')
-                ->with('voucher', $voucher_quantity->first());
+                ->with('voucher', $voucher);
     }
 
     public function create() {
@@ -65,6 +38,7 @@ class AdminVoucherController extends Controller
 
     public function createProcess(CreateVoucherRequest $request) {
         $isExistCode = Voucher::where('code', $request->code)
+                            ->where('isDelete', false)
                             ->first();
 
         if ($isExistCode) {
@@ -93,8 +67,7 @@ class AdminVoucherController extends Controller
 
     public function delete($code) {
         $voucher = Voucher::where('code', $code)
-                    ->where('isUsed', false)
-                    ->delete();
+                    ->update(['isDelete' => true]);
 
         return redirect()->route('voucherManagement');
     }
