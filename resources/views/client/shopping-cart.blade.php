@@ -78,7 +78,7 @@
         @if (Auth::check()) 
         <a style="cursor: pointer" id="cart-submit" data-href-check="{{ route('checkQuantity') }}" data-href-redirect="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
         @else  
-        <a href="{{ route('authenticatepage') }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
+        <a href="{{ url('dang-nhap-dang-ky?returnUrl=gio-hang' ) }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
         @endif
       </div>
       <div class="mx-4">
