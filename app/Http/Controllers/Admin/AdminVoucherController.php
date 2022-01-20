@@ -10,8 +10,8 @@ use App\Http\Requests\CreateVoucherRequest;
 class AdminVoucherController extends Controller
 {
     public function index() {
-        $vouchers = Voucher::selectRaw('*, COUNT(id) as quantity, COUNT(case isUsed when true then 1 else null end) as used, 
-                                                (COUNT(id) - COUNT(case isUsed when true then 1 else null end)) as remain')
+        $vouchers = Voucher::selectRaw('*, COUNT(id) as quantity, COUNT(case "isUsed" when true then 1 else null end) as used, 
+                                                (COUNT(id) - COUNT(case "isUsed" when true then 1 else null end)) as remain')
                         ->where('isDelete', false)
                         ->groupBy('code')
                         ->get();
@@ -21,8 +21,8 @@ class AdminVoucherController extends Controller
     }
 
     public function detail($code) {
-        $voucher = Voucher::selectRaw('*, COUNT(id) as quantity, COUNT(case isUsed when true then 1 else null end) as used, 
-                                                (COUNT(id) - COUNT(case isUsed when true then 1 else null end)) as remain')
+        $voucher = Voucher::selectRaw('*, COUNT(id) as quantity, COUNT(case "isUsed" when true then 1 else null end) as used, 
+                                                (COUNT(id) - COUNT(case "isUsed" when true then 1 else null end)) as remain')
                         ->where('isDelete', false)
                         ->where('code', $code)
                         ->groupBy('code')
