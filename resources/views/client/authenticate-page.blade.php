@@ -16,7 +16,13 @@
                       <span id="signin_span">Đăng nhập</span>
                       <span id="signup_span">Đăng ký</span>
                       <hr id="_Indicator">
-                      <form id="_LoginForm" method="post" action="{{ route('login') }}">
+                      @php
+                          $queryString = '';
+                          if (Request::get('returnUrl')) {
+                              $queryString = '?returnUrl=' . Request::get('returnUrl');
+                          }
+                      @endphp
+                      <form id="_LoginForm" method="post" action="{{ url('/dang-nhap' . $queryString ) }}">
                           @csrf
                           <input class="_form-input" type="text" placeholder="Tên tài khoản" name="username" value="{{ old('username') }}">
                           <input class="_form-input" type="password" placeholder="Mật khẩu" name="password">
