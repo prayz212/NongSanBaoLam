@@ -17,223 +17,223 @@ class VoucherSeeder extends Seeder
     {
         $vouchers = [
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'chaomungnammoi2022',
+                'code' => 'nammoi2022',
                 'discount' => '30000',
                 'start_at' => Carbon::parse('2022-01-01'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
             ],
             [
-                'code' => 'quatetmoinha',
+                'code' => 'quatet',
                 'discount' => '25000',
                 'start_at' => Carbon::parse('2022-01-15'),
                 'end_at' => Carbon::parse('2022-05-30')
