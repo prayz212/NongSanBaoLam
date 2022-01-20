@@ -50,7 +50,7 @@
                               <td>{{ $product->category->name }}</td>
                               <td>{{ number_format(round($product->price), 0, ",", ".") }}đ</td>
                               <td>{{ $product->discount ?? 'NULL' }}</td>
-                              <td>{{ $product->avgRating->first() ? round($product->avgRating->first()->rating) : 'NULL' }}</td>
+                              <td>{{ $product->avgRating->first() ? round($product->avgRating->first()->rating) : 'Rỗng' }}</td>
                           </tr>
                       @endforeach
                   </tbody>

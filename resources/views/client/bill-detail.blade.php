@@ -84,7 +84,7 @@
                 <td class="col-md-4 col-3">
                     <div class="row">
                         <div class="col-12 col-sm-3">
-                          <img src="{{asset('images/products/' . $detail->item->main_pic->url)}}" alt="{{$detail->item->main_pic->alt}}">
+                          <img src="{{$detail->item->main_pic->url}}" alt="{{$detail->item->main_pic->alt}}">
                         </div>
                         <div class="d-md-flex d-none d-md-table-cell align-items-center col-sm-9">
                             <p class="text-break fs-2"> {{$detail->item->name}}</p>

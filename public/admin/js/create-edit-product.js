@@ -11,6 +11,9 @@ function readURL(input) {
       };
 
       reader.readAsDataURL(input.files[0]);
+
+      /* change input status */
+      $(input).attr('data-hasValue', 'true');
   }
 }
 
@@ -19,6 +22,11 @@ $(document).ready(function () {
     $('.__remove-image').on('click', function () {
         /* hide remove button */
         $(this).hide();
+
+        /* remove input value and change input status */
+        const _input = $(this).closest('.__thumbnail-input-pic').find('input')
+        _input.val('');
+        _input.attr('data-hasValue', false);
 
         /* remove main pic if showing */
         const img = $(this).closest('.__thumbnail-input-pic').find('img')
@@ -29,18 +37,20 @@ $(document).ready(function () {
             $('.__main-pic p').show()
         }
 
-        // /* add remove img to input */
-        // var imgVal = $('#removeImg').val();
-        // var t = img.attr('src').split('/')
-        // $('#removeImg').val(imgVal + "|" + t[t.length - 1])
+        /* add removed images to hidden input */
+        if ($('#removed-images').length && img.attr('src').startsWith('https', 0)) {
+            let removeArrays = $('#removed-images').val();
+            let removedElement = img.attr('src');
+            $('#removed-images').val(removeArrays + "|" + removedElement);
+        }
 
         /* remove src value and hide */
-        img.removeAttr("src")
-        img.hide()
+        img.removeAttr("src");
+        img.hide();
 
         /* show button again */
-        const btn = $(this).closest('.__thumbnail-input-pic').find('button')
-        btn.show()
+        const btn = $(this).closest('.__thumbnail-input-pic').find('button');
+        btn.show();
     })
 
     $('.__thumbnail-input-pic img').click(function () {
@@ -50,5 +60,29 @@ $(document).ready(function () {
         const mainImg = $('.__main-pic img')
         mainImg.attr('src', imgSrc)
         mainImg.show()
+    });
+
+    //show loading animation
+    $('#create-product-btn').click(function () {
+        $(this).hide();
+        $('#create-product-loading-btn').show();
+        $('#create-product-form').submit();
+    });
+
+    $('#update-product-btn').click(function (e) {
+        e.preventDefault();
+        //check have at least one images of product
+        const imagesCount = $("input[name='images[]']").map(function() {return $(this).attr('data-hasValue')})
+            .get()
+            .filter(el => el == 'true' );
+
+        if (imagesCount.length <= 0) {
+            $('#update-error-msg').html('Sản phẩm phải có ít nhất một hình ảnh');
+        }
+        else {
+            $(this).hide();
+            $('#update-product-loading-btn').show();
+            $('#update-product-form').submit();
+        }
     });
 })

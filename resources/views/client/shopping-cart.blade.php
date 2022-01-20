@@ -25,7 +25,7 @@
                 <td class="col-sm-4 col-5" onclick="location.href ='{{ url('chi-tiet-san-pham/' . $c['item']->id ) }}'" style="cursor: pointer">
                     <div class="__cart-info row">
                         <div class="col-12 col-sm-3 px-4 px-sm-0">
-                            <img src="{{ asset('images/products/' . $c['item']->main_pic->url) }}" alt="{{ $c['item']->main_pic->name }}">
+                            <img src="{{ $c['item']->main_pic->url }}" alt="{{ $c['item']->main_pic->name }}">
                         </div>
                         <div class="d-sm-flex d-none align-items-center col-0 col-sm-9">
                             <div class="d-flex align-items-center">
@@ -78,7 +78,7 @@
         @if (Auth::check()) 
         <a style="cursor: pointer" id="cart-submit" data-href-check="{{ route('checkQuantity') }}" data-href-redirect="{{ route('payment') }}" class="checkout _btn text-light d-flex justify-content-center {{ $emptyCart ? '__disabled-btn' : '' }}" {{ $emptyCart ? 'disabled' : '' }}>Mua hàng</a>
         @else  
-        <a href="{{ route('authenticatepage') }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
+        <a href="{{ url('dang-nhap-dang-ky?returnUrl=gio-hang' ) }}" class="checkout _btn text-light d-flex justify-content-center">Đăng nhập</a>
         @endif
       </div>
       <div class="mx-4">
