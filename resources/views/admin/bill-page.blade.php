@@ -33,7 +33,7 @@
                             <td>{{ date('d/m/Y',strtotime($bill->created_at)) }}</td>
                             <td>{{ $bill->deliveryAt != NULL ? date('d/m/Y',strtotime($bill->deliveryAt)) : $bill->status }}</td>
                             <td>{{ $bill->method }}</td>
-                            <td>{{ $bill->totalPay != 0 ? number_format(round($bill->totalPay), 0, ",", ".") : "0" }} đ</td>
+                            <td>{{ $bill->totalPay != 0 ? number_format(round($bill->totalPay), 0, ",", ".") : "0" }}đ</td>
                             <td>{{ $bill->status }}</td>
                         </tr>
                         

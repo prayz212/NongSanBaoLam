@@ -69,6 +69,7 @@ class CartController extends Controller
             ->where('start_at', '<=', Carbon::now()->toDateString())
             ->where('end_at', '>=', Carbon::now()->toDateString())
             ->where('isUsed', false)
+            ->where('isDelete', false)
             ->first();
 
         return $isExist == NULL 
@@ -142,8 +143,16 @@ class CartController extends Controller
                 ->where('start_at', '<=', Carbon::now()->toDateString())
                 ->where('end_at', '>=', Carbon::now()->toDateString())
                 ->where('isUsed', false)
+                ->where('isDelete', false)
                 ->first();
-            $totalAmount['totalPay'] -= $voucher->discount;   
+            if ($voucher != NULL) {
+                $totalAmount['totalPay'] -= $voucher->discount;   
+            } else {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('payment-voucher-error', 'Voucher không hợp lệ hoặc đã hết hạn');
+            }
         }
 
         $bill = Bill::create([

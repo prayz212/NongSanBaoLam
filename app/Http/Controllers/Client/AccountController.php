@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateInfoRequest;
+use App\Http\Requests\NewPasswordRequest;
 use App\Models\Customer;
 use App\Models\Bill;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -61,5 +63,28 @@ class AccountController extends Controller
             ->get();
         return view('client.bill-page')
             ->with('bills', $bills);
+    }
+
+    public function resetPassword() {
+        $customer = Auth::user();
+
+        return view('client.reset-password')
+            ->with('customer', $customer);
+    }
+
+    public function requestNewPassword(NewPasswordRequest $request) {
+        $customer = Customer::where('username', $request->username)
+                        ->first();
+
+        if (!password_verify($request->oldPassword, $customer->password)) {
+            return redirect()->back()
+                    ->with('request-newpassword-err', 'Mật khẩu cũ không đúng');
+        }
+
+        $customer->password = Hash::make($request->newPassword);
+        $customer->save();
+
+        return redirect()->route('infopage')
+                ->with('info-noti-success', 'Cập nhật mật khẩu thành công');
     }
 }
