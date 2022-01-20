@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="col-sm-12 d-flex justify-content-end text-secondary">
                                 <a href="{{ route('updateAccount', ['id' => $customer->id]) }}" class="btn btn-primary px-4 me-3">Chỉnh sửa</a>
-                                <a data-href="{{ url('admin/xoa-tai-khoan/' . $customer->id) }}" class="btn btn-danger px-4 me-3" id="deleteButton" role="button">Xoá</a>
+                                <a data-href="{{ url('admin/xoa-tai-khoan/' . $customer->id) }}" class="btn btn-danger px-4" id="deleteButton" role="button">Xoá</a>
                             </div>
                         </div>
                 </div>

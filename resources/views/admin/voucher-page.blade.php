@@ -5,7 +5,7 @@
     <div class="container-fluid px-4">
         <div class="row my-4">
             <div class="col-sm-8 col-md-7 col-12">
-                <div class="h4">Quản lý tài khoản</div>
+                <div class="h4">Quản lý voucher</div>
             </div>
             
             <div class="col-sm-4 col-md-5 col-12 align-items-center">
