@@ -25,7 +25,7 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'images' => ['required'],
-            'images.*'  => ['image', 'mimes:jpeg,jpg,png', 'max:5000'], //maximun: 5mb
+            'images.*'  => ['image', 'mimes:jpeg,jpg,png'],
             'name' => ['required', 'max:255'],
             'type' => ['required'],
             'price' => ['required', 'numeric', 'min:1000'],
@@ -38,7 +38,6 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'images.required' => 'Yêu cầu chọn hình ảnh sản phẩm',
-            'images.*.max' => 'Ảnh sản phẩm có dung lượng tối đa 5Mb',
             'images.*.mimes' => 'Ảnh sản phẩm không hợp lệ',
             'name.required' => 'Yêu cầu nhập tên sản phẩm',
             'type.required' => 'Yêu cầu chọn thể loại sản phẩm',
@@ -47,6 +46,7 @@ class CreateProductRequest extends FormRequest
             'name.max' =>  'Tên sản phẩm có tối đa 255 ký tự',
             'price.numeric' => 'Giá sản phẩm không hợp lệ',
             'price.min' => 'Giá sản phẩm tối thiểu phải 1000',
+            'discount.numeric' => 'Chiết khẩu không hợp lệ',
             'discount.between' => 'Giá trị phải nằm trong khoảng từ 0 đến 100',
             'description.max' => 'Mô tả sản phẩm có tối đa 1000 ký tự',
         ];
