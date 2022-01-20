@@ -4,17 +4,18 @@
 <main class="__product-main">
 <div class="container-fluid px-4">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="__product-title-box d-flex justify-content-between" style="margin-top: 0px">
+        <div class="col-12">
+            <div class="__product-title-box d-sm-flex justify-content-between" style="margin-top: 0px">
                 <div class="print-title">
                     <h4 >Thông tin hóa đơn</h4>
                     <ol class="breadcrumb none-print" style="margin-bottom: 0px">
                         <li class="breadcrumb-item"><a href="{{ route('adminBill') }}">Quản lý hóa đơn</a></li>
                         <li class="breadcrumb-item active">Hóa đơn {{ $bill->id }}</li>
                     </ol>
+                    <button class="d-block d-sm-none mt-3 btn btn-success w-100 none-print" onclick="document.title = 'Hóa đơn ' + {{ $bill->id }}; window.print();">In hóa đơn</button>
                 </div>
                 
-                <div class="align-self-center none-print">
+                <div class="d-none d-sm-block align-self-center none-print">
                     <button class="btn btn-success w-100" onclick="document.title = 'Hóa đơn ' + {{ $bill->id }}; window.print();">In hóa đơn</button>
                 </div>
             </div>

@@ -34,7 +34,11 @@ class AuthController extends Controller
 
         $result = Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
         if ($result) {
-            return redirect()->route('infopage');
+            if ($request->has('returnUrl')) {
+                return redirect($request->input('returnUrl'));
+            } else {
+                return redirect()->route('infopage');
+            }
         } else {
             return redirect()->back()->withInput()->with('login-error', 'Tên tài khoản/Mật khẩu không đúng');
         }

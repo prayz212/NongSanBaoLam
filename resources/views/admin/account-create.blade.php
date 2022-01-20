@@ -114,8 +114,11 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12 text-secondary d-flex justify-content-end">
-                                <button class="btn btn-primary px-4 mt-0 mt-md-3">Lưu</button>
+                            <div class="col-sm-12 text-secondary d-flex justify-content-end mt-md-3">
+                                <a id="cancelButton" class="btn btn-danger mx-3 " data-href="{{ route('accountManagement') }}">
+                                    Huỷ
+                                </a>
+                                <button class="btn btn-primary px-4 mt-0">Lưu</button>
                             </div>
                         </div>
                     </form>
@@ -124,5 +127,7 @@
         </div>
     </div>
 </main>
+
+@include('admin.includes.pop-up-confirm')
 
 @endsection
