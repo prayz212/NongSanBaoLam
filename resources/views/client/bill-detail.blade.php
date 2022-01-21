@@ -2,7 +2,7 @@
 @section('main')
 
 @php
-    $isEnable = $bill->status == "Đã giao hàng";
+    $isEnable = $bill->status == "Đã giao";
     $pointer = "cursor: pointer";
 @endphp
 
@@ -191,7 +191,7 @@
             </button>
         </div>
     </div>
+    
+    <script src="{{ asset('client/js/popup-rating.js') }}"></script>
 @endif
-
-<script src="{{ asset('client/js/popup-rating.js') }}"></script>
 @endsection

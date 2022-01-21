@@ -13276,3 +13276,10 @@ input::-webkit-inner-spin-button {
 .__ac-page-me-2 {
   margin-right: 0.5rem !important;
 }
+
+/*  admin voucher page  */
+@media only screen and (max-width: 576px) {
+  .__voucher-info {
+    padding: 22px 40px 0px 40px!important;
+  }
+} 

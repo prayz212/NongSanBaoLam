@@ -20,7 +20,7 @@
         <div class="__product-info-box" style="padding: 16px 8px;">
           <div class="row fw-bold fs-3 d-flex justify-content-center">Voucher</div>
           <div class="d-flex justify-content-center">
-            <div class="col-lg-7 col-md-10 px-sm-5">
+            <div class="col-xl-7 col-lg-8 col-md-10 px-sm-5">
                 <form method="POST" action="{{ route('createVoucherProcess') }}">
                   @csrf
                   <div class="row m-3">

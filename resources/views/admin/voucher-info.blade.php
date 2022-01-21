@@ -17,11 +17,12 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <div class="__product-info-box" style="padding: 16px 8px;">
+        <div class="__product-info-box" style="padding: 16px 0px;">
           <div class="row fw-bold fs-3 d-flex justify-content-center">Voucher</div>
           <div class="d-flex justify-content-center">
-            <div class="col-lg-5 col-md-10 px-sm-5 pt-3">
-                <p>
+            <div class="col-12 col-sm-8 col-md-7 col-lg-6 col-xl-5 px-sm-5 pt-3 __voucher-info">
+                <div>
+                                  <p>
                   <b>Mã voucher: </b>
                   {{ $voucher->code }}
                 </p>
@@ -49,10 +50,11 @@
                   <b>Số lượng còn lại: </b>
                   {{ $voucher->remain ?? $voucher->quantity }}
                 </p>
+                </div>
                 <div class="row my-3">
                   <div class="col-12 d-md-flex justify-content-end d-inline">
                     <div class="col-md-6 col-12 text-secondary d-flex justify-content-end">
-                      <a type="button" id="deleteButton" class="btn btn-danger shadow-none" data-href="{{ url('admin/xoa-voucher/' . $voucher->code) }}">Xóa</a>
+                      <a id="deleteButton" class="btn btn-danger shadow-none" data-href="{{ url('admin/xoa-voucher/' . $voucher->code) }}">Xóa</a>
                     </div>
                   </div>
                 </div>
