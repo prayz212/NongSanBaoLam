@@ -20,7 +20,7 @@ use App\Notifications\PaymentInvoiceNotification;
 class CartController extends Controller
 {
     private $SHIPPING_COST = 25000;
-    private $BILL_STATUS = ['IN_PROCESS' => 'Đang xử lý', 'IN_DELIVERY' => 'Đang giao hàng', 'DELIVERED' => 'Đã giao hàng', 'CANCELED' => 'Đã huỷ'];
+    private $BILL_STATUS = ['IN_PROCESS' => 'Đang xử lý', 'IN_DELIVERY' => 'Đang giao hàng', 'DELIVERED' => 'Đã giao', 'CANCELED' => 'Đã huỷ'];
 
     public function addToCart(Request $request) {
         $product = Product::with(['main_pic', 'category'])->find($request->id);

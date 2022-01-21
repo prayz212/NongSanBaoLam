@@ -19,7 +19,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-5 col-lg-6 pe-md-1">
+            <div class="col-md-5 col-lg-6 col-xl-5 pe-md-1">
                 <div class="__product-title-box mb-0">
                     <div class="card-body px-3 px-md-2 px-lg-4">
                         <div class="d-flex flex-column align-items-center text-center">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="col-md-7 col-lg-6">
+            <div class="col-md-7 col-lg-6 col-xl-7">
                 <div class="__product-title-box">
                     <form class="px-3 pt-3" method="POST" action="{{ route('updateAccountProcess', ['id' => $customer->id]) }}">
                         @csrf
