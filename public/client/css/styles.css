@@ -1614,6 +1614,12 @@ th:last-child {
     font-size: 15px;
 }
 
+input[name='validDate'] {
+    webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 ._btn,
 ._update-btn {
     display: inline-block;
