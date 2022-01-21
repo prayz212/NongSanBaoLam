@@ -1615,7 +1615,7 @@ th:last-child {
 }
 
 input[name='validDate'] {
-    webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
