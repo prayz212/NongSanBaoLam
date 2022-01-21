@@ -23,12 +23,12 @@
                                 @csrf
                                 <div class="mb-2 mt-3">
                                     <label for="username">Tên tài khoản:</label>
-                                    <input name="username" type="text" class="form-control mt-2" id="Username" placeholder="Tên tài khoản" value="{{ old('username') }}">
+                                    <input name="username" type="text" class="form-control mt-2 shadow-none" id="Username" placeholder="Tên tài khoản" value="{{ old('username') }}">
                                     <div class="__notify-msg ml-2" style="font-size: smaller; color: red; margin-left: 4px; margin-top:2px;">{{ $errors->login->first('username') ?? '' }}</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password">Mật khẩu:</label>
-                                    <input name="password" type="password" class="form-control mt-2 enter-event" id="pwd" placeholder="Mật khẩu">
+                                    <input name="password" type="password" class="form-control mt-2 enter-event shadow-none" id="pwd" placeholder="Mật khẩu">
                                     <div class="__notify-msg ml-2" style="font-size: smaller; color: red; margin-left: 4px; margin-top:2px;">{{ $errors->login->first('password') ?? '' }}</div>
                                 </div>
                                 <div class="text-danger">{{ Session::get('login-error') ?? '' }}</div>
