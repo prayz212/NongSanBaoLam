@@ -17,7 +17,7 @@ class CreateCommentTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('content');
-            $table->bigInteger('reply_id')->unsigned()->default(0);
+            $table->bigInteger('reply_to')->unsigned()->default(0);
             $table->bigInteger('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();

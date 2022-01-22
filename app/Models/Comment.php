@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $table = 'comment';
-    protected $fillable = ['id', 'name', 'content', 'reply_id', 'product_id'];
+    protected $fillable = ['id', 'name', 'content', 'reply_to', 'product_id'];
 
     public function product() {
         return $this->belongsTo('App\Models\Product');
