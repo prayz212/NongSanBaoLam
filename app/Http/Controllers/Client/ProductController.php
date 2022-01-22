@@ -13,7 +13,9 @@ class ProductController extends Controller
 {
     private $ITEMS_PER_PAGE = 9;
     public function detail($id) {
-        $product = Product::with(['image', 'comment', 'avgRating'])
+        $product = Product::with(['image', 'avgRating', 'comment' => function($c) {
+            $c->where('is_deleted', false);
+        }])
             ->get()
             ->where('isDelete', '=', false)
             ->find($id);
@@ -24,7 +26,7 @@ class ProductController extends Controller
             ->where('product.id','!=',$id)
             ->limit(4)
             ->get();
-
+            
         return view('client.product-detail')
             ->with('detail', $product)
             ->with('relative', $relative);

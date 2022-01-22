@@ -148,7 +148,7 @@
                 <ul class="comments">
                     @foreach($detail->comment as $c)
                     <li class="clearfix">
-                        @if($c->reply_id == 0)
+                        @if($c->reply_to == 0)
                         <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
                         <div class="post-comments">
                             <p class="meta">{{ $c->name }} bình luận lúc {{ $c->created_at->format('H:i d/m/Y') }}: {!! $isAdmin ? '<i class="float-end"><a class="__reply-button" role="button"><small>Trả lời</small></a></i>' : '' !!} </p>
@@ -158,7 +158,7 @@
                         </div>
                         <ul class="comments">
                             @foreach($detail->comment as $r)
-                                @if($r->reply_id == $c->id)
+                                @if($r->reply_to == $c->id)
                                 <li class="clearfix">
                                     <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                                     <div class="post-comments">

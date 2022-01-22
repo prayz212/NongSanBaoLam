@@ -26,6 +26,11 @@ $(document).ready(function () {
 
     $("#pop-up-close-btn").click(function () {
         $(".__popup").hide();
+
+        const redirect = $(this).attr('data-redirect-href');
+        if (redirect) {
+            window.location.replace(redirect);
+        }
     });
 
     $("#pop-up-confirm-btn").click(function () {
@@ -50,7 +55,7 @@ function showConfirmPopup(title, messages, href, icon = null) {
     _this.show();
 }
 
-function showNotifyPopup(status, title, messages, icon = null) {
+function showNotifyPopup(status, title, messages, icon = null, redirect = null) {
     const _this = $(".__popup-notify");
 
     _this.find('#pop-up-title').html(title);
@@ -76,6 +81,10 @@ function showNotifyPopup(status, title, messages, icon = null) {
 
     $('#pop-up-icon').removeAttr("style");
     $('#pop-up-icon').attr('style', styles);
+
+    if (redirect) {
+        $('.__popup-notify button').attr('data-redirect-href', redirect);
+    }
 
     _this.show();
 }

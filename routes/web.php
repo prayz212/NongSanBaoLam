@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminBillController;
 use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminVoucherController;
+use App\Http\Controllers\Admin\AdminCommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,5 +112,12 @@ Route::prefix('/admin')->group(function () {
         Route::get('/nhap-kho', [AdminProductController::class, 'stockIn'])->name('productStockIn');
         Route::post('/yeu-cau-nhap-kho', [AdminProductController::class, 'stockInProcess'])->name('stockInProcess');
         Route::get('/api-danh-sach-san-pham', [AdminProductController::class, 'productsByCategory'])->name('getProductByCategory');
+
+        Route::get('/binh-luan-san-pham', [AdminCommentController::class, 'index'])->name('commentManagement');
+        Route::get('/api-cap-nhat-danh-sach-binh-luan', [AdminCommentController::class, 'fetch'])->name('fetchComment');
+        Route::post('/api-xoa-binh-luan', [AdminCommentController::class, 'delete'])->name('deleteComment');
+        Route::post('/api-danh-dau-binh-luan', [AdminCommentController::class, 'mark'])->name('markComment');
+        Route::post('/api-tra-loi-binh-luan', [AdminCommentController::class, 'reply'])->name('replyComment');
+        Route::post('/api-chinh-sua-binh-luan', [AdminCommentController::class, 'edit'])->name('editComment');
     });
 });

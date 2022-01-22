@@ -23,6 +23,12 @@
                   <div class="sb-nav-link-icon pt-1"><i class="fas fa-ticket-alt fa-fw"></i></i></div>
                   Quản lý voucher
               </a>
+
+              <div class="sb-sidenav-menu-heading">Hoạt động</div>
+              <a class="nav-link {{Request::is('admin/binh-luan-san-pham') ? 'active' : ''}}" style="{{Request::is('admin/binh-luan-san-pham') ? 'background-color: #424242' : ''}}" href="{{ route('commentManagement') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-comment"></i></i></div>
+                Trả lời bình luận
+              </a>
           </div>
       </div>
   </nav>

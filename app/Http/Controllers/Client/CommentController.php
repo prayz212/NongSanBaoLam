@@ -24,7 +24,7 @@ class CommentController extends Controller
              'name' => $request->name ?? 'Nông sản Bảo Lâm',
              'content' => $request->content,
              'product_id' => $request->product_id,
-             'reply_id' => $request->comment_id
+             'reply_to' => $request->comment_id
          ]);
 
         return redirect()->back();
