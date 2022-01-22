@@ -370,7 +370,7 @@ function nothingToDisplay() {
     `<li class="w-100 d-flex justify-content-center">
         <div class="mt-4 empty-comment">
             <div class="d-flex justify-content-center">
-                <img src="https://res.cloudinary.com/dazdxrnam/image/upload/v1642849813/completed_tasks_mqdzte.jpg" alt="all tasks completed" width="400px">
+                <img src="https://res.cloudinary.com/dazdxrnam/image/upload/v1642849813/completed_tasks_mqdzte.jpg" alt="all tasks completed" width="400px" height="233">
             </div>
             <p style="font-weight: 600; text-align: center">Tuyệt vời, không còn bình luận nào cần được phản hồi</p>
         </div>
