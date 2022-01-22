@@ -37,8 +37,10 @@ $(document).ready(function () {
 
     _parent.css({ 'left': '0px' }).animate({
         'left' : '-105%'    
-    }, 'slow', function(){ $(this).remove() });  
+    }, 'slow', function(){ $(this).remove() });
+
     markDoneComment(actionUrl, commentID);
+    checkNothingDisplay();
   });
 
   $( ".comments-section" ).on( "click", "li .delete-comment", function() {
@@ -188,6 +190,8 @@ function deleteComment(href, commentID) {
           $('li[id*=comment-' + commentID + ']')
             .closest('.comment-row')
             .fadeOut(300, function(){ $(this).remove();});
+
+          checkNothingDisplay();
         }
       } else {
         showNotifyPopup(
@@ -302,59 +306,84 @@ function appendComments(comments, replies) {
   const editHref = _this.attr('data-edit-href');
   const replyHref = _this.attr('data-reply-href');
   const currentUser = _this.attr('data-current-user');
-  
-  comments.forEach(comment => {
-    const {id, name, content, product} = comment;
-    let HTML = 
-    `<li id="comment-${id}" class="clearfix comment-row" style="position: relative;" data-comment-id="${id}" data-detele-href="${deleteHref}" data-marked-href="${markedHref}">
-        <img src="https://bootdey.com/img/Content/user_1.jpg" class="commentators">
-        <div class="post-comments">
-            <p class="meta">${name} 
-                <span>
-                    <span class="d-inline d-sm-none"> - </span> 
-                    <span class="d-none d-sm-inline">bình luận vào</span> 
-                    <span>
-                        <a style="text-decoration: none; color: darkblue" href="${productHref.replace('productID', product.id)}">${product.name}</a>
-                    </span>
-                    :
-                </span> 
-                <span class="float-end">
-                    <span class="reply-comment" title="Trả lời" style="cursor: pointer">
-                        <i class="fas fa-reply" style="color: gray; font-size: 1.4em"></i>
-                    </span>
-                    <span class="hide-reply-input" title="Trả lời" style="cursor: pointer; display: none">
-                        <i class="fas fa-eye-slash" style="color: gray; font-size: 1.4em"></i>
-                    </span>
-                    <span class="mark-done-comment mx-2" title="Đánh dấu hoàn thành" style="cursor: pointer">
-                        <i class="far fa-check-square" style="color: green; font-size: 1.4em"></i>
-                    </span>
-                    <span class="delete-comment" title="Xoá bình luận" style="cursor: pointer">
-                        <i class="fas fa-trash" style="color: brown; font-size: 1.4em"></i>
-                    </span>
-                </span>
-            </p>
-            <p>
-                ${content}
-            </p>
-        </div>
-        <ul class="comments replies-section" style="display: none">
-            ${generateReplyHTML(replies, id)}
-            <div class="reply-comment-input">
-                <div class="form-replies" data-edit-href="${editHref}" data-reply-href="${replyHref}" data-current-user="${currentUser}">
-                    <div class="row">
-                        <textarea class="form-control shadow-none" style="width: 90%; padding: 0.3rem!important; font-size: 1rem!important;" name="content" rows="1" cols="50" placeholder="Nhập nội dung bình luận..."></textarea>
-                        <a class="btn align-items-center submit-reply-btn" style="width: 10%" data-type="reply"><i class="fas fa-paper-plane" style="color: grey; font-size: 1em"></i></a>
-                    </div>
-                </div>
-            </div>
-        </ul>
-    </li>`
 
-    $('.comments-section').append(HTML);
-  });
+  if (comments.length <= 0) {
+    nothingToDisplay();
+  } else {
+    comments.forEach(comment => {
+      const {id, name, content, product} = comment;
+      let HTML = 
+      `<li id="comment-${id}" class="clearfix comment-row" style="position: relative;" data-comment-id="${id}" data-detele-href="${deleteHref}" data-marked-href="${markedHref}">
+          <img src="https://bootdey.com/img/Content/user_1.jpg" class="commentators">
+          <div class="post-comments">
+              <p class="meta">${name} 
+                  <span>
+                      <span class="d-inline d-sm-none"> - </span> 
+                      <span class="d-none d-sm-inline">bình luận vào</span> 
+                      <span>
+                          <a style="text-decoration: none; color: darkblue" href="${productHref.replace('productID', product.id)}">${product.name}</a>
+                      </span>
+                      :
+                  </span> 
+                  <span class="float-end">
+                      <span class="reply-comment" title="Trả lời" style="cursor: pointer">
+                          <i class="fas fa-reply" style="color: gray; font-size: 1.4em"></i>
+                      </span>
+                      <span class="hide-reply-input" title="Trả lời" style="cursor: pointer; display: none">
+                          <i class="fas fa-eye-slash" style="color: gray; font-size: 1.4em"></i>
+                      </span>
+                      <span class="mark-done-comment mx-2" title="Đánh dấu hoàn thành" style="cursor: pointer">
+                          <i class="far fa-check-square" style="color: green; font-size: 1.4em"></i>
+                      </span>
+                      <span class="delete-comment" title="Xoá bình luận" style="cursor: pointer">
+                          <i class="fas fa-trash" style="color: brown; font-size: 1.4em"></i>
+                      </span>
+                  </span>
+              </p>
+              <p>
+                  ${content}
+              </p>
+          </div>
+          <ul class="comments replies-section" style="display: none">
+              ${generateReplyHTML(replies, id)}
+              <div class="reply-comment-input">
+                  <div class="form-replies" data-edit-href="${editHref}" data-reply-href="${replyHref}" data-current-user="${currentUser}">
+                      <div class="row">
+                          <textarea class="form-control shadow-none" style="width: 90%; padding: 0.3rem!important; font-size: 1rem!important;" name="content" rows="1" cols="50" placeholder="Nhập nội dung bình luận..."></textarea>
+                          <a class="btn align-items-center submit-reply-btn" style="width: 10%" data-type="reply"><i class="fas fa-paper-plane" style="color: grey; font-size: 1em"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </ul>
+      </li>`
+
+      $('.comments-section').append(HTML);
+    });
+  }
 
   $('#fetching-comments').hide();
   $('#fetch-comments').show();
+}
+
+function nothingToDisplay() {
+  $('.comments-section').append(
+    `<li class="w-100 d-flex justify-content-center">
+        <div class="mt-4 empty-comment">
+            <div class="d-flex justify-content-center">
+                <img src="https://res.cloudinary.com/dazdxrnam/image/upload/v1642849813/completed_tasks_mqdzte.jpg" alt="all tasks completed" width="400px">
+            </div>
+            <p style="font-weight: 600; text-align: center">Tuyệt vời, không còn bình luận nào cần được phản hồi</p>
+        </div>
+    </li>`
+  );
+}
+
+function checkNothingDisplay() {
+  if ($('.comments-section li.comment-row').length <= 1) {
+    setTimeout(() => {
+      nothingToDisplay();
+    }, 1800); 
+  }
 }
 
 function generateReplyHTML(replies, commentID) {
