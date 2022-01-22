@@ -363,19 +363,13 @@ $(document).ready(function () {
         }
     });
 
-    function updateTotalPayAmount() {
-        let totalPrice = parseInt($('#total-price-amount').attr('data-amount'))
-        let totalDiscount = parseInt($('#total-discount-amount').attr('data-amount'))
-        let totalVoucher = parseInt($('#voucher-amount').attr('data-amount'))
-        let totalShipping = parseInt($('#shipping-cost-amount').attr('data-amount'))
-        let newTotalPay = totalPrice + totalShipping - totalDiscount - totalVoucher;
+    $('#payment-btn').click(function(e) {
+        e.preventDefault();
+        $('#payment-loading-btn').show();
+        $(this).hide();
 
-        if (newTotalPay < 0) {newTotalPay = 0;}
-        
-        const _el = $('#total-pay-amount')
-        _el.attr('data-amount', newTotalPay)
-        _el.text(newTotalPay.toLocaleString("it-IT", {currency: "VND",}) + "đ")
-    }
+        $(this).closest('form').submit();
+    });
 
     /*          BILLS            */
     $('#bill-table tr').click(function () {
@@ -387,6 +381,20 @@ $(document).ready(function () {
         }
     });
 });
+
+function updateTotalPayAmount() {
+    let totalPrice = parseInt($('#total-price-amount').attr('data-amount'))
+    let totalDiscount = parseInt($('#total-discount-amount').attr('data-amount'))
+    let totalVoucher = parseInt($('#voucher-amount').attr('data-amount'))
+    let totalShipping = parseInt($('#shipping-cost-amount').attr('data-amount'))
+    let newTotalPay = totalPrice + totalShipping - totalDiscount - totalVoucher;
+
+    if (newTotalPay < 0) {newTotalPay = 0;}
+    
+    const _el = $('#total-pay-amount')
+    _el.attr('data-amount', newTotalPay)
+    _el.text(newTotalPay.toLocaleString("it-IT", {currency: "VND",}) + "đ")
+}
 
 gsap.from(".__logo", { opacity: 0, duration: 1, delay: 0.6, x: -20 });
 gsap.from(".__hamburger", { opacity: 0, duration: 1, delay: 0.6, x: 20 });
