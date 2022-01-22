@@ -92,7 +92,7 @@ $(document).ready(function () {
 
   $( ".comments-section" ).on( "click", ".form-replies .submit-reply-btn", function() {
     const _parent = $(this).closest('.form-replies');
-    const content = _parent.find('textarea').val();
+    const content = _parent.find('textarea').val().trim();
     const username = _parent.attr('data-current-user');
     const type = $(this).attr('data-type');
     const href = type == 'reply' 
@@ -106,6 +106,12 @@ $(document).ready(function () {
     const element = type == 'reply'
       ? $(this).closest('.replies-section')
       : $(this).closest('.replies-section').find('li[id*=reply-' + id + ']');
+
+    if (content == '') {
+      _parent.find('textarea').css('border', '0.1rem solid red');
+      _parent.find('textarea').focus();
+      return;
+    }
 
     submitCommentForm(href, content, username, id, type, element);
     _parent.find('textarea').val('');
@@ -276,7 +282,7 @@ function submitCommentForm(actionHref, content, commentator, id, type, element) 
         showNotifyPopup(
           'fail', 
           'Đã xảy ra lỗi', 
-          `${action} bình luận hoàn tất không thành công, vui lòng thử lại sau`, 
+          `${action} bình luận không thành công, vui lòng thử lại sau`, 
           'fas fa-exclamation-triangle fa-3x'
         );
 
@@ -284,10 +290,11 @@ function submitCommentForm(actionHref, content, commentator, id, type, element) 
       }
     },
     error: function () {
+      let action = type == 'edit' ? 'Chỉnh sửa' : 'Trả lời';
       showNotifyPopup(
         'fail', 
         'Đã xảy ra lỗi', 
-        'Đánh dấu bình luận hoàn tất không thành công, vui lòng thử lại sau', 
+        `${action} bình luận không thành công, vui lòng thử lại sau`, 
         'fas fa-exclamation-triangle fa-3x'
       );
 
@@ -370,7 +377,7 @@ function nothingToDisplay() {
     `<li class="w-100 d-flex justify-content-center">
         <div class="mt-4 empty-comment">
             <div class="d-flex justify-content-center">
-                <img src="https://res.cloudinary.com/dazdxrnam/image/upload/v1642849813/completed_tasks_mqdzte.jpg" alt="all tasks completed" width="400px">
+                <img src="https://res.cloudinary.com/dazdxrnam/image/upload/v1642849813/completed_tasks_mqdzte.jpg" alt="all tasks completed" width="400px" height="233">
             </div>
             <p style="font-weight: 600; text-align: center">Tuyệt vời, không còn bình luận nào cần được phản hồi</p>
         </div>

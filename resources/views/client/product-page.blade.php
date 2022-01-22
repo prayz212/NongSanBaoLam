@@ -8,11 +8,11 @@
           <div class="card mb-3">
               <div class="card-header text-uppercase py-3 text-center __category-block-title">DANH MỤC SẢN PHẨM</div>
               <ul class="list-group category_block">
+                  <a href="{{ url('the-loai-san-pham/trai-cay-da-lat') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'trai-cay-da-lat' ? '__selected-category' : '' }}">Trái cây Đà Lạt</li></a>
+                  <a href="{{ url('the-loai-san-pham/trai-cay-ngoai-nhap') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'trai-cay-ngoai-nhap' ? '__selected-category' : '' }}">Trái cây ngoại nhập</li></a>
                   <a href="{{ url('the-loai-san-pham/rau-cu-huu-co') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'rau-cu-huu-co' ? '__selected-category' : '' }}">Rau củ hữu cơ</li></a>
                   <a href="{{ url('the-loai-san-pham/rau-cu-da-lat') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'rau-cu-da-lat' ? '__selected-category' : '' }}">Rau củ Đà Lạt</li></a>
                   <a href="{{ url('the-loai-san-pham/rau-cu-ngoai-nhap') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'rau-cu-ngoai-nhap' ? '__selected-category' : '' }}">Rau củ ngoại nhập</li></a>
-                  <a href="{{ url('the-loai-san-pham/trai-cay-da-lat') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'trai-cay-da-lat' ? '__selected-category' : '' }}">Trái cây Đà Lạt</li></a>
-                  <a href="{{ url('the-loai-san-pham/trai-cay-ngoai-nhap') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'trai-cay-ngoai-nhap' ? '__selected-category' : '' }}">Trái cây ngoại nhập</li></a>
                   <a href="{{ url('the-loai-san-pham/combo-san-pham') }}"><li class="list-group-item px-5 py-3 {{ request()->type == 'combo-san-pham' ? '__selected-category' : '' }}">Combo sản phẩm</li></a>
               </ul>
           </div>
@@ -63,7 +63,7 @@
                               </div>
                               <div class="__product-footer">
                                   <a href="{{ url('chi-tiet-san-pham/' . $p->id) }}">
-                                      <h3>{{ $p->name }}</h3>
+                                      <h3 class="__break-word-dots">{{ $p->name }}</h3>
                                   </a>
                                   <div class="__rating">
                                     @php

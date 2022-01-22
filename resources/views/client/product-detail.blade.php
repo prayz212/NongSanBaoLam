@@ -224,7 +224,7 @@
             </div>
             <div class="__product-footer">
                 <a href="{{ url('chi-tiet-san-pham/' . $r->id) }}">
-                    <h3>{{ $r->name }}</h3>
+                    <h3 class="__break-word-dots">{{ $r->name }}</h3>
                 </a>
                 <div class="__rating">
                 @php

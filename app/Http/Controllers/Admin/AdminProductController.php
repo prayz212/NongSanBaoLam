@@ -16,171 +16,237 @@ use DB;
 class AdminProductController extends Controller
 {
     public function index() {
-        $products = Product::with(['category', 'avgRating'])
-            ->where('isDelete', false)->get();
-        
-        return view('admin.product-page')
-            ->with('products', $products);
+        try {
+            $products = Product::with(['category', 'avgRating'])
+                ->where('isDelete', false)->get();
+            
+            return view('admin.product-page')
+                ->with('products', $products);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function detail($id) {
-        $product = Product::with('main_pic', 'category', 'avgRating', 'image')
-            ->where('isDelete', false)
-            ->find($id);
+        try {
+            $product = Product::with('main_pic', 'category', 'avgRating', 'image')
+                ->where('isDelete', false)
+                ->find($id);
 
-        return view('admin.product-info')
-            ->with('product', $product);
+            return view('admin.product-info')
+                ->with('product', $product);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function delete($id) {
-        $product = Product::where('isDelete', false)
-            ->find($id);
+        try {
+            $product = Product::where('isDelete', false)
+                ->find($id);
 
-        $images = Image::where('product_id', $id)
-            ->pluck('public_id')
-            ->toArray();
+            $images = Image::where('product_id', $id)
+                ->pluck('public_id')
+                ->toArray();
 
-        Cloudder::destroyImages($images);
+            Cloudder::destroyImages($images);
 
-        DB::table('image')
-            ->where('product_id', $id)
-            ->delete();
+            DB::table('image')
+                ->where('product_id', $id)
+                ->delete();
 
-        $product->isDelete = true;
-        $product->save();
+            $product->isDelete = true;
+            $product->save();
 
-        return redirect()->route('productManagement');
+            return redirect()->route('productManagement');
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function update($id) {
-        $product = Product::with('category', 'avgRating', 'image')
-            ->where('isDelete', false)
-            ->find($id);
+        try {
+            $product = Product::with('category', 'avgRating', 'image')
+                ->where('isDelete', false)
+                ->find($id);
 
-        $categories = Category::get();
+            $categories = Category::get();
 
-        return view('admin.product-edit')
-            ->with('product', $product)
-            ->with('categories', $categories);
+            return view('admin.product-edit')
+                ->with('product', $product)
+                ->with('categories', $categories);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function stockIn() {
-        $categories = Category::get();
-        
-        return view('admin.product-stock-in')
-            ->with('categories', $categories);
+        try {
+            $categories = Category::get();
+            
+            return view('admin.product-stock-in')
+                ->with('categories', $categories);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function productsByCategory(Request $request) {
-        if ($request->has('category')) {
-            $products = Product::where('category_id', $request->query('category'))
-                ->where('isDelete', false)
-                ->select('id', 'name')
-                ->get();
-            
-            $response =  response()->json([
-                'status' => 200,
-                'products' => $products
-            ]);
-        } else {
-            $response = response()->json([
-                'status' => 400
-            ]);
-        }
+        try {
+            if ($request->has('category')) {
+                $products = Product::where('category_id', $request->query('category'))
+                    ->where('isDelete', false)
+                    ->select('id', 'name')
+                    ->get();
+                
+                $response =  response()->json([
+                    'status' => 200,
+                    'products' => $products
+                ]);
+            } else {
+                $response = response()->json([
+                    'status' => 400
+                ]);
+            }
 
-        return $response;
+            return $response;
+        }
+        catch(\Exception $error){
+            return response()->json(['status' => 400, 'errorMessages' => $error->getMessage()], 400);
+        }
     }
 
     public function stockInProcess(Request $request) {
-        if ($request->has('category') && $request->has('product') && $request->has('quantity')) {
-            $product = Product::where('category_id', $request->category)
-                ->where('isDelete', false)
-                ->where('id', $request->product)
-                ->first();
-            
-            $product->quantity += $request->quantity;
-            $product->save();
-            
-            $response =  response()->json([
-                'status' => 200
-            ]);
-        } else {
-            $response = response()->json([
-                'status' => 400
-            ]);
-        }
+        try {
+            if ($request->has('category') && $request->has('product') && $request->has('quantity')) {
+                $product = Product::where('category_id', $request->category)
+                    ->where('isDelete', false)
+                    ->where('id', $request->product)
+                    ->first();
+                
+                $product->quantity += $request->quantity;
+                $product->save();
+                
+                $response =  response()->json([
+                    'status' => 200
+                ]);
+            } else {
+                $response = response()->json([
+                    'status' => 400
+                ]);
+            }
 
-        return $response;
+            return $response;
+        }
+        catch(\Exception $error){
+            return response()->json(['status' => 400, 'errorMessages' => $error->getMessage()], 400);
+        }
     }
 
     public function create() {
-        $categories = Category::get();
-        return view('admin.product-create')
-            ->with('categories', $categories);
+        try {
+            $categories = Category::get();
+            return view('admin.product-create')
+                ->with('categories', $categories);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function createProcess(CreateProductRequest $request) {
-        //check limit size of uploaded images
-        $isAllValid = $this->checkLimitSize($request->file('images'));
-        if ($isAllValid == false) {
-            return redirect()->back()->withInput()->with('upload-image-error', 'Ảnh sản phẩm có dung lượng tối đa là 2Mb');
-        }
-        
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'category_id' => $request->type,
-            'price' => $request->price,
-            'quantity' => 0,
-            'discount' => $request->discount != null ? $request->discount : null,
-        ]);
-
-        //upload to Cloudinary
-        $product_id = $product->id;
-        $uploadedImages = $this->uploadImages($request->file('images'), $product_id);
-        $images = Image::insert($uploadedImages);
-
-        return redirect()->route('productInfo', $product_id);
-    }
-
-    public function updateProcess(UpdateProductRequest $request) {
-        //check limit size of uploaded images
-        if($request->file('images')) {
+        try {
+            //check limit size of uploaded images
             $isAllValid = $this->checkLimitSize($request->file('images'));
             if ($isAllValid == false) {
                 return redirect()->back()->withInput()->with('upload-image-error', 'Ảnh sản phẩm có dung lượng tối đa là 2Mb');
             }
-        }
-
-        $product = Product::find($request->id);
-        $product->name = $request->name;
-        $product->category_id = $request->type;
-        $product->price = $request->price;
-        $product->discount = $request->discount;
-        $product->description = $request->description;
-        $product->save();
-
-        //remove from Cloudinary
-        if ($request->removed) {
-            $removedImages = array_filter(explode("|", $request->removed));
-            $images = Image::whereIn('url', $removedImages)
-                ->pluck('public_id')
-                ->toArray();
             
-            Cloudder::destroyImages($images);
+            $product = Product::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'category_id' => $request->type,
+                'price' => $request->price,
+                'quantity' => 0,
+                'discount' => $request->discount != null ? $request->discount : null,
+            ]);
 
-            DB::table('image')
-                ->whereIn('url', $removedImages)
-                ->delete();
-        }
-
-        //upload new images to Cloudinary
-        if($request->file('images')) {
+            //upload to Cloudinary
             $product_id = $product->id;
             $uploadedImages = $this->uploadImages($request->file('images'), $product_id);
             $images = Image::insert($uploadedImages);
+
+            return redirect()->route('productInfo', $product_id);
         }
-        return redirect()->route('productInfo', $product_id);
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
+    }
+
+    public function updateProcess(UpdateProductRequest $request) {
+        try {
+            //check limit size of uploaded images
+            if($request->file('images')) {
+                $isAllValid = $this->checkLimitSize($request->file('images'));
+                if ($isAllValid == false) {
+                    return redirect()->back()->withInput()->with('upload-image-error', 'Ảnh sản phẩm có dung lượng tối đa là 2Mb');
+                }
+            }
+
+            $product = Product::find($request->id);
+            $product->name = $request->name;
+            $product->category_id = $request->type;
+            $product->price = $request->price;
+            $product->discount = $request->discount;
+            $product->description = $request->description;
+            $product->save();
+
+            //remove from Cloudinary
+            if ($request->removed) {
+                $removedImages = array_filter(explode("|", $request->removed));
+                $images = Image::whereIn('url', $removedImages)
+                    ->pluck('public_id')
+                    ->toArray();
+                
+                Cloudder::destroyImages($images);
+
+                DB::table('image')
+                    ->whereIn('url', $removedImages)
+                    ->delete();
+            }
+
+            //upload new images to Cloudinary
+            if($request->file('images')) {
+                $product_id = $product->id;
+                $uploadedImages = $this->uploadImages($request->file('images'), $product_id);
+                $images = Image::insert($uploadedImages);
+            }
+            return redirect()->route('productInfo', $product_id);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     private function checkLimitSize($images) { 

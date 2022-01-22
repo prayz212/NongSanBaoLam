@@ -20,51 +20,72 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AuthController extends Controller
 {
     public function index() {
-        if (Auth::check()) {
-            return redirect()->route('infopage');
+        try {
+            if (Auth::check()) {
+                return redirect()->route('infopage');
+            }
+            return view('client.authenticate-page');
         }
-        return view('client.authenticate-page');
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function login(LoginRequest $request) {
-        //check if the user logged in as an admin => logout it
-        if (Auth::guard('admin')->check()) {
-            Auth::guard('admin')->logout();
-        }
-
-        $result = Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
-        if ($result) {
-            if ($request->has('returnUrl')) {
-                return redirect($request->input('returnUrl'));
-            } else {
-                return redirect()->route('infopage');
+        try {
+            //check if the user logged in as an admin => logout it
+            if (Auth::guard('admin')->check()) {
+                Auth::guard('admin')->logout();
             }
-        } else {
-            return redirect()->back()->withInput()->with('login-error', 'Tên tài khoản/Mật khẩu không đúng');
+
+            $result = Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
+            if ($result) {
+                if ($request->has('returnUrl')) {
+                    return redirect($request->input('returnUrl'));
+                } else {
+                    return redirect()->route('infopage');
+                }
+            } else {
+                return redirect()->back()->withInput()->with('login-error', 'Tên tài khoản/Mật khẩu không đúng');
+            }
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
         }
     }
 
     public function register(RegisterRequest $request) {
-        $isExistUsername = Customer::where('username', $request->username)
-            ->exists();
+        try {
+            $isExistUsername = Customer::where('username', $request->username)
+                ->exists();
 
-        $isExistEmail = Customer::where('email', $request->email)
-            ->exists();
+            $isExistEmail = Customer::where('email', $request->email)
+                ->exists();
 
-        if ($isExistUsername) {
-            return redirect()->back()->withInput()->with('register-error', 'Tên tài khoản đã tồn tại');
-        } else if ($isExistEmail) {
-            return redirect()->back()->withInput()->with('register-error', 'Email đã tồn tại');
+            if ($isExistUsername) {
+                return redirect()->back()->withInput()->with('register-error', 'Tên tài khoản đã tồn tại');
+            } else if ($isExistEmail) {
+                return redirect()->back()->withInput()->with('register-error', 'Email đã tồn tại');
+            }
+
+            Customer::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+            Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
+
+            return redirect()->route('infopage');
         }
-
-        Customer::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-        Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
-
-        return redirect()->route('infopage');
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function resetPassword() {
@@ -88,6 +109,11 @@ class AuthController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->withInput()->with('request-reset-pass-err', 'Email chưa được đăng ký');
         }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }        
     }
 
     public function updatePassword($token) {
@@ -104,8 +130,11 @@ class AuthController extends Controller
             return view('client.request-update-password')
                 ->with('username', $customer->username)
                 ->with('token', $token);
-        } catch (ModelNotFoundException $e) {
-            die("Lỗi");
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
         }
     }
 
@@ -120,13 +149,23 @@ class AuthController extends Controller
             $passwordReset->delete();
 
             return redirect()->route('authenticatepage');
-        } catch (ModelNotFoundException $e) {
-            die("Lỗi");
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
         }
     }    
 
     public function logout() {
-        Auth::logout();
-        return redirect()->route('authenticatepage');
+        try {
+            Auth::logout();
+            return redirect()->route('authenticatepage');
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 }
