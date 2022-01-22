@@ -13,121 +13,46 @@ class ProductController extends Controller
 {
     private $ITEMS_PER_PAGE = 9;
     public function detail($id) {
-        $product = Product::with(['image', 'avgRating', 'comment' => function($c) {
-            $c->where('is_deleted', false);
-        }])
-            ->get()
-            ->where('isDelete', '=', false)
-            ->find($id);
+        try {
+            $product = Product::with(['image', 'avgRating', 'comment' => function($c) {
+                $c->where('is_deleted', false);
+            }])
+                ->get()
+                ->where('isDelete', '=', false)
+                ->find($id);
 
-        $relative = Product::with(['main_pic', 'avgRating'])
-            ->where('category_id', $product->category_id)
-            ->where('isDelete', '=', false)
-            ->where('product.id','!=',$id)
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
-            
-        return view('client.product-detail')
-            ->with('detail', $product)
-            ->with('relative', $relative);
+            $relative = Product::with(['main_pic', 'avgRating'])
+                ->where('category_id', $product->category_id)
+                ->where('isDelete', '=', false)
+                ->where('product.id','!=',$id)
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+                
+            return view('client.product-detail')
+                ->with('detail', $product)
+                ->with('relative', $relative);
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
     }
 
     public function index(Request $request) {
-        if ($request->has('filter')) {
-            $queryParams = $request->query('filter');
-            $queryString = '?filter=' . $queryParams . '&page=';
-            $products = $this->getFilterProducts($queryParams);
-        }
-        else {
-            $products = Product::with(['main_pic', 'avgRating'])
-                ->where('isDelete', '=', false)
-                ->orderBy('created_at', 'DESC')
-                ->paginate($this->ITEMS_PER_PAGE);
-
-            $queryString = '?page=';
-        }
-        
-        return view('client.product-page')
-            ->with('products', $products)
-            ->with('queryString', $queryString);
-    }
-
-    public function search(Request $request) {
-        $searchKey = $request->query('key');
-
-        $products = Product::with(['main_pic', 'avgRating'])
-            ->where('isDelete', '=', false)
-            ->where('name', 'like', '%' . $searchKey . '%')
-            ->orderBy('created_at', 'DESC')
-            ->paginate($this->ITEMS_PER_PAGE);
-
-        return view('client.special-product-page')
-            ->with('products', $products)
-            ->with('title', 'Tìm kiếm sản phẩm')
-            ->with('queryString', '?key=' . $searchKey . '&page=');
-    }
-
-    public function topSales() {
-        $bestSaler = Product::orderBy('sold', 'DESC')
-            ->with(['main_pic', 'avgRating'])
-            ->where('isDelete', '=', false)
-            ->paginate($this->ITEMS_PER_PAGE);
-
-        return view('client.special-product-page')
-            ->with('products', $bestSaler)
-            ->with('title', 'Sản phẩm bán chạy')
-            ->with('queryString', '?page=');
-    }
-
-    public function newProducts() {
-        $newProducts = Product::orderBy('created_at', 'DESC')
-            ->with(['main_pic', 'avgRating'])
-            ->where('isDelete', '=', false)
-            ->paginate($this->ITEMS_PER_PAGE);
-
-        return view('client.special-product-page')
-            ->with('products', $newProducts)
-            ->with('title', 'Sản phẩm mới')
-            ->with('queryString', '?page=');
-    }
-
-    public function flashSales() {
-        $saleProducts = Product::orderBy('discount', 'DESC')
-            ->with(['main_pic', 'avgRating'])
-            ->where('isDelete', '=', false)
-            ->where('discount', '!=', 0)
-            ->paginate($this->ITEMS_PER_PAGE);
-
-        return view('client.special-product-page')
-            ->with('products', $saleProducts)
-            ->with('title', 'Sản phẩm khuyến mãi')
-            ->with('queryString', '?page=');
-    }
-
-    public function category(Request $request, $type) {
-        $categoryList = [
-            'rau-cu-huu-co' => 1,
-            'rau-cu-da-lat' => 2,
-            'rau-cu-ngoai-nhap' => 3,
-            'trai-cay-da-lat' => 4,
-            'trai-cay-ngoai-nhap' => 5,
-            'combo-san-pham' => 6
-        ];
-
-        if (array_key_exists($type, $categoryList)) {
+        try {
             if ($request->has('filter')) {
                 $queryParams = $request->query('filter');
                 $queryString = '?filter=' . $queryParams . '&page=';
-                $products = $this->getFilterProducts($queryParams, $categoryList[$type]);
+                $products = $this->getFilterProducts($queryParams);
             }
             else {
                 $products = Product::with(['main_pic', 'avgRating'])
                     ->where('isDelete', '=', false)
-                    ->where('category_id', $categoryList[$type])
                     ->orderBy('created_at', 'DESC')
                     ->paginate($this->ITEMS_PER_PAGE);
-    
+
                 $queryString = '?page=';
             }
             
@@ -135,31 +60,160 @@ class ProductController extends Controller
                 ->with('products', $products)
                 ->with('queryString', $queryString);
         }
-        else {
-            return redirect()->route('productpage');
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
+    }
+
+    public function search(Request $request) {
+        try {
+            $searchKey = $request->query('key');
+
+            $products = Product::with(['main_pic', 'avgRating'])
+                ->where('isDelete', '=', false)
+                ->where('name', 'like', '%' . $searchKey . '%')
+                ->orderBy('created_at', 'DESC')
+                ->paginate($this->ITEMS_PER_PAGE);
+
+            return view('client.special-product-page')
+                ->with('products', $products)
+                ->with('title', 'Tìm kiếm sản phẩm')
+                ->with('queryString', '?key=' . $searchKey . '&page=');
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
+    }
+
+    public function topSales() {
+        try {
+            $bestSaler = Product::orderBy('sold', 'DESC')
+                ->with(['main_pic', 'avgRating'])
+                ->where('isDelete', '=', false)
+                ->paginate($this->ITEMS_PER_PAGE);
+
+            return view('client.special-product-page')
+                ->with('products', $bestSaler)
+                ->with('title', 'Sản phẩm bán chạy')
+                ->with('queryString', '?page=');
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
+    }
+
+    public function newProducts() {
+        try {
+            $newProducts = Product::orderBy('created_at', 'DESC')
+                ->with(['main_pic', 'avgRating'])
+                ->where('isDelete', '=', false)
+                ->paginate($this->ITEMS_PER_PAGE);
+
+            return view('client.special-product-page')
+                ->with('products', $newProducts)
+                ->with('title', 'Sản phẩm mới')
+                ->with('queryString', '?page=');
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
+    }
+
+    public function flashSales() {
+        try {
+            $saleProducts = Product::orderBy('discount', 'DESC')
+                ->with(['main_pic', 'avgRating'])
+                ->where('isDelete', '=', false)
+                ->where('discount', '!=', 0)
+                ->paginate($this->ITEMS_PER_PAGE);
+
+            return view('client.special-product-page')
+                ->with('products', $saleProducts)
+                ->with('title', 'Sản phẩm khuyến mãi')
+                ->with('queryString', '?page=');
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
+        }
+    }
+
+    public function category(Request $request, $type) {
+        try {
+            $categoryList = [
+                'rau-cu-huu-co' => 1,
+                'rau-cu-da-lat' => 2,
+                'rau-cu-ngoai-nhap' => 3,
+                'trai-cay-da-lat' => 4,
+                'trai-cay-ngoai-nhap' => 5,
+                'combo-san-pham' => 6
+            ];
+
+            if (array_key_exists($type, $categoryList)) {
+                if ($request->has('filter')) {
+                    $queryParams = $request->query('filter');
+                    $queryString = '?filter=' . $queryParams . '&page=';
+                    $products = $this->getFilterProducts($queryParams, $categoryList[$type]);
+                }
+                else {
+                    $products = Product::with(['main_pic', 'avgRating'])
+                        ->where('isDelete', '=', false)
+                        ->where('category_id', $categoryList[$type])
+                        ->orderBy('created_at', 'DESC')
+                        ->paginate($this->ITEMS_PER_PAGE);
+        
+                    $queryString = '?page=';
+                }
+                
+                return view('client.product-page')
+                    ->with('products', $products)
+                    ->with('queryString', $queryString);
+            }
+            else {
+                return redirect()->route('productpage');
+            }
+        }
+        catch(\Exception $error){
+            return view('error')
+                ->with('errorMessages', $error->getMessage())
+                ->with('returnUrl', url()->previous());
         }
     }
 
     public function rating(RatingRequest $request) {
-        $rating = Rating::where('product_id', $request->productId)
-            ->where('bill_id', $request->billId)
-            ->first();
+        try {
+            $rating = Rating::where('product_id', $request->productId)
+                ->where('bill_id', $request->billId)
+                ->first();
 
-        if ($rating) {
+            if ($rating) {
+                return response()->json([
+                    'status' => 400
+                ]);
+            }
+
+            Rating::create([
+                'product_id' => $request->productId,
+                'bill_id' => $request->billId,
+                'star' => $request->rating,
+            ]);
+
             return response()->json([
-                'status' => 400
+                'status' => 200
             ]);
         }
-
-        Rating::create([
-            'product_id' => $request->productId,
-            'bill_id' => $request->billId,
-            'star' => $request->rating,
-        ]);
-
-        return response()->json([
-            'status' => 200
-        ]);
+        catch(\Exception $error){
+            return response()->json(['status' => 400, 'errorMessages' => $error->getMessage()], 400);
+        }
     }
 
     private function getFilterProducts($filter, $type = false) {
