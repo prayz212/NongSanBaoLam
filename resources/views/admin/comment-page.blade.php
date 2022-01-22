@@ -102,6 +102,16 @@
                         </li>
                         @endif
                         @endforeach
+                        @if (count($comments) == 0)
+                            <li class="w-100 d-flex justify-content-center">
+                                <div class="mt-4 empty-comment">
+                                    <div class="d-flex justify-content-center">
+                                        <img src="{{ asset('images/completed_tasks.jpeg') }}" alt="all tasks completed" width="400px">
+                                    </div>
+                                    <p style="font-weight: 600; text-align: center">Tuyệt vời, không còn bình luận nào cần được phản hồi</p>
+                                </div>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
