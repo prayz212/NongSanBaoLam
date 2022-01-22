@@ -13272,7 +13272,6 @@ input::-webkit-inner-spin-button {
 }
 
 /*  admin account page  */
-
 .__ac-page-me-2 {
   margin-right: 0.5rem !important;
 }
@@ -13283,3 +13282,112 @@ input::-webkit-inner-spin-button {
     padding: 22px 40px 0px 40px!important;
   }
 } 
+
+/*  admin comment page  */
+.blog-comment::before,
+.blog-comment::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.blog-comment ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-comment img {
+    opacity: 1;
+    filter: Alpha(opacity=100);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.blog-comment img.commentators {
+    position: relative;
+    float: left;
+    margin-left: 0;
+    margin-top: 0;
+    width: 50px; 
+    height: 50px;
+    border-radius: 50px;
+}
+
+.blog-comment img.replier {
+  position: relative;
+  float: left;
+  margin-left: 0;
+  margin-top: 0;
+  width: 36px; 
+  height: 36px;
+  border-radius: 50px;
+}
+
+.blog-comment .post-comments {
+  margin-top: 20px;
+  border: 1px solid #eee;
+  margin-left: 58px;
+  margin-right: 0px;
+  padding: 10px 20px;
+  position: relative;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background: #fff;
+  color: #6b6e80;
+  position: relative;
+}
+
+.blog-comment .post-replies {
+  border: 1px solid #eee;
+  margin-top: 14px;
+  margin-left: 43px;
+  margin-right: 0px;
+  padding: 10px 20px;
+  position: relative;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background: #fff;
+  color: #6b6e80;
+  position: relative;
+}
+
+.blog-comment .form-replies {
+  border: 1px solid #eee;
+  margin-top: 14px;
+  margin-left: 43px;
+  margin-right: 0px;
+  padding: 10px 20px;
+  position: relative;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background: #fff;
+  color: #6b6e80;
+  position: relative;
+}
+
+.blog-comment .meta {
+    font-size: 13px;
+    color: #aaaaaa;
+    padding-bottom: 8px;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-comment ul.comments ul {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 14px;
+}
+
+.comments-scrollable {
+  overflow-y: scroll;
+  height: calc( 100vh - 300px );;
+}
