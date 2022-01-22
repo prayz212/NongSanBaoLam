@@ -125,8 +125,11 @@
                         <td id="total-pay-amount" class="fs-2 fw-bold">{{ number_format($totalPrice - $totalDiscount + $shippingCost, 0, ",", ".") }}đ</td>
                       </tr>
                   </table>
-                  <div class="">
-                      <button type="submit" class="_btn fs-3 w-100">Thanh toán</button>
+                  <div>
+                      <button id="payment-btn" class="_btn fs-3 w-100" style="display: block">Thanh toán</button>
+                      <button id="payment-loading-btn" class="_btn fs-3 w-100" disabled style="display: none">
+                        Đang thanh toán...
+                    </button>
                   </div>
               </div>
           </div>
