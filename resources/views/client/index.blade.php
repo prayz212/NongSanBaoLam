@@ -30,7 +30,7 @@
                       </div>
                       <div class="__product-footer">
                           <a href="{{ url('chi-tiet-san-pham/' . $p->id) }}">
-                              <h3>{{ $p->name }}</h3>
+                              <h3 class="__break-word-dots">{{ $p->name }}</h3>
                           </a>
                           <div class="__rating">
                             @php
@@ -87,7 +87,7 @@
                         </div>
                         <div class="__product-footer">
                             <a href="{{ url('chi-tiet-san-pham/' . $np->id) }}">
-                                <h3>{{ $np->name }}</h3>
+                                <h3 class="__break-word-dots">{{ $np->name }}</h3>
                             </a>
                             <div class="__rating">
                             @php

@@ -879,7 +879,7 @@ li {
     width: 20rem;
     padding: 1rem;
     border: 1px solid #ccc;
-    appearance: none;
+    appearance:none;
     outline: none;
 }
 

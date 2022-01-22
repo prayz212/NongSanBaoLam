@@ -24,6 +24,7 @@ class ProductController extends Controller
             ->where('category_id', $product->category_id)
             ->where('isDelete', '=', false)
             ->where('product.id','!=',$id)
+            ->inRandomOrder()
             ->limit(4)
             ->get();
             
