@@ -93,8 +93,8 @@
                                 <div class="reply-comment-input">
                                     <div class="form-replies" data-edit-href="{{ route('editComment') }}" data-reply-href="{{ route('replyComment') }}" data-current-user="{{ Auth::guard('admin')->user()->fullname }}">
                                         <div class="row">
-                                            <textarea class="form-control shadow-none" style="width: 90%; padding: 0.3rem!important; font-size: 1rem!important;" name="content" rows="1" cols="50" placeholder="Nhập nội dung bình luận..."></textarea>
-                                            <a class="btn align-items-center submit-reply-btn" style="width: 10%" data-type="reply"><i class="fas fa-paper-plane" style="color: grey; font-size: 1em"></i></a>
+                                            <textarea class="form-control shadow-none" style="width: 88%; padding: 0.3rem!important; font-size: 1rem!important;" name="content" rows="1" cols="50" placeholder="Nhập nội dung bình luận..."></textarea>
+                                            <a class="btn align-items-center submit-reply-btn" style="width: 12%" data-type="reply"><i class="fas fa-paper-plane" style="color: grey; font-size: 1em"></i></a>
                                         </div>
                                     </div>
                                 </div>
