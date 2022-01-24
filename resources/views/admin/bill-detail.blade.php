@@ -16,7 +16,7 @@
                 </div>
                 
                 <div class="d-none d-sm-block align-self-center none-print">
-                    <button class="btn btn-success w-100" onclick="document.title = 'Hóa đơn ' + {{ $bill->id }}; window.print();">In hóa đơn</button>
+                    <button class="btn btn-success w-100 shadow-none" onclick="document.title = 'hoa_don_' + {{ $bill->id }}; window.print();">In hóa đơn</button>
                 </div>
             </div>
         </div>
