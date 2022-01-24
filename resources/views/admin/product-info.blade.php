@@ -36,12 +36,15 @@
 
           <div class="col-lg-5 col-sm-12 __left-infor-section">
               <div class="__product-info-box mt-3 mt-sm-0">
+                  @php
+                      $unit = $product->category->id == 6 ? 'Combo' : 'Kg';
+                  @endphp
                   <p><b>Mã sản phẩm:</b> #{{ $product->id }}</p>
                   <p><b>Tên sản phẩm:</b> {{ $product->name }}</p>
                   <p><b>Loại sản phẩm:</b> {{ $product->category->name }}</p>
                   <p><b>Giá:</b> {{ number_format(round($product->price), 0, ",", ".") }}đ</p>
-                  <p><b>Đã bán:</b> {{ $product->sold ?? 0 }} kg</p>
-                  <p><b>Còn lại:</b> {{ $product->quantity - $product->sold }} kg</p>
+                  <p><b>Đã bán:</b> {{ $product->sold ?? 0 }} {{ $unit }}</p>
+                  <p><b>Còn lại:</b> {{ $product->quantity - $product->sold }} {{ $unit }}</p>
                   <p><b>Trung bình đánh giá:</b> {{ $product->avgRating->first() ? round($product->avgRating->first()->rating) . ' sao' : 'Chưa có đánh giá' }} </p>
               </div>
 

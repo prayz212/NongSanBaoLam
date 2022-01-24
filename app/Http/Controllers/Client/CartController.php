@@ -155,7 +155,7 @@ class CartController extends Controller
                         'cart-error', 
                         $checkResult['availableQty'] == '0' 
                             ? $checkResult['product'] .  ' hiện tại đã hết hàng'
-                            : $checkResult['product'] .  ' chỉ còn ' . $checkResult['availableQty'] . 'kg');
+                            : $checkResult['product'] .  ' chỉ còn ' . $checkResult['availableQty'] . ' ' . $checkResult['unit']);
             }
 
             if ($request->paymentType == 'CreditCard') {
@@ -225,7 +225,7 @@ class CartController extends Controller
                 $product->sold += $value['qty'];
                 $product->save();
             }
-
+            
             // send invoice to customer email
             $customer = Customer::where('id', Auth::user()->id)->firstOrFail();
             $customer->notify(new PaymentInvoiceNotification($carts, $bill, isset($voucher) ? $voucher : NULL));
@@ -248,6 +248,7 @@ class CartController extends Controller
                 : response()->json([
                     'isEnough' => false, 
                     'product' => $checkResult['product'], 
+                    'unit' => $checkResult['unit'],
                     'remaining' => $checkResult['availableQty'],
                     'missing' => $checkResult['missingQty'],
                 ]);
@@ -269,6 +270,7 @@ class CartController extends Controller
                 return [
                     'status' => 0,
                     'product' => $product->name,
+                    'unit' => $product->category_id == 6 ? 'Combo' : 'Kg',
                     'availableQty' => $reQuantity,
                     'missingQty' => $value['qty'] - $reQuantity,
                 ];
