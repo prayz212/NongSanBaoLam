@@ -275,7 +275,7 @@ $(document).ready(function () {
                         "fail", 
                         data.remaining == 0 
                         ? data.product + " hiện tại đã hết hàng"
-                        : data.product + " chỉ còn " + data.remaining + "kg",
+                        : data.product + " chỉ còn " + data.remaining + ' ' + data.unit,
                         "Không đủ số lượng"
                     );
                 }

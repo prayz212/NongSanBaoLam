@@ -155,7 +155,7 @@
                                             </tr>
                                             @foreach($carts as $key => $value)
                                             <tr>
-                                                <td width="75%" align="left" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 8px 10px;"> {{ $value['item']->name }} ({{ $value['qty'] }} kg) </td>
+                                                <td width="75%" align="left" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 8px 10px;"> {{ $value['item']->name }} ({{ $value['qty'] }} {{ $value['item']->category->id == 6 ? 'Combo' : 'Kg' }}) </td>
                                                 <td width="25%" align="right" style="font-size: 16px; font-weight: 400; line-height: 24px; padding: 8px 10px;"> {{ number_format(round($value['item']->price * $value['qty']), 0, ",", ".") }}đ</td>
                                             </tr>
                                             @endforeach

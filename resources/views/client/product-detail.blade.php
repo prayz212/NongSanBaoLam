@@ -67,7 +67,7 @@
                     <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
                     <input type="button" value="+" class="plus">
                 </div>
-                <div style='height: 41px; align-self: center; color: #939191; font-size: 1.3rem; margin-left: 1.5rem;'>(Đơn vị: Kg)</div>
+                <div style='height: 41px; align-self: center; color: #939191; font-size: 1.3rem; margin-left: 1.5rem;'>(Đơn vị: {{ $detail->category_id == 6 ? 'Combo' : 'Kg' }})</div>
             </div>
 
               <div class="__form">

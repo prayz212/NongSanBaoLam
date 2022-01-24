@@ -16,7 +16,7 @@
                 </div>
                 
                 <div class="d-none d-sm-block align-self-center none-print">
-                    <button class="btn btn-success w-100 shadow-none" onclick="document.title = 'hoa_don_' + {{ $bill->id }}; window.print();">In hóa đơn</button>
+                    <button class="btn btn-success w-100 shadow-none" onclick="document.title = 'Hóa đơn ' + {{ $bill->id }}; window.print();">In hóa đơn</button>
                 </div>
             </div>
         </div>
@@ -27,10 +27,17 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 print-col-6 pe-lg-0">
                     <div class="__product-info-box invoice-details rounded-3 mt-0">
+                        @php
+                        $card_numbers = "Không có";
+                        if ($bill->card) {
+                            $numbers = str_split($bill->card->number, 4);
+                            $card_numbers = $numbers[0] . ' ' . $numbers[1] . ' ' . $numbers[2] . ' ' . $numbers[3];
+                        }
+                        @endphp
                         <p><b>Khách hàng</b> - #{{ $bill->customer_id}}</p>
                         <p><b>Họ và tên:</b> {{ $bill->fullname}}</p>
                         <p><b>Loại thanh toán:</b> {{ $bill->method == 'COD' ? 'Thu hộ' : 'Thẻ tín dụng'}}</p>
-                        <p><b>Số thẻ {{ $bill->card != NULL ? $bill->card->brand : '' }}: </b> {{ $bill->card != NULL ? $bill->card->number : "Không có" }}</p>
+                        <p><b>Số thẻ {{ $bill->card != NULL ? $bill->card->brand : '' }}: </b> {{ $card_numbers }}</p>
                         <p><b>Địa chỉ:</b> {{ $bill->address }}</p>
                     </div>
                 </div>
@@ -60,7 +67,7 @@
                                     <th>Mã</th>
                                     <th>Sản phẩm</th>
                                     <th class="d-none d-sm-table-cell">Thể loại</th>
-                                    <th>SL (kg)</th>
+                                    <th>SL</th>
                                     <th class="text-end">Số tiền</th>
                                 </tr>
                             </thead>
