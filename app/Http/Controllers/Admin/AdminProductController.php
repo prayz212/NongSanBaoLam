@@ -240,7 +240,7 @@ class AdminProductController extends Controller
                 $uploadedImages = $this->uploadImages($request->file('images'), $product_id);
                 $images = Image::insert($uploadedImages);
             }
-            return redirect()->route('productInfo', $product_id);
+            return redirect()->route('productInfo', $product->id);
         }
         catch(\Exception $error){
             return view('error')
