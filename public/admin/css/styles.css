@@ -13405,3 +13405,9 @@ input::-webkit-inner-spin-button {
     height: 160px;
   }
 }
+
+@media only screen and (max-width: 390px) {
+  footer .small {
+    font-size: 0.68em;
+  }
+}

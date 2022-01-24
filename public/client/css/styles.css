@@ -862,6 +862,12 @@ li {
     }
 }
 
+@media only screen and (max-width: 330px) {
+    .__footer-center {
+        font-size: 0.68em;
+    }
+}
+
 /* All Products */
 .__section .__top {
     display: flex;
@@ -1529,7 +1535,7 @@ th:last-child {
     position: relative;
     width: 100%;
     padding: 100px 0;
-    min-height: 86vh;
+    min-height: 88vh;
     background: var(--grey-alt);
     overflow: hidden;
 }
