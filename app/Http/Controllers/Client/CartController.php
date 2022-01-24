@@ -108,31 +108,14 @@ class CartController extends Controller
         try {
             if ($request->session()->has('cart') && count($request->session()->get('cart')->items)) {
                 $customer = Customer::find(Auth::id());
-                $totalPrice = 0;
-                $totalDiscount = 0;
-                $shippingCost = $this->SHIPPING_COST;
                 $carts = Session::get('cart')->items;
-
-                foreach($carts as $c) {
-                    $qty = $c['qty'];
-                    $price = $c['item']->price;
-                    $discount = $c['item']->discount;
-
-                    if ($discount == NULL) {
-                        $totalPrice += ($qty * $price);
-                    }
-                    else if ($discount != NULL) {
-                        $finalPrice = $price - ($price * (float)$discount/100);
-                        $totalDiscount += ($price - $finalPrice) * $qty;
-                        $totalPrice += ($qty * $finalPrice);
-                    }
-                }
+                $totalAmount = $this->paymentCalculation($carts);
 
                 return view('client.payment')
                     ->with('customer', $customer)
-                    ->with('totalPrice', $totalPrice)
-                    ->with('totalDiscount', $totalDiscount)
-                    ->with('shippingCost', $shippingCost);
+                    ->with('totalPrice', $totalAmount['totalPrice'])
+                    ->with('totalDiscount', $totalAmount['totalDiscount'])
+                    ->with('shippingCost', $totalAmount['totalShippingCost']);
             }
             else {
                 return redirect()->route('shoppingCart');
