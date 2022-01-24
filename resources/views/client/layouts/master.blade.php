@@ -52,10 +52,8 @@
 
         <!-- Footer -->
         <footer id="footer" class="__section __footer">
-            <div class="__container">
-                <div class="__footer-center">
-                    Copyright © NSBL | Develop by Chi Vi & Quang Huy.
-                </div>
+            <div class="__footer-center h-100 d-flex justify-content-center align-items-center">
+                Copyright © NSBL | Develop by Chi Vi & Quang Huy.
             </div>
         </footer>
     </div>

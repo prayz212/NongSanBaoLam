@@ -42,7 +42,7 @@
           </div>
       </div>
 
-      <div class="row my-4">
+      <div class="row mb-2 mb-lg-0">
           <div class="col-lg-6 bar-chart-section" data-href="{{ route('productAnalysis') }}">
               <div class="card mb-2">
                   <div class="card-header __break-word-dots" title="Biểu đồ thống kê số lượng sản phẩm bán ra">
@@ -60,7 +60,7 @@
                 </div>
               </div>
           </div>
-          <div class="col-lg-6 mt-sm-0 mt-4 pie-chart-section" data-href="{{ route('billStatusAnalysis') }}">
+          <div class="col-lg-6 pie-chart-section" data-href="{{ route('billStatusAnalysis') }}">
               <div class="card mb-2">
                   <div class="card-header __break-word-dots" title="Biểu đồ thống kê tình trạng các đơn hàng">
                       <i class="fas fa-chart-pie me-1"></i>
