@@ -82,6 +82,10 @@ Route::prefix('/admin')->group(function () {
 
     Route::group(['middleware' => 'auth:admin'], function() {
         Route::get('/trang-chu', [AdminHomeController::class, 'index'])->name('dashboard');
+        Route::post('/api-thong-ke-don-dat-hang', [AdminHomeController::class, 'orderAnalysis'])->name('orderAnalysis');
+        Route::post('/api-thong-ke-san-pham', [AdminHomeController::class, 'productAnalysis'])->name('productAnalysis');
+        Route::post('/api-thong-ke-trang-thai-don-hang', [AdminHomeController::class, 'billStatusAnalysis'])->name('billStatusAnalysis');
+
         Route::get('/dang-xuat', [AdminAuthController::class, 'logout'])->name('adminLogout');
         
         Route::get('/quan-ly-hoa-don', [AdminBillController::class, 'index'])->name('adminBill');
