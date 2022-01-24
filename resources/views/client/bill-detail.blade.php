@@ -60,7 +60,7 @@
             <th class="col-md-1 col-1 py-4 text-center">STT</th>
             <th class="col-md-4 col-3 py-4 text-center">Sản phẩm</th>
             <th class="col-md-2 d-none d-md-table-cell text-center"> Phân loại </th>
-            <th class="col-md-2 col-2 text-center">Số lượng (kg)</th>
+            <th class="col-md-2 col-2 text-center">Số lượng</th>
             <th class="col-md-1 col-3 text-center">Đơn giá </th>
             <th class="col-md-2 col-3 text-center">Thành tiền</th>
         </tr>
