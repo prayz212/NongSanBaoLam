@@ -99,9 +99,13 @@
                             </a>
                           @endif
                           @php
-                              $rank = $products->lastPage() % 5 == 0 ? floor($products->lastPage() / 5 - 1) : floor($products->lastPage() / 5);
+                              $rank = $products->currentPage() / 5;
+                              
+                              if ($rank == 0.2) { $i = 0; $to = 4; }
+                              else if ($rank == 0.4) { $i = -1; $to = 3; }
+                              else { $i = -2; $to = 2; }
                           @endphp
-                          @for ($i = 1; $i <= 5; $i++)
+                          @for ($i; $i <= $to; $i++)
                               @if ($products->lastPage() != 1)
                               @php
                                   $pageNumber = $i + ($rank * 5);
