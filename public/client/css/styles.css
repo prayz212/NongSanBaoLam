@@ -977,6 +977,10 @@ form span {
     text-align: center;
 }
 
+.__product-detail .__thumbnail:hover {
+    cursor: pointer;
+}
+
 .__product-detail .__thumbnail img {
     height: 100%;
     object-fit: contain;

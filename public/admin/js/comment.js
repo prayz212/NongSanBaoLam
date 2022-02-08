@@ -56,6 +56,9 @@ $(document).ready(function () {
     const actionUrl = $(this).closest('.comment-row').attr("data-detele-href");
     const commentID = _parent.attr("data-reply-id");
 
+    const editedElement = $(this).closest('.float-end').find('.cancel-edit-reply');
+    if (editedElement) { editedElement.click(); }
+
     showCommentConfirmPopup('Xác nhận xoá', 'Bạn có chắc chắn xoá bình luận này?', actionUrl + '|' + commentID, 'fa fa-exclamation-circle fa-3x');
   });
 
@@ -115,6 +118,9 @@ $(document).ready(function () {
 
     submitCommentForm(href, content, username, id, type, element);
     _parent.find('textarea').val('');
+    
+    const editedElement = $(this).closest('.replies-section').find(`#reply-${id}`);
+    editedElement.find('.post-replies .meta .cancel-edit-reply').click();
   });
 
   /* comment confirmation popup */
