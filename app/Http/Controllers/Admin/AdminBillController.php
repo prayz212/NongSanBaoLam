@@ -33,6 +33,8 @@ class AdminBillController extends Controller
                     'card'])
                     ->find($id);
 
+            if (!$bill) { return redirect()->route('adminBill'); }
+
             return view('admin.bill-detail')
                     ->with('bill', $bill);
         }

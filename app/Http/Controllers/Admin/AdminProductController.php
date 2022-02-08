@@ -36,6 +36,10 @@ class AdminProductController extends Controller
                 ->where('isDelete', false)
                 ->find($id);
 
+            if (!$product) {
+                return redirect()->route('productManagement');
+            }
+
             return view('admin.product-info')
                 ->with('product', $product);
         }

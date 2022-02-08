@@ -36,6 +36,8 @@ class AdminVoucherController extends Controller
                             ->groupBy('code', 'start_at', 'end_at', 'discount')
                             ->first();
 
+            if (!$voucher) { return redirect()->route('voucherManagement'); }
+
             return view('admin.voucher-info')
                     ->with('voucher', $voucher);
         }
